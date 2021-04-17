@@ -1,0 +1,296 @@
+{% extends 'base.html.twig' %}
+{% block title 'PasVuPasLu - paramètres profil' %}
+{% block body %}
+    {#{{ dump(app.user)}}#}
+        <div class="col-12 pt-5" style="background-color: #ececec;margin-bottom: 0!important;">
+            <h1 style="text-align: center;">Paramètres profil</h1>
+            <h3 class="col-12" style="text-align: center; margin: 2rem 0; font-size: 1rem; text-decoration: underline;">Tous les champs sont obligatoires :</h3>
+            {% for message in app.Flashes('success') %}
+                <div class="alert alert-success alert-dismissible fade show text-center" role="alert" id="success">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{ message }}
+                </div>
+            {% endfor %}
+            <div class="flash-errors" style="display: none;">
+                <span class="flash-message">{ error }</span>
+            </div>
+
+            {{ form_start(form, {'attr': {'class': 'form-group shadow p-3 mb-5 rounded', 'style': 'background-color:#ececec;margin-bottom: 0!important;'}}) }}
+
+            <div class="row">
+                <div class="col-6">
+                    {{ form_row(form.pseudo) }}
+                </div>
+                <div class="col-6">
+                    {{ form_row(form.age, {'attr': {'maxlength': '2'}}) }}
+                </div>
+                <div class="col-6">
+                    {{ form_row(form.photo, {'required': false}) }}
+                    <input type="text" hidden name="temporary" value="{{ temporary }}">
+                </div>
+                <div class="col-6">
+                    <label for="" style="display: block;">Sélectionner un avatar</label>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary form-control" data-toggle="modal" data-target="#exampleModal" style="border-radius: 6rem; text-align: left; background: white; color: #45494d; border-color: #45494d4d;">
+                        Sélectionner un avatar dans la banquette d'images
+                    </button>
+                </div>
+                <div class="col-12">
+                    {{ form_row(form.presentation) }}
+                </div>
+
+                <a href="{{ path('edit_password') }}" class="text-center mx-auto">Modifier le mot de passe</a>
+
+                   <h3 class="col-12" style="text-align: center; margin: 2rem 0; font-size: 1rem; text-decoration: underline;">Merci d'indiquer vos coordonnées :</h3>
+
+                <div class="col-md-6">
+                    {{ form_row(form.adress) }}
+                </div>
+                <div class="col-md-6">
+                    {{ form_row(form.ville) }}
+                </div>
+
+                <div class="col-md-4">
+                    {{ form_row(form.codePostale) }}
+                </div>
+
+                <div class="col-md-4">
+                    {{ form_row(form.country) }}
+                </div>
+                <div class="col-md-4">
+                    {{ form_row(form.telephone) }}
+                </div>
+            </div>
+
+            <button class="login btn-default" type="submit">Enregistrer les modifications</button>
+            {{ form_end(form) }}
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <form id="select_avatar" action="{{ path('edit_avatar') }}" method="POST" class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Sélectionner un avatar</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" style="height: 22rem; overflow: auto;">
+                            <div class="row">
+                                {% for img in d %}
+                                    {% set foo = img|split('/', '4') %}
+                                    <div class="col-md-3">
+                                        <label>
+                                            <input type="radio" name="avatar_select" value="{{ foo[3] }}">
+                                            <img src="{{ asset('assets/images/profil/'~foo[3]) }}" style="width: 94px; height: 94px;padding: .5rem 0;">
+                                        </label>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                            <button type="submit" class="avatar-select btn btn-primary">Sauvegarder l'avatar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    <style>
+        /* HIDE RADIO */
+        [type=radio] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        /* IMAGE STYLES */
+        [type=radio] + img {
+            cursor: pointer;
+        }
+
+        /* CHECKED STYLES */
+        [type=radio]:checked + img {
+            outline: 2px solid #620628;
+            background: #620628;
+        }
+        .ph {
+            background: #0c5366d1;
+            color: white;
+            padding: 1rem;
+            border-radius: .3rem;
+        }
+        .desc {
+            font-size: .75rem;
+            color: #858796;
+        }
+        table {
+            width: 100%;
+            margin-bottom: 1rem;
+            color: #858796;
+        }
+        /* Profile container */
+        .profile {
+            margin: 20px 0;
+        }
+
+        /* Profile sidebar */
+        .profile-sidebar {
+            padding: 20px 0 10px 0;
+            background: #fff;
+        }
+
+        .profile-userpic img {
+            float: none;
+            margin: 0 auto;
+            width: 50%;
+            height: 8rem;
+            -webkit-border-radius: 50% !important;
+            -moz-border-radius: 50% !important;
+            border-radius: 50% !important;
+        }
+
+        .profile-usertitle {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .profile-usertitle-name {
+            color: #5a7391;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 7px;
+        }
+
+        .profile-usertitle-job {
+            text-transform: uppercase;
+            color: #5b9bd1;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .profile-userbuttons {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .profile-userbuttons .btn {
+            text-transform: uppercase;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 6px 15px;
+            margin-right: 5px;
+        }
+
+        .profile-userbuttons .btn:last-child {
+            margin-right: 0px;
+        }
+
+        .profile-usermenu {
+            margin-top: 30px;
+        }
+
+        .profile-usermenu ul li {
+            border-bottom: 1px solid #f0f4f7;
+        }
+
+        .profile-usermenu ul li:last-child {
+            border-bottom: none;
+        }
+
+        .profile-usermenu ul li a {
+            color: #93a3b5;
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        .profile-usermenu ul li a i {
+            margin-right: 8px;
+            font-size: 14px;
+        }
+
+        .profile-usermenu ul li a:hover {
+            background-color: #fafcfd;
+            color: #5b9bd1;
+        }
+
+        .profile-usermenu ul li.active {
+            border-bottom: none;
+        }
+
+        .profile-usermenu ul li.active a {
+            color: #5b9bd1;
+            background-color: #f6f9fb;
+            border-left: 2px solid #5b9bd1;
+            margin-left: -2px;
+        }
+
+        /* Profile Content */
+        .profile-content {
+            padding: 20px;
+            background: #fff;
+            min-height: 460px;
+        }
+        .portlet {
+            margin-top: 0;
+            margin-bottom: 25px;
+            padding: 0;
+            border-radius: 4px;
+        }
+        .portlet.bordered {
+            border-left: 2px solid #e6e9ec!important;
+        }
+        .portlet.light {
+            padding: 12px 20px 15px;
+            background-color: #fff;
+        }
+        .portlet.light.bordered {
+            border: 1px solid #e7ecf1!important;
+        }
+        .list-separated {
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+        .profile-stat {
+            padding-bottom: 20px;
+            border-bottom: 1px solid #f0f4f7;
+        }
+        .profile-stat-title {
+            color: #7f90a4;
+            font-size: 25px;
+            text-align: center;
+        }
+        .uppercase {
+            text-transform: uppercase!important;
+        }
+        .profile-stat-text {
+            color: #5b9bd1;
+            font-size: 10px;
+            font-weight: 600;
+            text-align: center;
+        }
+        .profile-desc-title {
+            color: #7f90a4;
+            font-size: 17px;
+            font-weight: 600;
+        }
+        .profile-desc-text {
+            color: #7e8c9e;
+            font-size: 14px;
+        }
+        .margin-top-20 {
+            margin-top: 20px!important;
+        }
+        .profile-desc-link i {
+            width: 22px;
+            font-size: 19px;
+            color: #abb6c4;
+            margin-right: 5px;
+        }
+    </style>
+{% endblock %}

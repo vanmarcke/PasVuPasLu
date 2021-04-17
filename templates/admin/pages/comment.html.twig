@@ -1,0 +1,148 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title 'Liste des Commentaires' %}
+
+{% block body %}
+    <div class="container">
+        {% for message in app.Flashes('success') %}
+            <div class="alert alert-success alert-dismissible fade show text-center" role="alert" id="success">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ message }}
+            </div>
+        {% endfor %}
+        <div class="row">
+
+            <div class="col-xl-12 col-lg-12">
+
+                {% if rapports is not empty %}
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">
+                            Commentaires signaler
+                        </h6>
+                    </div>
+                    <div class="card-body live-search-list">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Notes</th>
+                                <th scope="col">Commentaires</th>
+                                <th scope="col" style="text-align: right">Options</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for rapport in rapports %}
+                                <tr class="search">
+                                    <td>
+                                        {{ rapport.rate }}/10
+                                    </td>
+                                    <td>
+                                        <div class="desc mt-1">
+                                            <a href="#!" style="font-size: .89rem">{{ rapport.livre.titre }}</a>
+                                            <p class="m-0 pt-2">Commentaire de : <a href="{{ path('admin_edit_user', {'id': rapport.user.id}) }}" style="font-size: .89rem">{{ rapport.user.nom ~' '~ rapport.user.prenom }}</a></p>
+                                        </div>
+                                        <div class="desc mt-1">
+                                            {{ rapport.content|length > 497 ? rapport.content|slice(0, 497) ~ '...' : rapport.content|striptags|raw  }}
+                                        </div>
+                                    </td>
+                                    <th scope="row" style="text-align: right">
+                                        {#<a href="#" class="btn btn-info btn-circle btn-sm mb-1">#}
+                                            {#<i class="far fa-eye"></i>#}
+                                        {#</a>#}
+                                        <form method="post" action="{{ path('admin_valide_comment', {id: rapport.id}) }}" style="display: inline-block">
+                                            <input type="hidden" name="_method" value="POST">
+                                            <input type="hidden" name="_token" value="{{ csrf_token("valide" ~ rapport.id) }}">
+                                            <button class="btn btn-success btn-circle btn-sm mb-1" onclick="return confirm('Êtes-vous sûr de bien vouloir validé ce commentaire ? \n');">
+                                                <i class="fas fa-check"></i>
+                                            </button>
+                                        </form>
+                                        <form method="post" action="{{ path('admin_delete_comment', {id: rapport.id}) }}" style="display: inline-block">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <input type="hidden" name="_token" value="{{ csrf_token("delete" ~ rapport.id) }}">
+                                            <button class="btn btn-danger btn-circle btn-sm" onclick="return confirm('Êtes-vous sûr de bien vouloir supprimer ce commentaire ? \n');">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </th>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        {% include("admin/_no-result.html.twig") %}
+                    </div>
+                </div>
+                {% endif %}
+
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">
+                            Commentaires valider
+                        </h6>
+                    </div>
+                    <div class="card-body live-search-list">
+                        {% if comments is not empty %}
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Notes</th>
+                                <th scope="col">Commentaires</th>
+                                <th scope="col" style="text-align: right">Options</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for comment in comments %}
+                                <tr class="search">
+                                    <td>
+                                        {{ comment.rate }}/10
+                                    </td>
+                                    <td>
+                                        <div class="desc mt-1">
+                                            <a href="{{ path('show_livre', {'slug': comment.livre.slug, 'id': comment.livre.id}) }}" style="font-size: .89rem">{{ comment.livre.titre }}</a>
+                                            <p class="m-0 pt-2">Commentaire de : <a href="{{ path('admin_edit_user', {'id': comment.user.id}) }}" style="font-size: .89rem">{{ comment.user.nom ~' '~ comment.user.prenom }}</a></p>
+                                        </div>
+                                        <div class="desc mt-1">
+                                            {{ comment.content|length > 497 ? comment.content|slice(0, 497) ~ '...' : comment.content|striptags|raw  }}
+                                        </div>
+                                    </td>
+                                    <th scope="row" style="text-align: right">
+                                        {#<a href="#" class="btn btn-info btn-circle btn-sm mb-1">#}
+                                            {#<i class="far fa-eye"></i>#}
+                                        {#</a>#}
+                                        <form method="post" action="{{ path('admin_delete_comment', {id: comment.id}) }}" style="display: inline-block">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <input type="hidden" name="_token" value="{{ csrf_token("delete" ~ comment.id) }}">
+                                            <button class="btn btn-danger btn-circle btn-sm" onclick="return confirm('ATTENTION : Êtes-vous sûr de bien vouloir supprimer ce commentaire ? \n');">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </th>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                            {% include("admin/_no-result.html.twig") %}
+                        {% else %}
+                            <h5 class="m-3 text-center">Il est actuellement aucun commentaire sur le site</h5>
+                        {% endif %}
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <style>
+        tbody {
+            background: #f8f9fc;
+        }
+        .desc {
+            font-size: .75rem;
+            color: #858796;
+        }
+    </style>
+{% endblock %}
+
+

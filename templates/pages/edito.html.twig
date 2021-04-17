@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    PasVuPasLu - L'édito
+{% endblock %}
+
+{% block body %}
+
+    <div class="content">
+        <div class="carousel slide" data-ride="carousel">
+            <span class="illustration-title-slider">L'édito</span>
+
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                  {% if carroussel_first.link %}
+                  <a href="{{carroussel_first.link}}" target="_blank">
+                      <img class="d-block w-100" src="{{ asset('assets/images/illustration/' ~ carroussel_first.content)}}" alt="First slide">
+                  </a>
+                  {% else %}
+                  <img class="d-block w-100" src="{{ asset('assets/images/illustration/' ~ carroussel_first.content)}}" alt="First slide">
+                      
+                  {% endif %}
+                </div>
+  
+                {% for carroussel in carroussel %}
+  
+                  <div class="carousel-item">
+                      {% if carroussel.link %}
+                      <a href="{{carroussel.link}}" target="_blank">
+                          <img class="d-block w-100" src="{{ asset('assets/images/illustration/' ~ carroussel.content)}}" alt="Second slide">
+                      </a>
+                      {% else %}
+                          
+                      <img class="d-block w-100" src="{{ asset('assets/images/illustration/' ~ carroussel.content)}}" alt="Second slide">
+                      {% endif %}
+                  </div>
+  
+                {% endfor %}
+  
+              </div>
+        </div>
+
+
+        <div class="separator"></div>
+
+
+        <div class="block-quote bg-rose box-interviews-2" style="height: auto;">
+            <div class="interviews-title text-center" style="padding: 2rem 2rem 5rem">Liste des éditos</div>
+            <img src="{{ asset('assets/images/illustration/oo.png') }}">
+
+            <div class="interviews-content">
+                {% for edito in editos %}
+                <div class="interviews-block text-center">
+                    <div class="row mx-auto interviews">
+                        <div class="col-auto round-interviews">
+                            <img src="{{ asset('assets/images/illustration/stylo.png') }}">
+                        </div>
+                        <div class="col-8 b-interviews">
+                            <div class="interviews-title">{{ edito.title }}</div>
+                            <div class="interviews-desc">Edito du {{ edito.createdAt|date('d/m/Y') }}</div>
+                        </div>
+                        <div class="col-auto btn-interviews">
+                            <a href="{{ path('edito_view', {'slug': edito.slug, 'id': edito.id}) }}" class="btn-default">Lire !</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+{% endblock %}
+

@@ -1,0 +1,118 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Identification' %}
+
+{% block body %}
+    <div class="content">
+        <div class="carousel slide" data-ride="carousel">
+            <span class="illustration-title-slider">Inscription / Connexion</span>
+
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                  {% if carroussel_first.link %}
+                  <a href="{{carroussel_first.link}}" target="_blank">
+                      <img class="d-block w-100" src="{{ asset('assets/images/illustration/' ~ carroussel_first.content)}}" alt="First slide">
+                  </a>
+                  {% else %}
+                  <img class="d-block w-100" src="{{ asset('assets/images/illustration/' ~ carroussel_first.content)}}" alt="First slide">
+                      
+                  {% endif %}
+                </div>
+  
+                {% for carroussel in carroussel %}
+  
+                  <div class="carousel-item">
+                      {% if carroussel.link %}
+                      <a href="{{carroussel.link}}" target="_blank">
+                          <img class="d-block w-100" src="{{ asset('assets/images/illustration/' ~ carroussel.content)}}" alt="Second slide">
+                      </a>
+                      {% else %}
+                          
+                      <img class="d-block w-100" src="{{ asset('assets/images/illustration/' ~ carroussel.content)}}" alt="Second slide">
+                      {% endif %}
+                  </div>
+  
+                {% endfor %}
+  
+              </div>
+        </div>
+
+
+
+        <div class="separator"></div>
+
+        <div class="block-quote bg-blue" style="height: auto;">
+            <div class="row mx-auto text-center">
+                <div class="col-md-5 b-tree p-3">
+                    <div class="text-login">
+                        <div>D E J A&nbsp;&nbsp;M E M B R E</div>
+                        {#<a href="{{ path('security_login') }}">#}
+                            {#C o n n e c t e z - v o u s &nbsp;!#}
+                        {#</a>#}
+                        <i>C o n n e c t e z - v o u s&nbsp;!</i>
+                    </div>
+
+                    {% if error %}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="font-weight: 600;font-size: .87rem; margin-top: 2rem;">
+                            Adresse mail ou mot de passe incorrect
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endif %}
+
+                    {% for message in app.Flashes('success') %}
+                        <div class="alert alert-success alert-dismissible fade show text-center" role="alert" style="font-weight: 600;font-size: .87rem; margin-top: 2rem;">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+
+                    <form method="POST" action="{{ path('security_login') }}" class="login">
+                        <div class="form-group">
+                            <label for="email">Adresse mail</label>
+                            <input type="email" class="form-control" id="email" autocomplete="off" name="_username" placeholder="Votre adresse email" value="{{ last_username }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Mot de passe</label>
+                            <input type="password" class="form-control" id="password" autocomplete="off" name="_password"  placeholder="Votre mot de passe">
+                            <a href="{{ path('password_forgot') }}"><small id="emailHelp" class="form-text">Mot de passe oublié ?</small></a>
+                        </div>
+                        <button type="submit" class="login btn-default">Se connecter</button>
+                    </form>
+                </div>
+                <div class="col-md-7 p-3">
+                    <div class="text-login mb-5">
+                        <div class="">D E V E N I R&nbsp;&nbsp;M E M B R E</div>
+                        <i>Pas Vu, Pas lu est une communauté destinée<br>à tous les amoureux du livre. </i>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="block-quote bg-rose text-center box-login-register mx-auto">
+                                <p class="l-register-text pt-3">INSCRIPTION LECTEUR</p>
+                                <p class="login-register-price">Totalement GRATUITE</p>
+                                <img src="{{ asset('assets/images/illustration/left.jpg') }}">
+                                <img src="{{ asset('assets/images/illustration/livre.png') }}" class="auto">
+                                <div class="pb-3"><a href="{{ path('register_user1') }}" class="btn-default btn-register-1">Cliquer ici</a></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="block-quote bg-blue-register text-center box-login-register mx-auto">
+                                <p class="l-register-text pt-3">INSCRIPTION AUTEUR</p>
+                                <p class="login-register-price">60 euros TTC Annuel* Soit 5 € / mois</p>
+                                <img src="{{ asset('assets/images/illustration/right.jpg') }}">
+                                <img src="{{ asset('assets/images/illustration/livre.png') }}" class="auto">
+                                <div class="pb-3"><a href="{{ path('register_user') }}" class="btn-default btn-register-2">Cliquer ici</a></div>
+                            </div>
+                        </div>
+                        <p class="min-text">
+                            * Le paiement de votre abonnement permet à l'Association Terhoma de se développer en toute indépendance et sans demander de subventions. Votre abonnement est un acte  d'économie solidaire !
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'PasVuPasLu - Creer une nouvelle discussion' %}
+
+{% block stylesheets %}
+    <link href="{{ asset('assets/admin/vendor/ckeditor/ckeditor.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    <div class="content">
+
+        {{ form_start(form) }}
+        <div class="p-3" style="background: #dfdfdf;">
+            <div class="col-sm-12">
+                {{ form_errors(form.title) }}
+                <div class="form-group">
+                    <label class="control-label required" for="forum_title">Titre de votre discussion</label>
+                    {{ form_widget(form.title) }}
+                </div>
+            </div>
+            <div class="col-sm-12 pt-2 pb-3 forum">
+                <div class="col-12">
+                    <div class="merreur">
+                        {{ form_errors(form.message) }}
+                    </div>
+                </div>
+                <div class="card post">
+                    <div class="row">
+                        <div class="col-sm-3 user-forum">
+                            <div class="text-center">
+                                <img src="{% if app.user.auter.photo is defined %}{{ asset('assets/images/profil/'~ app.user.auter.photo) }}{% else %}{{ asset('assets/images/avatars/d.png') }}{% endif %}"
+                                     style="border-radius: 60rem;height: 8rem;width: 51%;" class="img-fluid center-block"/>
+                                <h3>
+                                    {% if app.user.auter.pseudo is defined%}
+                                        {{ app.user.auter.pseudo }}
+                                    {% else %}
+                                        {{ app.user.nom ~ ' ' ~ app.user.prenom }}
+                                    {% endif %}
+                                </h3>
+                            </div>
+                        </div>
+                        {{ form_widget(form.message) }}
+                    </div>
+                </div>
+                <div class="text-right mt-4">
+                    {{ form_widget(form.submit) }}
+                </div>
+            </div>
+        </div>
+        {{ form_end(form) }}
+
+    </div>
+
+    <style>
+        textarea.post-content.post-message {
+            resize:none;
+            border:none;
+            outline-style:none;
+        }
+        ul.list-unstyled {
+            background: #ff0000b8;
+            color: white;
+            border-radius: .3rem;
+            margin: .5rem .17rem;
+            padding: .5rem;
+        }
+        .merreur {
+            margin-right: -15px;
+            margin-left: -25px;
+        }
+    </style>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/admin/vendor/ckeditor/ckeditor.js') }}"></script>
+    <script>
+        {# Remplace le textarea par le plugin Ckeditor #}
+        CKEDITOR.replace('forum_message', {
+            width: '73.7%',
+            removePlugins : 'elementspath',
+            enterMode: CKEDITOR.ENTER_BR,
+            shiftEnterMode:CKEDITOR.ENTER_P,
+            toolbar: [{ name: 'basicstyles', groups: [ 'basicstyles' ], items: [ 'Bold', 'Italic', 'Underline', "-", 'TextColor', 'BGColor' ] },
+                { name: 'styles', items: [ 'Format', 'Font', 'FontSize' ] },
+                { name: 'scripts', items: [ 'Subscript', 'Superscript' ] },
+                { name: 'justify', groups: [ 'blocks', 'align' ], items: [ 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock' ] },
+                { name: 'paragraph', groups: [ 'list', 'indent' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'] },
+                { name: 'links', items: [ 'Link', 'Unlink' ] }
+            ],
+        });
+    </script>
+{% endblock %}
+
+

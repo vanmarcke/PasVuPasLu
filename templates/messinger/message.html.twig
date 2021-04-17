@@ -1,0 +1,108 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/inbox.css') }}">
+{% endblock %}
+
+{% block title 'PasVuPasLu - Messagerie privée' %}
+
+{% block body %}
+    <div class="content-inbox">
+        <aside style="width: 28%;">
+            <div class="head">
+                <div class="avatar"><img style="width: 100%;height: 100%;border-radius: 60rem;" src="{% if app.user.auter.photo is defined %}{{ asset('assets/images/profil/'~app.user.auter.photo) }}{% else %}{{ asset('assets/images/avatars/d.png') }}{% endif %}" alt=""></div>
+                <div class="name">{% if app.user.auter.pseudo is defined%}{{app.user.auter.pseudo }}{% else %}{{app.user.nom ~ ' ' ~ app.user.prenom }}{% endif %}</div>
+                <div class="welcome">Bienvenue dans votre messagerie privée</div>
+            </div>
+            <div class="friends_list ok active">
+                {% for message in messages %}
+                    <a href="{{ path('messginer_show', {id: message.id}) }}" class="friend active fcenter" style="text-decoration: none">
+                        <div class="avatarbox">
+                            <div class="avatar_overlay">
+                                {% if message.userSender.id != app.user.id and message.isview == '1' %}
+                                    <i class="new-msg fas fa-comments blink"></i>
+                                {% endif %}
+                                <img src="{% if app.user.id == message.userSender.id %}{% if message.userReceiver.auter.photo is defined %}{{ asset('assets/images/profil/'~message.userReceiver.auter.photo) }}{% else %}{{ asset('assets/images/avatars/d.png') }}{% endif %}{% else %}{% if message.userSender.auter.photo is defined %}{{ asset('assets/images/profil/'~message.userSender.auter.photo) }}{% else %}{{ asset('assets/images/avatars/d.png') }}{% endif %}{% endif %}">
+                            </div>
+                        </div>
+                        <div class="namemsg">
+                            <p class="b">
+                                {% if app.user.id == message.userSender.id %}
+                                 
+                                    {% if message.userReceiver.auter.pseudo is defined%}{{message.userReceiver.auter.pseudo }}{% else %}{{message.userReceiver.nom ~ ' ' ~ message.userReceiver.prenom }}{% endif %}
+                                {% else %}
+                           
+                                    {% if message.userSender.auter.pseudo is defined%}{{message.userSender.auter.pseudo }}{% else %}{{message.userSender.nom ~ ' ' ~ message.userSender.prenom }}{% endif %}
+                                {% endif %}
+                            </p>
+                            <p class="msg">Le {{ message.msg }}</p>
+                        </div>
+                    </a>                    
+                {% endfor %}
+            </div>
+        </aside>
+
+        <div class="midcont">
+            <div class="head">
+                <div class="avatarbox">
+                    <div class="avatar_overlay">
+                        <img src="{% if recever.auter.photo is defined %}{{ asset('assets/images/profil/'~recever.auter.photo) }}{% else %}{{ asset('assets/images/avatars/d.png') }}{% endif %}">
+                    </div>
+                </div>
+                <h4>{% if recever.auter.pseudo is defined%}{{recever.auter.pseudo }}{% else %}{{recever.nom ~ ' ' ~ recever.prenom }}{% endif %}</h4>
+            </div>
+            {% for message in app.Flashes('success') %}
+                <div class="alert alert-success alert-dismissible fade show mt-3 text-center" role="alert" id="success" style="margin: 0 2rem;">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% if form_errors(form.msg) is not empty %}
+                <div class="alert alert-danger alert-dismissible fade show mt-3 texte-center" role="alert" id="success" style="margin: 0 2rem;">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{ form_errors(form.msg) }}
+                </div>
+            {% endif %}
+            <div class="messagescont" style="height: 100%; overflow: auto;">
+                {% for msge in msg %}
+                    <div class="msg">
+                        <div class="user {% if app.user == msge.userSender %}me{% else %}friend{% endif %} t">
+                            <div class="avatarbox">
+                                <div class="avatar_overlay">
+                                    {% if msge.userSender %}
+                                        <img src="{% if msge.userSender.auter.photo is defined %}{{ asset('assets/images/profil/'~msge.userSender.auter.photo) }}{% else %}{{ asset('assets/images/avatars/d.png') }}{% endif %}
+                                        ">
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="text">
+                                {{ msge.msg }}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+            <div class="bottomchat mt-5">
+                {{ form_start(form) }}
+                {% if recever.auter.pseudo is defined%}
+                {{ form_widget(form.msg, { 'attr': {'placeholder': 'Répondre à ' ~ recever.auter.pseudo, 'style': 'height:100%', 'cols': '30', 'rows': '5'} }) }}
+                {{ form_errors(form.msg)}}
+                {% else %}
+                {{ form_widget(form.msg, { 'attr': {'placeholder': 'Répondre à ' ~ recever.nom~' '~recever.prenom, 'style': 'height:100%', 'cols': '30', 'rows': '5'} }) }}
+                {{ form_errors(form.msg)}}
+                {% endif %}
+                <button class="btn-default btn-forum" style="margin: 1rem; float: right; color: white;">Envoyer</button>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+    <style>
+        .list-unstyled {
+            margin: 0;
+        }
+    </style>
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title 'Podcasts' %}
+
+{% block stylesheets %}
+   {{ parent() }}
+   {{ encore_entry_link_tags('podcasts') }}
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+
+        <div class="col-xl-12 col-lg-12">
+
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        Liste des podcasts
+                    </h6>
+                </div>
+               {% for message in app.Flashes('success') %}
+                    <div class="alert alert-success alert-dismissible fade show  m-2 text-center" role="alert" id="success">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{ message }}
+                    </div>
+                {% endfor %}
+
+                <div class="row live-search-list">
+
+                    {% if podcast is not empty %}
+
+                        {% for podcast in podcast %}
+                            <div class="col-md-12 search">
+                                <div class="card-body">
+                                 {#   <div class="card text-white border-primary p-1 mb-3 text-center admin-podcast" style='background-image: url("{{asset('assets/images/podcasts/' ~ podcast.image)}}");'>#}
+                                    <div class="card p-1 mb-3 text-center admin-podcast text-dark">
+                                        <img src="{{asset('assets/images/podcasts/' ~ podcast.image)}}" class="img-admin-podcast" alt="">
+                                        <div class="card-body card-podcast">
+                                            <h2 class="card-title d-block text-truncate">{{ podcast.titre }}</h2>
+                                            <p class="text-justify">{{podcast.description|slice(0, 100)|raw}}...</p>
+                                            {% if podcast.audio %}
+                                            <div class="audio mb-4">
+                                                <audio controls src="{{asset('assets/audio/' ~  podcast.audio)}}" class="lecteur"></audio>
+                                            </div>
+                                            {% endif %}
+                                            {% if podcast.link %}
+                                            <p>Lien : <a href="{{podcast.link}}" class="text-dark" target="_blank">{{podcast.link}}</a></p>
+                                            {% endif %}
+                                            <a href="{{path('delete_podcast', {id:podcast.id})}}" class="btn btn-danger btn-sm" onclick="return confirm('ATTENTION : Êtes-vous sûr de bien vouloir supprimer ce podcast ? \n');">
+                                                <i class="fas fa-trash"></i>
+                                                Supprimer
+                                            </a>
+                                            
+                                            
+                                            <a href="{{ path('edit_podcast',{'id': podcast.id }) }}" class="btn btn-primary btn-sm">
+                                                <i class="fas fa-edit"></i>
+                                                Modifier
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="col-md-12 text-center mt-5 mb-5 pl-3 pr-3">
+                            <h5 class="mb-3">il y a actuellement aucun podcast</h5>
+                            <a href="{{ path('new_podcast') }}"class="btn btn-primary">Ajoutez votre premier podcast</a>
+                        </div>
+                    {% endif %}
+                    
+                </div>
+            </div>
+            <a href="{{ path('new_podcast') }}"class="btn btn-primary  col-md-3">Ajoutez un podcast</a>
+
+        </div>
+
+    </div>
+</div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,173 @@
+{% extends 'base.html.twig' %}
+
+{% block title topic.title %}
+
+{% block stylesheets %}
+    <link href="{{ asset('assets/admin/vendor/ckeditor/ckeditor.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    <div class="content">
+
+        <div class="p-3" style="background: #dfdfdf;">
+            <div id="error_m">
+                {{ form_errors(form.message) }}
+            </div>
+            <div class="">
+                <div style="color: #c12561;border-radius: .2rem;padding: .92rem .25rem;font-size: 1.23rem;font-weight: 600;">{{ topic.title }}</div>
+                <div class="col-sm-12 pt-3 pb-2 forum">
+                    <div class="card post">
+                        <div class="row">
+                            <div class="col-sm-3 user-forum">
+                                <div class="position-absolute">
+                                    {#{% if user.id != app.user.id %}#}
+                                        {#<a href="#!rapport" onclick="return confirm('Êtes-vous sûr de bien vouloir signaler ce message ?\n');" class="forum-raport d-block mb-2"><i class="fas fa-flag"></i></a>#}
+                                    {#{% endif %}#}
+
+                                    {% if topic.forums.id == app.user.id %}
+                                        <a href="{{ path('forum_edit_topic', {id: topic.id}) }}" class="forum-raport d-block mb-2"><i class="far fa-edit"></i></a>
+                                    {% endif %}
+                                </div>
+                                <div class="text-center">
+                                    <img src="{% if user.auter.photo is defined %}{{ asset('assets/images/profil/'~ user.auter.photo) }}{% else %}{{ asset('assets/images/avatars/d.png') }}{% endif %}"
+                                         style="border-radius: 60rem;height: 8rem;width: 51%;" class="img-fluid center-block"/>
+                                    <h3>
+                                        {% if user.auter.pseudo is defined%}
+                                            {{ user.auter.pseudo }}
+                                        {% else %}
+                                            {{ user.nom ~ ' ' ~ user.prenom }}
+                                        {% endif %}
+                                    </h3>
+                                    <p>{{ topic.createdat |date('d/m/y')  }}</p>
+                                    <table style="width:100%">
+                                        <tr>
+                                            <td><a href="{{ path('profil_auter', {id: user.id}) }}" class="profile-link">Profile</a></td>
+                                            <td><a href="{{ path('messginer_send', {id: user.id}) }}" class="profile-link">Message</a></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-sm-9 post-content text-justify">
+                                <p>{{ topic.message | raw }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% for message in app.Flashes('success') %}
+                    <div class="alert alert-success alert-dismissible fade show mt-3" role="alert" id="success">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                <!-- post 2 -->
+                {% for message in messages %}
+                <div class="col-sm-12 pt-2 pb-3 forum" id="{{ message.id }}">
+                    <div class="card post">
+                        <div class="row">
+                            <div class="col-sm-3 user-forum">
+                                <div class="position-absolute">
+                                    {#{% if message.userPost.id != app.user.id %}#}
+                                        {#<a href="#!" onclick="return confirm('Êtes-vous sûr de bien vouloir signaler ce message ?\n');" class="forum-raport d-block mb-2"><i class="fas fa-flag"></i></a>#}
+                                    {#{% endif %}#}
+
+                                    {% if message.userPost.id == app.user.id %}
+                                        <a href="{{ path('forum_edit_reply', {id: message.id}) }}" class="forum-raport d-block mb-2"><i class="far fa-edit"></i></a>
+                                    {% endif %}
+                                </div>
+                                <div class="text-center">
+                                    <img src="{% if message.userPost.auter.photo is defined %}{{ asset('assets/images/profil/'~ message.userPost.auter.photo) }}{% else %}{{ asset('assets/images/avatars/d.png') }}{% endif %}"
+                                         style="border-radius: 60rem;height: 8rem;width: 51%;" class="img-fluid center-block"/>
+                                    <h3>
+                                    	{% if message.userPost.auter.pseudo is defined%}
+                                            {{ message.userPost.auter.pseudo }}
+                                        {% else %}
+                                            {{ message.userPost.nom ~ ' ' ~ message.userPost.prenom }}
+                                        {% endif %}
+                                    </h3>
+                                    <p>{{ message.createdAt |date('d/m/y') }}</p>
+                                    <table style="width:100%">
+                                        <tr>
+                                            <td><a href="{{ path('profil_auter', {id: message.userPost.id}) }}" class="profile-link">Profile</a></td>
+                                            <td><a href="{{ path('messginer_send', {id: message.userPost.id}) }}" class="profile-link">Message</a></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-sm-9 post-content">
+                                <p>{{ message.message |raw }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                <!-- repley -->
+                {{ form_start(form) }}
+                <div class="col-sm-12 pt-2 pb-3 forum">
+                    <div class="card post">
+                        <div class="row">
+                            <div class="col-sm-3 user-forum">
+                                <div class="text-center">
+                                    <img src="{% if app.user.auter.photo is defined %}{{ asset('assets/images/profil/'~ app.user.auter.photo) }}{% else %}{{ asset('assets/images/avatars/d.png') }}{% endif %}"
+                                         style="border-radius: 60rem;height: 8rem;width: 51%;" class="img-fluid center-block"/>
+                                    <h3>
+                                        {% if app.user.auter.pseudo is defined%}
+                                                {{ app.user.auter.pseudo }}
+                                        {% else %}
+                                            {{ app.user.nom ~ ' ' ~ app.user.prenom }}
+                                        {% endif %}
+                                    </h3>
+                                </div>
+                            </div>
+                            {{ form_widget(form.message) }}
+                        </div>
+                    </div>
+                    <div class="text-right mt-4">
+                        {{ form_widget(form.submit) }}
+                    </div>
+                </div>
+                {{ form_end(form) }}
+                {##}
+            </div>
+        </div>
+
+    </div>
+    <style>
+        .list-unstyled {
+            background: #ff0000c4;
+            color: white;
+            padding: 1rem;
+            border-radius: .3rem;
+        }
+    </style>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/admin/vendor/ckeditor/ckeditor.js') }}"></script>
+    <script>
+        {# Remplace le textarea par le plugin Ckeditor #}
+        CKEDITOR.replace('forum_reply[message]', {
+            width: '73.7%',
+            removePlugins : 'elementspath',
+            enterMode: CKEDITOR.ENTER_BR,
+            shiftEnterMode:CKEDITOR.ENTER_P,
+            toolbar: [{ name: 'basicstyles', groups: [ 'basicstyles' ], items: [ 'Bold', 'Italic', 'Underline', "-", 'TextColor', 'BGColor' ] },
+                { name: 'styles', items: [ 'Format', 'Font', 'FontSize' ] },
+                { name: 'scripts', items: [ 'Subscript', 'Superscript' ] },
+                { name: 'justify', groups: [ 'blocks', 'align' ], items: [ 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock' ] },
+                { name: 'paragraph', groups: [ 'list', 'indent' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'] },
+                { name: 'links', items: [ 'Link', 'Unlink' ] }
+            ],
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            if ( window.location.hash ) {
+                console.log(window.location.hash);
+                smoothScroll.animateScroll(  null, window.location.hash  );
+            }
+        });
+    </script>
+{% endblock %}
+
+

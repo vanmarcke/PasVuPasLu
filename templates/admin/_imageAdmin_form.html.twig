@@ -1,0 +1,19 @@
+{{ form_start(form, {'action': path('imageE_new' ) })}}
+{{ form_errors(form) }}
+<div class="col-md-12">
+    <img src="assets/images/uploads/imageAdmin/{{ image.vars.value.alt }}" alt="{{ image.vars.value.alt }}" class="img img-fluid">
+    <div>{{ form_row(image.file, {
+            'label': false,
+            'required': false,
+            'attr': {
+                'accept': 'image/*',
+            }
+        }) }}</div>
+
+    <div class="col-sm-6 mb-3 mb-sm-0">
+
+        {{ form_rest(form) }}
+        <button type="submit" class="button is-primary">valider</button>
+
+    </div>
+{{ form_end(form) }}

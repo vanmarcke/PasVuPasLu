@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'PasVuPasLu - Informations légales' %}
+
+{% block body %}
+    <div class="content">
+
+        <div class="carousel slide" data-ride="carousel">
+            <span class="illustration-title-slider">Informations</span>
+
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                  {% if carroussel_first.link %}
+                  <a href="{{carroussel_first.link}}" target="_blank">
+                      <img class="d-block w-100" src="{{ asset('assets/images/illustration/' ~ carroussel_first.content)}}" alt="First slide">
+                  </a>
+                  {% else %}
+                  <img class="d-block w-100" src="{{ asset('assets/images/illustration/' ~ carroussel_first.content)}}" alt="First slide">
+                      
+                  {% endif %}
+                </div>
+  
+                {% for carroussel in carroussel %}
+  
+                  <div class="carousel-item">
+                      {% if carroussel.link %}
+                      <a href="{{carroussel.link}}" target="_blank">
+                          <img class="d-block w-100" src="{{ asset('assets/images/illustration/' ~ carroussel.content)}}" alt="Second slide">
+                      </a>
+                      {% else %}
+                          
+                      <img class="d-block w-100" src="{{ asset('assets/images/illustration/' ~ carroussel.content)}}" alt="Second slide">
+                      {% endif %}
+                  </div>
+  
+                {% endfor %}
+  
+              </div>
+        </div>
+
+
+        <div class="separator"></div>
+
+        <div class="readers-bando bg-rose" style="background: black; font: normal normal .95rem 'Open Sans',Arial,sans-serif; color: #ffffff; text-align: center; font-weight: 700; letter-spacing: 0;">
+            INFORMATIONS LEGALES, CONDITIONS GENERALES D'UTILISATION &amp; CONDITIONS GENERALES DE VENTE :
+        </div>
+        <div class="text-justify" style="background: #c61859; color: white; padding: 1.5rem;">
+            <div>
+                {{ info_legal[0].content|raw }}
+            </div>
+        
+            <div class="m-5">
+                <img src="{{ asset('assets/images/illustration/tapi.png') }}" class="mx-auto">
+            </div>
+        
+        </div>
+
+    </div>
+{% endblock %}
+

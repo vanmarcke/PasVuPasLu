@@ -1,0 +1,107 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title 'Gestion des pages' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+
+            <div class="col-xl-8 col-lg-7">
+
+                {# Menu du header #}
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Séction menu header</h6>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Options</th>
+                                <th scope="col">Nom</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row">
+                                    <a href="#" class="btn btn-danger btn-circle btn-sm">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-primary btn-circle btn-sm">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                </th>
+                                <td>Mark</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                {# Menu du footer #}
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Séction menu bas de page</h6>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Options</th>
+                                <th scope="col">Nom</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row">
+                                    <a href="#" class="btn btn-danger btn-circle btn-sm">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-primary btn-circle btn-sm">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                </th>
+                                <td>Mark</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Donut Chart -->
+            <div class="col-xl-4 col-lg-5">
+                <div class="card shadow mb-4">
+                    <!-- Card Header - Dropdown -->
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Ajouter une page </h6>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        <form class="user">
+                            <div class="form-group">
+                                <input type="text" class="form-control form-control-user" placeholder="Nom de la page">
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-5 materialSelect inline empty w-100">
+                                    <ul class="select">
+                                        <li data-selected="true">Sélectionner l'emplacement</li>
+                                        <li data-value="0">Menu header</li>
+                                        <li data-value="1">Menu bas de page</li>
+                                    </ul>
+                                    <div class="message">Sélectionner l'emplacement de la page</div>
+                                </div>
+                            </div>
+                            <a href="index.html" class="btn btn-primary btn-user btn-block">
+                                Ajouter la page
+                            </a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+

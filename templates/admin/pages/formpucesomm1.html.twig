@@ -1,0 +1,24 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title 'Dashboard' %}
+
+{% block body %}
+    <div class="container-fluid">
+        {{ form_start(formpucesomm1, {'attr': {'class': 'row col-12 mb-3'}}) }}
+        <div class="col-lg-10">
+            <div class="form-group">
+                <label class="control-label required" for="">Modifier le sommaire</label>
+                {{ form_widget(formpucesomm1.TextMag) }}
+                {{ form_errors(formpucesomm1.TextMag) }}
+            </div>
+        </div>
+        <div class="col-lg-2">
+            <div class="form-group">
+                <label for="">Mettre à jour</label>
+                <button type="submit" class="btn btn-secondary w-100">Enregistrer</button>
+            </div>
+        </div>
+        {{ form_end(formpucesomm1) }}
+    </div>
+{% endblock %}
+

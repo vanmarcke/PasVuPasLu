@@ -1,0 +1,80 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title 'Modifier le prix Terhoma ' ~ price.title %}
+
+{% block body %}
+    <div class="container">
+        {{ form_start(form, {'attr': {'class':'row user'}}) }}
+
+            <div class="col-xl-8 col-lg-7">
+
+                {# Menu du header #}
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary text-center">Informations sur ce prix</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group row m-1 pb-4">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                {{ form_widget(form.title, {'attr': {'class': 'form-control form-control-user'}}) }}
+                                {{ form_errors(form.title)}}
+                            </div>
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                {{ form_widget(form.title2, {'attr': {'class': 'form-control form-control-user'}}) }}
+                                {{ form_errors(form.title2)}}
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb-3 mb-sm-0">
+                            {{ form_widget(form.text) }}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Donut Chart -->
+            <div class="col-xl-4 col-lg-5">
+                <div class="card shadow mb-4">
+                    <!-- Card Header - Dropdown -->
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Photo format portrait 1200 X 1600</h6>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                      
+                        <div class="input-group mt-3">
+                            <span class="input-group-btn w-100 position-absolute" style="background: #eaecf4;">
+                                <span class="btn btn-default btn-file w-100 text-center">
+                                    Télécharger une photo {{ form_widget(form.photo, {'required':false, 'attr': {'class':'imgInp w-100'}}) }}
+                                </span>
+                            </span>
+                            <input type="text" class="form-control invisible" readonly>
+                        </div>
+                        <img id='img-upload' src="{{ asset('assets/images/prix/'~price.photo) }}" style="height: 25rem;width: 100%;margin-bottom:2rem;">
+                        <input type="text" name="temporary" hidden value="{{ price.photo }}">
+                        {{ form_errors(form.photo) }}
+                        <div class="col-md-12 mt-4">
+                            <button class="btn btn-primary w-100">
+                                Mettre à jour le prix
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {{ form_end(form) }}
+    </div>
+
+    <style>
+        tbody {
+            background: #f8f9fc;
+        }
+        .desc {
+            font-size: .75rem;
+            color: #858796;
+        }
+    </style>
+{% endblock %}
+
+
+
+

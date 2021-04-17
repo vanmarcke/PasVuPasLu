@@ -1,0 +1,52 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title 'Podcasts_new' %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+
+        <div class="col-xl-12 col-lg-12">
+
+            <div class="card shadow mb-4">
+                <div class="card-header ">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        {{ titre is defined ? titre : 'Nouveau Podcast'}}
+                    </h6>
+                </div>
+
+                <div class="row ml-2 mr-2">
+                    {{ form_start(form, {'attr':{'class':'w-100'}}) }}
+                        {{ form_row(form.titre) }}
+                        {{ form_row(form.description) }}
+                        {{ form_row(form.link, {label:'Lien'}) }}
+                        {{ form_row(form.titre) }}
+                        <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="" class="col-md-12">Fichier audio - Format MP3</label>
+                            {{ form_widget(form.audio, {'attr':{class:'btn btn-secondary', accept:'audio/mpeg, audio/ogg'}}) }} <br>
+                            {{ form_errors(form.audio)}}
+                            <small class="col-md-12">Poids max: 10Mo</small>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="" class="col-md-12">Image</label>
+                            {{ form_widget(form.image, {'attr':{class:'btn btn-secondary'}}) }} <br>
+                            {{ form_errors(form.image)}}
+                            <small class="col-md-12">Poids max: 2Mo</small>
+                        </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary mb-2 shadow-lg">Enregistrer</button>
+                        <a href="{{path('admin_podcast')}}" class="btn btn-secondary mb-2">Annuler</a>
+                    {{ form_end(form) }}
+                  
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+</div>
+{% endblock %}
+

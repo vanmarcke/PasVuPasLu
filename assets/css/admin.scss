@@ -1,0 +1,16 @@
+
+.blocpub1-text, .conteneur-pub p{
+    position: absolute;
+    z-index: 99;
+    top: 10px;
+    left: 5px;
+    width: 100%;
+
+}
+.conteneur-pub{
+    position: relative;
+}
+.conteneur-pub img{
+    width: 80%;
+    height: 390px;
+}

@@ -1,0 +1,78 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title 'Pub' %}
+
+{% block stylesheets %}
+   {{ parent() }}
+   {{ encore_entry_link_tags('admin') }}
+{% endblock %}
+
+{% block body %}
+<div class="p-3">
+    {% for message in app.Flashes('success') %}
+    <div class="alert alert-success alert-dismissible fade show  m-2 text-center" role="alert" id="success">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        {{ message }}
+    </div>
+    {% endfor %}
+    <div class="row">
+
+        <div class="col-md-5">
+
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        Pub Bloc1 Forum
+                    </h6>
+                    <div class="conteneur-pub">
+                        <img src="{{ asset('assets/images/illustration/' ~ pub1_img[0].content) }}" alt="" class="pub-forum">
+                        
+                    </div>
+
+                    <a href="{{path('pub1', {cle:'pub1'})}}" class="btn btn-secondary mt-1">Modifier le lien de l'image</a>
+                    <a href="{{path('pub_img_rem', {cle:'pub1'})}}" class="btn btn-danger mt-1">Supprimer le lien de l'image</a>
+                    <a href="{{path('pub_img_edit', {cle:'pub1_img'})}}" class="btn btn-secondary mt-1">Modifier l'image</a>
+                    <input type="text" value="{{pub1_video[0].content}}" class="form-control mt-1" disabled>
+                    <small>Url embed type : https://www.youtube.com/embed/nom_de_la_video</small>
+                    <a href="{{path('pub_video', {cle:'pub1_video'})}}" class="btn btn-secondary mt-1">Lien vidéo</a>
+                    <a href="{{path('pub_video_rem', {cle:'pub1_video'})}}" class="btn btn-danger mt-1">Supprimer le lien de la vidéo</a>
+                    
+
+                </div>
+
+
+        
+            </div>
+        </div>
+
+        <div class="col-md-5">
+
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        Pub Bloc2 Forum
+                    </h6>
+                    <div class="conteneur-pub">
+                        <img src="{{ asset('assets/images/illustration/' ~ pub2_img[0].content) }}" alt="" class="pub-forum">
+
+                    </div>
+                
+                    <a href="{{path('pub1', {cle:'pub2'})}}" class="btn btn-secondary mt-1">Modifier le lien de l'image</a>
+                    <a href="{{path('pub_img_rem', {cle:'pub2'})}}" class="btn btn-danger mt-1">Supprimer le lien de l'image</a>
+                    <a href="{{path('pub_img_edit', {cle:'pub2_img'})}}" class="btn btn-secondary mt-1">Modifier l'image</a>
+                    <input type="text" value="{{pub2_video[0].content}}" class="form-control mt-1" disabled>
+                    <small>Url embed type : https://www.youtube.com/embed/nom_de_la_video</small>
+                    <a href="{{path('pub_video', {cle:'pub2_video'})}}" class="btn btn-secondary mt-1">Lien vidéo</a>
+                    <a href="{{path('pub_video_rem', {cle:'pub2_video'})}}" class="btn btn-danger mt-1">Supprimer le lien de la vidéo</a>
+                    
+
+                </div>        
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

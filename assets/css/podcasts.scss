@@ -1,0 +1,51 @@
+.box-interviews-2 img {
+    position: unset;
+    // display: none;
+}
+.lecteur{
+    width: 100%;
+    height: 20px;
+}
+.img-podcast{
+    object-fit: cover;
+    width: 150px;
+    height: 150px;
+    border-radius: 15px;
+    margin: auto;
+    
+}
+.block-podcast{
+    background-color:#f1f3f2;
+    border-radius: 15px;
+    box-shadow: #164d6e 0px 0px 10px;
+}
+.conteneur-image{
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0!important;
+}
+.admin-podcast{
+    background-size: cover;
+    background-repeat: no-repeat;
+    box-shadow: gray 0 0 7px;
+    border: rgb(150, 150, 150) 2px solid;
+}
+.img-admin-podcast{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    object-fit: cover;
+    top: 0;
+    left: 0;
+    opacity: 0.2;
+}
+.card-podcast{
+    z-index: 99;
+}
+.video{
+    width: 100%;
+    height: 100%;
+    border-radius: 0px 15px 15px 0px;
+}

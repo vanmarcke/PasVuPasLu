@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+   {{ parent() }}
+   {{ encore_entry_link_tags('category') }}
+{% endblock %}
+
+{#{% block title 'Categories' %}#}
+{% block title %}
+    PasVuPasLu - {{ categories.categorie }}
+{% endblock %}
+
+{% block body %}
+
+    <div class="content">
+
+        <div class="illustration" style="background-image: url({{ asset('assets/images/categorie/'~categoriephoto) }});">
+            <span class="illustration-title">{{ categorie  }}</span>
+        </div>
+
+        <div class="separator"></div>
+
+        <div class="row mx-auto text-white category-title pt-2 pb-3" style="background-color: #a80d49;">
+            <div class="col-md-10">
+                Vous êtes l'auteur 
+                {% if categorie == 'Bandes dessinées' %}d'une Bande Dessinée
+                {% elseif categorie == 'Poésies' %}de Poésies
+                {% elseif categorie == 'Essais' %}d'un Essai
+                {% elseif categorie == 'Thrillers' %}d'un Thriller
+                {% elseif categorie == 'Mangas' %}d'un Manga
+                {% elseif categorie == 'Jeunesse' %}d'un livre pour la jeunesse
+                {% elseif categorie == 'Bien-être & vie pratique' %}d'un ouvrage sur le bien-être ou la vie pratique
+                {% elseif categorie == 'Nouvelles' %}d'un recueil de nouvelles
+                {% elseif categorie == 'Romans' %}d'un Roman
+                {% elseif categorie == 'Science Fiction' %}d'un ouvrage de science-fiction
+                {% else %} d'un {{ categorie }}{% endif %}, vous souhaitez donner de la visibilité à votre oeuvre, rendez-vous à la page{% if categorie != 'Bien-être & vie pratique' %}<br>{% endif %} <a href="{{ path('security_login') }}">inscription</a> et remplissez le formulaire.
+            </div>
+            <img src="{{ asset('assets/images/illustration/btn-register.jpg') }}">
+    </div>
+
+        <div class="container pb-5 pt-5">
+            <div class="row fond">
+                {% if livres is not empty %} 
+                                {% for livre in livres %}
+                            <div class="blog-card">
+
+                                <div class="meta">
+                                    <img class="photo" src="{{ asset('assets/images/livre/'~livre.photo) }}" alt="">
+                                    <ul class="details">
+                                    {% if livre.user.auter.pseudo is defined%}
+                                    <li class="author"><a href="{{ path('profil_auter',{'id': livre.user.id }) }}">{{livre.user.auter.pseudo }}</a></li>
+                                    {% else %}
+                                    <li class="author"><a href="{{ path('profil_auter',{'id': livre.user.id }) }}">{{livre.user.nom ~ ' ' ~ livre.user.prenom }}</a></li>
+                                    {% endif %}
+                                    <li class="date">{{ livre.createdAt|date('d/m/Y') }}</li>        
+                                </div>
+                                
+                                <div class="description">
+                                    <h2>{{ livre.titre }}</h2>
+                                    <p class="card-text pt-2 text-justify" style="height: 150px;overflow: hidden;";><em><strong>Extrait :</strong></em>
+                                    {{ livre.extract|striptags|length > 500 ? livre.extract|raw|striptags|slice(0,700)|raw : livre.extract|raw }} ...
+                                    </p>
+                                    <p class="read-more">
+                                        <a href="{{ path('show_livre',{'slug': livre.slug, 'id': livre.id }) }}">Voir l'intégralité de l'extrait</a>
+                                    </p>
+                                </div>                                
+                            </div>   
+                            {% endfor %}
+
+                    {% else %}
+
+                    <div class="alert alert-warning mx-auto">
+                        <strong>
+                            Aucun livre n'est actuellement présent sur cette catégorie.
+                        </strong>
+                    </div>
+
+                    {% endif %}
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('category') }}
+{% endblock %}
+

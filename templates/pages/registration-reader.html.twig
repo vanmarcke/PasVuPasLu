@@ -1,0 +1,258 @@
+{% extends 'base.html.twig' %}
+{% block javascripts %}
+   {#} <script src="https://www.paypalobjects.com/api/checkout.js"></script>{#}
+   {#} <script src="{{ asset('assets/js/index.js') }}"></script>{#}
+  {#}  <script>
+        const path = "/registration/user_lecteur";
+        const newPay = "/lecteur";
+    </script>{#}
+{% endblock %}
+{% block title 'Inscription Lecteur' %}
+
+{% block body %}
+   
+    <div class="content">
+
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+              {% if carroussel_first.link %}
+              <a href="{{carroussel_first.link}}" target="_blank">
+                  <img class="d-block w-100" src="{{ asset('assets/images/illustration/' ~ carroussel_first.content)}}" alt="First slide">
+              </a>
+              {% else %}
+              <img class="d-block w-100" src="{{ asset('assets/images/illustration/' ~ carroussel_first.content)}}" alt="First slide">
+                  
+              {% endif %}
+            </div>
+
+            {% for carroussel in carroussel %}
+
+              <div class="carousel-item">
+                  {% if carroussel.link %}
+                  <a href="{{carroussel.link}}" target="_blank">
+                      <img class="d-block w-100" src="{{ asset('assets/images/illustration/' ~ carroussel.content)}}" alt="Second slide">
+                  </a>
+                  {% else %}
+                      
+                  <img class="d-block w-100" src="{{ asset('assets/images/illustration/' ~ carroussel.content)}}" alt="Second slide">
+                  {% endif %}
+              </div>
+
+            {% endfor %}
+
+          </div>
+        </div>
+
+        <div class="separator"></div>
+
+        <div class="row mx-auto">
+            <div class="col-md-6 p-0">
+                <div class="box-register-title">
+                    Inscription Lecteur
+                    <p>(Vous pouvez créer un compte lecteur dès maintenant)</p>
+                </div>
+            </div>
+            <div class="col-md-6 p-0">
+                <div class="box-register-title-2">
+                        Devenez lecteur c'est
+                    <p>Gratuit !</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="separator"></div>
+
+        {# <div class="block-quote register-box">
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="{{ asset('assets/images/illustration/left.jpg') }}" class="w-100">
+                </div>
+                <div class="col-md-8 p-3">
+                    <div class="register-text-title pb-1">Devenir membre lecteur, c'est facile !</div>
+                    <p class="text-white">
+                        1/ Remplissez le questionnaire ci-dessous,<br>
+                        2/ Effectuez votre paiement,<br>
+                        3/ Vérifiez votre inscription sur votre boite mail.<br>
+                        4/ Commencez votre activité en vous connectant à votre espace.
+                    </p>
+                    <img src="{{ asset('assets/images/illustration/livre-2.png') }}" class="livre-2">
+                </div>
+            </div>
+        </div> #}
+
+        {# <div class="separator"></div> #}
+
+        <div class="block-quote bg-purple text-white" style="height: auto;">
+            <form method="post" class="register mx-auto w-50" enctype="multipart/form-data">
+            <!-- <div class="register mx-auto w-50"> -->
+         
+             <div class="flash-errors" style="display: none;">
+                   <span class="flash-message">{ error }</span>
+             </div> 
+             {#}
+                <div class="wait mx-auto" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 9991; background: #093f4e94;display: none">
+                    <i id="close-pay" class="fas fa-times" style="display:none;position: absolute; right: 1rem; top: 1rem; font-size: 2rem; cursor: pointer; opacity: .5;"></i>
+                    <div class="wait-load text-center m-5 mx-auto" style="top: 36%; transform: translateY(-50%); position: relative;">
+                        <div class="lds-dual-ring"></div>
+                        <div style="font-weight: 600;">Chargement...</div>
+                    </div>
+                    <div class="wait-pay text-center m-5 mx-auto" style="top: 36%; transform: translateY(-50%); position: relative;display: none">
+                        <div class="row mx-auto">
+                            <div class="mx-auto p-5">
+                                <div style="font-weight: 600;">Cliquez sur le bouton "Payer avec PayPal" pour finaliser votre inscription.</div>
+                                <div id="paypal-button" class="mt-5"></div>
+                            </div>
+
+                            <div class="mx-auto col-lg-12">
+                                <div>Ou</div>
+                            </div>
+
+                            <div class="mx-auto p-5">
+                                <!-- Button  modal -->
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                    Utiliser un code promo
+                                </button>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>{#}
+                
+                <div class="form-row">
+                    <div class="col-md-12">
+                        <label for="name">Nom</label>
+                        {{ form_widget(form.nom, { 'attr': {'placeholder': 'Votre nom'} }) }}
+                         {{ form_errors(form.nom)}}
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="firstname">Prénom</label>
+                        {{ form_widget(form.prenom, { 'attr': {'placeholder': 'Votre prénom'} }) }}
+                        {{ form_errors(form.prenom)}}
+                    </div>
+                </div>
+
+                <div class="form-row">
+                     <div class="col-md-6">
+                        <label for="pseudo">Pseudo</label>
+                        {{ form_widget(form.pseudo, { 'attr': {'placeholder': 'Votre pseudo'} }) }}
+                        {{ form_errors(form.pseudo)}}
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="birthDate">Date de naissance</label>
+                        {{ form_widget(form.birthDate, { 'attr': {'placeholder': 'Votre date de naissance','class':'text-center'} }) }}  
+                    </div>
+
+            
+                    <div class="col-md-6">
+                        <label for="email">Email</label>
+                        {{ form_widget(form.email, { 'attr': {'placeholder': 'Votre adresse email'} }) }}
+                        {{ form_errors(form.email)}}
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="telephone">Téléphone</label>
+                        {{ form_widget(form.telephone, { 'attr': {'placeholder': ' 06 / +33'} }) }}  
+                        {{ form_errors(form.telephone)}}
+                    </div>
+
+                </div>
+                <div class="form-row">
+                    <div class="col-md-12">
+                        <label for="pseudo">Adresse</label>
+                        {{ form_widget(form.adress, { 'attr': {'placeholder': 'Votre adresse'} }) }}
+                        {{ form_errors(form.adress)}} 
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="pseudo">Code postale</label>
+                        {{ form_widget(form.codePostale, { 'attr': {'placeholder': '5 chiffres'} }) }} 
+                        {{ form_errors(form.codePostale)}}
+                    </div>
+                    <div class="col-md-8">
+                        <label for="ville">Ville</label>
+                        {{ form_widget(form.ville, { 'attr': {'placeholder': 'Nom de la ville'} }) }}
+                        {{ form_errors(form.ville)}}  
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="pseudo">Pays</label>
+                        {{ form_widget(form.country, { 'attr': {'placeholder': 'Votre pays'} }) }}  
+                        {{ form_errors(form.country)}}
+                   </div>
+                </div>
+
+                <div class="form-row">
+                   <div class="col-md-6">
+                        <label for="pseudo">Mot de passe</label>
+                        {{ form_widget(form.password.first, { 'attr': {'placeholder': 'Votre mot de passe'} }) }}
+                        {{ form_errors(form.password.first) }}
+                    </div>
+                    <div class="col-md-6">
+                        <label for="pseudo">Confirmer votre mot de passe</label>
+                        {{ form_widget(form.password.second, { 'attr': {'placeholder': 'Confirmer'} }) }}
+                        {{ form_errors(form.password.second) }}
+
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <label for="photo">Photo de profil ( max : 2mo )</label>
+                        {{ form_widget(form.photo, {'attr':{'accept':'image/png, image/jpeg'}}) }}  
+                        {{ form_errors(form.photo)}}
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-check">
+                        <input type="checkbox" id="box-3" name="checkbox" class="form-control">
+                        <label for="box-3">J’accepte les termes et <a href="{{ path('legal') }}" target="_blank">conditions de ventes et d'utilisation</a> du site Internet.</label>
+                    </div>
+                </div>
+               
+                <button type="submit" class="login btn-default">Valider mon inscription</button>
+            
+             {{ form_rest(form)}}
+            </form>
+        </div>
+   
+
+        <!-- Modal -->
+      {#}  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <form id="promo-code" action="{{ path('coupon_verefi') }}" method="post" class="form-row modal-content pb-0">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Code promo</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body mb-3">
+                        <p class="text-center">Renseigner votre code promo ci-dessous puis cliquez sur le bouton valider pour finaliser votre inscription</p>
+                        <input type="text" name="_promo" autocomplete="off" required="required" placeholder="Code promo" class="form-control">
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" name="_method" value="POST">
+                        <input type="hidden" name="_token" value="{{ csrf_token("promo") }}">
+                        <button type="submit" id="send-promo" class="btn btn-primary w-100">Valider mon code promo</button>
+                    </div>
+                </form>
+            </div>
+        </div>{#}
+        <!-- END -->
+        <style>
+            .err {
+                color: #ffffff;
+                font-weight: 700;
+                padding: .23rem 0;
+                text-align: center;
+                border-radius: .6rem;
+                background: #f44336;
+            }
+        </style>
+
+    </div>
+{% endblock %}

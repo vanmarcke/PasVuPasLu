@@ -1,0 +1,116 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vidéos et Podcasts{% endblock %}
+
+{% block stylesheets %}
+   {{ parent() }}
+   {{ encore_entry_link_tags('podcasts') }}
+{% endblock %}
+
+{% block body %}
+    <div class="content">
+
+        <div class="carousel slide" data-ride="carousel">
+            <span class="illustration-title-slider">Vidéos & Podcasts</span>
+
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                  {% if carroussel_first.link %}
+                  <a href="{{carroussel_first.link}}" target="_blank">
+                      <img class="d-block w-100" src="{{ asset('assets/images/illustration/' ~ carroussel_first.content)}}" alt="First slide">
+                  </a>
+                  {% else %}
+                  <img class="d-block w-100" src="{{ asset('assets/images/illustration/' ~ carroussel_first.content)}}" alt="First slide">
+                      
+                  {% endif %}
+                </div>
+  
+                {% for carroussel in carroussel %}
+  
+                  <div class="carousel-item">
+                      {% if carroussel.link %}
+                      <a href="{{carroussel.link}}" target="_blank">
+                          <img class="d-block w-100" src="{{ asset('assets/images/illustration/' ~ carroussel.content)}}" alt="Second slide">
+                      </a>
+                      {% else %}
+                          
+                      <img class="d-block w-100" src="{{ asset('assets/images/illustration/' ~ carroussel.content)}}" alt="Second slide">
+                      {% endif %}
+                  </div>
+  
+                {% endfor %}
+  
+              </div>
+        </div>
+
+
+
+        <div class="separator"></div>
+
+
+        <div class="block-quote bg-rose box-interviews-2" style="height: auto;">
+            <div class="interviews-title text-center" style="padding: 2rem 2rem 5rem">"La version audible d'un livre connait un franc succès.
+
+                Vous aussi, offrez un extrait audible de votre ouvrage aux visiteurs de la plateforme. Si vous avez un podcast à proposer ou si vous souhaitez être accompagné(e) pour sa réalisation, contactez votre Community Manager."
+                
+                </div>
+            
+            {% if podcast is not empty %}
+            {% for podcast in podcast %}
+                
+            <div class="row block-podcast col-md-10 mx-auto mb-5 pr-0">
+                <div class="col-md-3 d-flex justify-content-center conteur-image">
+                    <img src="{{asset('assets/images/podcasts/' ~ podcast.image )}}" class="img-podcast"alt="">
+                </div>
+                <div class="col-md-9">
+                    {% if podcast.link %}
+                        <div class="row">
+                            <div class="col-md-10">
+                                <h3 class="h3 mt-3">{{podcast.titre}}</h3>
+                                <p>{{podcast.description|raw}}</p>
+                            </div>
+                            <div class="col-md-10 p-0" style="height : 350px; margin-bottom: 20px;">
+                                <iframe class="video p-0"src="{{podcast.link}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    {% else %}
+                        <h3 class="h3 mt-3">{{podcast.titre}}</h3>
+                        <p>{{podcast.description|raw}}</p>
+                        {% if podcast.audio %}
+                        <div class="audio mb-4">
+                            <audio controls src="{{asset('assets/audio/' ~  podcast.audio)}}" class="lecteur"></audio>
+                        </div>
+                        {% endif %}
+
+                    {% endif %}
+
+                </div>
+                
+            </div>
+            
+            {% endfor %}
+            {% else %}
+
+                <div class="alert alert-warning mx-auto text-center">
+                    <strong>
+                        Aucun podcast n'est actuellement présent sur cette page.
+                    </strong>
+                </div>
+
+            {% endif %}
+
+            <div class="interviews-content">
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('podcasts') }}
+{% endblock %}

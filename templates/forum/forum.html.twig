@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'PasVuPasLu - Forum de discussion' %}
+
+{% block body %}
+    <div class="content">
+
+      {% for message in app.Flashes('success') %}
+                        <div class="alert alert-success alert-dismissible fade show text-center" role="alert" id="success">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+
+        <div class="pt-5 pb-5" style="background: #dfdfdf;">
+            <div class="text-center">
+                <a class="btn-default btn-forum mb-5" href="{{ path('forum_addtopic') }}">
+                    <span>Démarrer une discussion ...</span>
+                </a>
+            </div>
+            <div class="interviews-content block-2-i">
+                <ul class="DiscussionList-discussions">
+                    {# boucle #}
+                    {% for forum in forums %}
+                    <li>
+                        <div class="DiscussionListItem">
+                            <div class="DiscussionListItem-content Slidable-content">
+                                <div class="DiscussionListItem-author">
+                                    <span class="Avatar" style="background: rgb(198, 160, 229);"><img src="{% if forum.forums.auter.photo is defined %}{{ asset('assets/images/profil/'~ forum.forums.auter.photo) }}{% else %}{{ asset('assets/images/avatars/d.png') }}{% endif %}" style="width: 100%; height: 100%; border-radius: 60rem;"></span>
+                                </div>
+                                <a href="{{ path('forum_topic', {'slug' : forum.slug, 'id' : forum.id}) }}" class="DiscussionListItem-main">
+                                    <h3 class="DiscussionListItem-title">{{ forum.title }}</h3>
+                                    <ul class="DiscussionListItem-info">
+                                        <li class="item-terminalPost">
+                                    <span><i class="icon fas fa-reply"></i>
+                                        <span class="username font-weight-bold">
+                                            {% if forum.forums.auter.pseudo is defined%}
+                                                {{ forum.forums.auter.pseudo }}
+                                            {% else %}
+                                                {{ forum.forums.nom ~ ' ' ~ forum.forums.prenom }}
+                                            {% endif %}
+                                        </span>
+                                        <time datetime="" title="">Publié le {{ forum.createdAt |date('d/m/y') }}</time>
+                                    </span>
+                                        </li>
+                                        <span class="DiscussionListItem-count" title="" style="position: absolute;top: .26rem;right: 0;font-size: 1.3rem;">
+                                            <i class="fas fa-comment-alt"></i> &nbsp;
+                                            
+                                          {% if is_granted("ROLE_ADMIN") %}  
+                                            <form method="post" action="{{ path('delete_forum', {id: forum.id}) }}" style="display: inline-block">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <input type="hidden" name="_token" value="{{ csrf_token("delete" ~ forum.id) }}">
+                                            <button class="btn btn-danger btn-circle btn-sm" onclick="return confirm('ATTENTION : Êtes-vous sûr de bien vouloir supprimer ce forum ?');">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                            </form>
+                                           {% endif %}
+                                        </span>
+                                    </ul>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    {% endfor %}
+                    {% if(forums is empty) %}
+                        <div class="text-center" style="color: #063c4c;">
+                            <i class="fas fa-comment-alt"></i>
+                            Soyez le premier à commencer une discussion.
+                        </div>
+                    {% endif %}
+                    {# Fin de la boucle #}
+
+                </ul>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+

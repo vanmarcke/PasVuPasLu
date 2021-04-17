@@ -1,0 +1,199 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+   {{ parent() }}
+   {{ encore_entry_link_tags('books') }}
+{% endblock %}
+
+{% block title 'PasVuPasLu - Livres' %}
+
+{% block body %}
+    <div class="content">
+
+        <div class="carousel slide" data-ride="carousel">
+            <span class="illustration-title-slider">Livres</span>
+
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                  {% if carroussel_first.link %}
+                  <a href="{{carroussel_first.link}}" target="_blank">
+                      <img class="d-block w-100" src="{{ asset('assets/images/illustration/' ~ carroussel_first.content)}}" alt="First slide">
+                  </a>
+                  {% else %}
+                  <img class="d-block w-100" src="{{ asset('assets/images/illustration/' ~ carroussel_first.content)}}" alt="First slide">
+                      
+                  {% endif %}
+                </div>
+  
+                {% for carroussel in carroussel %}
+  
+                  <div class="carousel-item">
+                      {% if carroussel.link %}
+                      <a href="{{carroussel.link}}" target="_blank">
+                          <img class="d-block w-100" src="{{ asset('assets/images/illustration/' ~ carroussel.content)}}" alt="Second slide">
+                      </a>
+                      {% else %}
+                          
+                      <img class="d-block w-100" src="{{ asset('assets/images/illustration/' ~ carroussel.content)}}" alt="Second slide">
+                      {% endif %}
+                  </div>
+  
+                {% endfor %}
+  
+              </div>
+        </div>
+        
+
+
+        <div class="separator"></div>
+
+        <div class="title-book">Leur succès dépend de vous !</div>
+        <div class="row mx-auto">
+            <div class="col-md-6 p-0">
+                <div class="books-content" style="background-color: #c40c50;">
+                    <div class="book-title text-center">
+                        Les nouveautés
+                        <img src="{{ asset('assets/images/illustration/book-left.png') }}">
+                    </div>
+                    <div class="list-five">
+                        {# Les nouveautés livre #}
+                        {% for livre in livres %}
+                            <div>
+                                {% if livre.photo == 'null' %}
+                        <div style="background: #292828; height: 10rem; border-radius: .6rem;width: 245%;float: left; margin-right: 2rem; width: 23%; height: 9rem;">
+                            <i class="fas fa-book-open" style="color: white;
+    font-size: 3rem;
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    padding-top: 35%;
+    opacity: .2;"></i>
+                        </div>
+                        {% else %}                        
+                        <ul class="align">		
+					<li>						
+						<figure class='book'>
+						<!-- Front -->
+							<ul class='hardcover_front'>
+								<li>
+									<img src="{{ asset('assets/images/livre/'~livre.photo) }}" alt="" width="100%" height="100%">
+								</li>
+								<li></li>
+							</ul>
+						<!-- Pages -->
+							<ul class='page'>
+								<li></li>
+								<li>
+                                    <a class="btn" href="{{ path('show_livre',{'slug': livre.slug, 'id': livre.id }) }}">Voir l'extrait</a>
+								</li>
+								<li></li>
+								<li></li>
+								<li></li>
+							</ul>
+						<!-- Back -->
+							<ul class='hardcover_back'>
+								<li></li>
+								<li></li>
+							</ul>
+							<ul class='book_spine'>
+								<li></li>
+								<li></li>
+							</ul>
+                        {% endif %}
+                        <figcaption><br>                        
+								<h5 class="text-white">{{ livre.titre }}</h5>
+								<span>Auteur :<a href="{{ path('profil_auter',{'id': livre.user.id }) }}">
+                                 {% if livre.user.auter.pseudo is defined%}
+                                        {{livre.user.auter.pseudo }}
+                                    {% else %}
+                                        {{livre.user.nom ~ ' ' ~ livre.user.prenom }}
+                                    {% endif %}
+                                    </a></span>
+								<p>Date de parution : {{ livre.createdAt|date('d/m/Y') }}</p>
+							</figcaption>
+						</figure>
+					</li>
+				</ul>                              
+                                   
+                </div>
+            {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 p-0">
+                <div class="books-content" style="background-color: #8a0b3c;">
+                    <div class="book-title text-center">
+                        Les mieux notés
+                        <img src="{{ asset('assets/images/illustration/book-right.png') }}">
+                    </div>
+
+                    <div class="list-five">
+                        {# les mieux noté #}
+                        {% for livre in noteLivre %}
+                            {% for books in livre %}
+                                <div>
+                                     {% if books.photo == 'null' %}
+                                <div style="background: #292828; height: 10rem; border-radius: .6rem;width: 245%;float: left; margin-right: 2rem; width: 23%; height: 9rem;">
+                                    <i class="fas fa-book-open" style="color: white;font-size: 3rem;text-align: center;margin: 0 auto;width: 100%;height: 100%;padding-top: 35%;opacity: .2;"></i>
+                                </div>
+                                {% else %}                                
+                                <ul class="align">					
+                                <li>
+                                    <figure class='book'>
+                                    <!-- Front -->
+                                        <ul class='hardcover_front'>
+                                            <li>
+                                                <img src="{{ asset('assets/images/livre/'~books.photo) }}" alt="" width="100%" height="100%">
+                                            </li>
+                                            <li></li>
+                                        </ul>
+                                    <!-- Pages -->
+                                        <ul class='page'>
+                                            <li></li>
+                                            <li>
+                                                <a class="btn" href="{{ path('show_livre',{'slug': books.slug, 'id': books.id }) }}">Voir l'extrait</a>
+                                            </li>
+                                            <li></li>
+                                            <li></li>
+                                            <li></li>
+                                        </ul>
+                                    <!-- Back -->
+                                        <ul class='hardcover_back'>
+                                            <li></li>
+                                            <li></li>
+                                        </ul>
+                                        <ul class='book_spine'>
+                                            <li></li>
+                                            <li></li>
+                                        </ul>
+                                            {% endif %}
+                                        <figcaption><br>
+                                            <h5 class="text-white">{{ books.titre }}</h5>
+                                            <span>Auteur :<a href="{{ path('profil_auter',{'id': books.user.id }) }}">
+                                            {% if books.user.auter.pseudo is defined%}
+                                                    {{books.user.auter.pseudo }}
+                                                {% else %}
+                                                    {{books.user.nom ~ ' ' ~ books.user.prenom }}
+                                                {% endif %}
+                                                </a></span>
+                                            <p>Date de parution : {{ books.createdAt|date('d/m/Y') }}</p>
+                                        </figcaption>
+                                    </figure>
+                                </li>
+                            </ul>                                    
+                        </div>
+                            {% endfor %}    
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <img src="{{ asset('assets/images/illustration/books.png') }}" class="img-books">
+    </div> 
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('books') }}
+{% endblock %}

@@ -1,0 +1,211 @@
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+    <script src="{{ asset('assets/js/index.js') }}"></script>
+    <script>
+        const buyOne = true;
+        const payer = "{{ path('request') }}";
+        const auth = "{{ path('response') }}";
+    </script>
+    <script src="{{ asset('assets/admin/vendor/ckeditor/ckeditor.js') }}"></script>
+    <script>
+       
+        $(document).on('change', '.btn-file :file', function() {
+            var input = $(this),
+                label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+            input.trigger('fileselect', [label]);
+        });
+
+        $('.btn-file :file').on('fileselect', function(event, label) {
+
+            var input = $(this).parents('.input-group').find(':text'),
+                log = label;
+
+            if( input.length ) {
+                input.val(log);
+            } else {
+                if( log ) alert(log);
+            }
+
+        });
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#img-upload').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        
+    </script>
+{% endblock %}
+
+{% block title 'PavuPaslu.com - Ajouter un livre' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css" integrity="sha256-AWdeVMUYtwLH09F6ZHxNgvJI37p+te8hJuSMo44NVm0=" crossorigin="anonymous" />
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+
+{% endblock %}
+
+{% block body %}
+    {#{{ dump(app.user ) }}#}
+    {% set categories = categories_repository.findAll() %}
+    {% form_theme form 'bootstrap_4_layout.html.twig' %}
+    {% if islivre is not null %}
+    <div class="flash-errors" style="display: none;">
+        <span class="flash-message">{ error }</span>
+    </div>
+        <div class="container" style="background: #ffffff; margin-top: 0rem!important; padding: 0;">
+            <div class="alert alert-danger text-center mb-0">
+                Vous avez atteint le maximum de livres autorisés !
+            </div>
+            <div style="padding: 3% 9%;background-color: #eeeeee8c;">
+                <b>Bonjour</b> {{ app.user.nom ~' '~ app.user.prenom }}, <br>
+                Chaque compte PasvuPasLu vous permet de rajouter et de promouvoir votre livre qu'une seule fois sur la plate-forme,
+                vous avez toujours la possibilité de supprimer le livre actuelle et d'en rajouter un nouveau.
+                cependant si vous avez d'autres livres que vous souhaitez mettre en ligne vous devez payer <b>60 euros annuel TTC</b>
+                <div id="paypal-button" class="mt-5"></div>
+                <div class="text-center p-4">
+                    <div class="pb-4">Ou</div>
+                 <!-- Button  modal -->
+                    <button type="button" class="btn btn-primary w-50" data-toggle="modal" data-target="#exampleModal">
+                        J'utilise un code promo
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <form id="promo-code" action="{{ path('coupon_verefiLivre') }}" method="post" class="form-row modal-content pb-0">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Code promo</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body mb-3">
+                        <p class="text-center">Renseigner votre code promo ci-dessous puis cliquez sur le bouton valider</p>
+                        <input type="text" name="_promo" autocomplete="off" required="required" placeholder="Code promo" class="form-control">
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" name="_method" value="POST">
+                        <input type="hidden" name="_token" value="{{ csrf_token("promo") }}">
+                        <button type="submit" id="send-promo" class="btn btn-primary w-100">Valider mon code promo</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- END -->
+        <style>
+            .err {
+             color: #ffffff;
+             font-weight: 700;
+             padding: .23rem 0;
+             text-align: center;
+             border-radius: .6rem;
+             background: #f44336;
+            }
+            .btn.btn-paypal {
+                position: relative;
+                margin-top: 4rem;
+                background-color: #f8be0f;
+                color: white;
+                padding: 1.3rem 8rem;
+                border-radius: .3rem;
+                transition: .2s;
+                font-weight: 600;
+            }
+            .btn.btn-paypal:hover {
+                opacity: .9;
+            }
+            .btn.btn-paypal > span {
+                left: 14%;
+                position: absolute;
+                top: 20%;
+
+            }
+            .btn.btn-paypal img {
+                width: 36%;
+                right: 11%;
+                position: absolute;
+                top: -5%;
+            }
+        </style>
+    {% else %}
+    {% if form is defined %}
+    <div class="container" style="background: #ffffff; margin-top: 0rem!important; padding: 0;">
+        {% for message in app.Flashes('success') %}
+            <div class="alert alert-success alert-dismissible fade show mb-0 text-center" role="alert" id="success">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ message }}
+            </div>
+        {% endfor %}
+        <div class="row">
+
+            <div class="col-xl-12 col-lg-12">
+
+                <div class="card shadow mb-4">
+                    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+                    <div class="card-header py-3">
+                        <h6>Ajouter un livre</h6>
+                    </div>
+                    <div class="card-body">
+                        <form action="" method="POST" class="user">
+                            <div class="form-group row m-1 pb-4">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    {{ form_row(form.titre) }}
+                                </div>
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    {{ form_row(form.categorie) }}
+
+                                </div>
+                                <div class="col-sm-12 mb-3 mb-sm-0">
+                                    {{ form_row(form.video) }}
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 mb-3 mb-sm-0">
+                                <div class="form-group">
+                                    <img id='img-upload' class="rounded mx-auto d-block" style="width: 25%;"/>
+                                                {{ form_row(form.photo) }}
+                                                <p style="margin-top: -35px; font-size: .896rem; color: #222222;"><i class="fas fa-info-circle pr-1"></i>Laissez vide si vous n'êtes pas encore édité</p>                                            
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12 mb-3 mb-sm-0">
+                                    {{ form_row(form.extract) }}
+                                </div>
+                            </div>
+
+                            <button class="login btn-default w-50 mx-auto">
+                                Ajouter le livre
+                            </button>
+
+                            {{ form_rest(form) }}
+                            {{ form_end(form) }}
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+   
+
+    {% endif %}
+    {% endif %}
+
+
+{% endblock %}

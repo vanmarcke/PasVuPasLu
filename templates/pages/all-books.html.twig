@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'PasVuPasLu - Livres' %}
+
+{% block body %}
+    <div class="content">
+        <div class="illustration" style="background-image: url({{ asset('assets/images/illustration/readers.jpg') }});">
+            <span class="illustration-title">Lecteurs</span>
+        </div>
+
+        <div class="separator"></div>
+
+        <div class="container pb-5 pt-5">
+            <h3 style="padding-bottom: 1rem; margin-top: -3.5rem; font-style: italic; font-size: 1.29rem;">Tous les livres</h3>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card text-center mb-3" style="margin-top: 0!important">
+                        <div class="card-body">
+
+                            <a href="{{ path('book_view') }}" class="d-block">
+                                <img src="https://static.fnac-static.com/multimedia/Images/FR/NR/45/34/a0/10499141/1507-1/tsp20190201145259/Le-gout-de-la-mort.jpg" class="mb-2 mx-auto" alt="" style="max-width: 75%; max-height: 200px">
+                            </a>
+
+                            <h6 class="eclipse"><a href="{{ path('book_view') }}" class="text-dark">Tome 23 : Le goût de la mort</a></h6>
+
+                            <div class="text-muted small mb-3">
+                                Alyana a réveillé les géants qui parcouraient jadis les terres d’Arran...
+                            </div>
+
+                            <a href="{{ path('book_view') }}"><strong>Consulter un extrait</strong></a>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center mb-3" style="margin-top: 0!important">
+                        <div class="card-body">
+
+                            <a href="{{ path('book_view') }}" class="d-block">
+                                <img src="https://static.fnac-static.com/multimedia/Images/FR/NR/58/d4/99/10081368/1507-1/tsp20180920112651/La-poie.jpg" class="mb-2 mx-auto" alt="" style="max-width: 75%; max-height: 200px">
+                            </a>
+
+                            <h6 class="eclipse"><a href="{{ path('book_view') }}" class="text-dark">Orcs et Gobelins - Tome 5 : La poisse</a></h6>
+
+                            <div class="text-muted small mb-3">
+                                La Poisse attire les coups du sort comme personne. Rien d’étonnant donc...
+                            </div>
+
+                            <a href="{{ path('book_view') }}"><strong>Consulter un extrait</strong></a>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center mb-3" style="margin-top: 0!important">
+                        <div class="card-body">
+
+                            <a href="{{ path('book_view') }}" class="d-block">
+                                <img src="https://static.fnac-static.com/multimedia/Images/FR/NR/b2/97/9f/10459058/1507-1/tsp20181024081614/Zakariel.jpg" class="mb-2 mx-auto" alt="" style="max-width: 75%; max-height: 200px">
+                            </a>
+
+                            <h6 class="eclipse"><a href="{{ path('book_view') }}" class="text-dark">Les Maîtres inquisiteurs - Tome 11 : Zakariel</a></h6>
+
+                            <div class="text-muted small mb-3">
+                                Assinya s’est réincarnée et Adrael ne peut se résoudre à l’abandonner à son sort...
+                            </div>
+
+                            <a href="{{ path('book_view') }}"><strong>Consulter un extrait</strong></a>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center mb-3" style="margin-top: 0!important">
+                        <div class="card-body">
+
+                            <a href="{{ path('book_view') }}" class="d-block">
+                                <img src="https://static.fnac-static.com/multimedia/Images/FR/NR/0f/51/a6/10899727/1507-1/tsp20190306164220/La-vie-secrete-des-ecrivains.jpg" class="mb-2 mx-auto" alt="" style="max-width: 75%; max-height: 200px">
+                            </a>
+
+                            <h6 class="eclipse"><a href="{{ path('book_view') }}" class="text-dark">La vie secrète des écrivains</a></h6>
+
+                            <div class="text-muted small mb-3">
+                                En 1999, après avoir publié trois romans  devenus cultes, le célèbre écrivain Nathan...
+                            </div>
+
+                            <a href="{{ path('book_view') }}"><strong>Consulter un extrait</strong></a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+

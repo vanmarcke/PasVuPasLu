@@ -1,0 +1,347 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Profil : ' ~ user.auter.pseudo %}
+{% block body %}
+
+    <div class="content" style="background: #f3f3f3;">
+        <div class="container pt-5">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="profile-sidebar pt-0">
+                        <!-- SIDEBAR USERPIC -->
+                        <div style="padding-top: 2rem;">
+                            <div class="profile-userpic">
+                                {% if user.auter.photo is defined %}
+                                <div style="background-image:url('{{ asset('assets/images/profil/'~ user.auter.photo) }}');background-repeat: no-repeat; background-size: 100% 100%; width: 100%; height: auto; padding-top: 95.64%; border-radius: 60rem;"></div>
+                                {% else %}
+                                <div style="background-image:url('{{ asset('assets/images/avatars/d.png') }}');background-repeat: no-repeat; background-size: 100% 100%; width: 100%; height: auto; padding-top: 95.64%; border-radius: 60rem;"></div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <!-- END SIDEBAR USERPIC -->
+                        <!-- SIDEBAR USER TITLE -->
+                        <div class="profile-usertitle">
+                            <div class="profile-usertitle-name">
+                                {% if user.auter.pseudo is defined%}
+                                    {{user.auter.pseudo }}
+                                {% else %}
+                                    {{user.nom ~ ' ' ~ user.prenom }}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <!-- END SIDEBAR USER TITLE -->
+                        <!-- SIDEBAR BUTTONS -->
+                        <div class="profile-userbuttons">
+                            {% if app.user.id is defined %}
+                            {% if user.id != app.user.id %}
+                                <a href="{{ path('messginer_send', {id: user.id}) }}" type="button" class="btn btn-primary btn-sm w-100">Envoyer un message</a>
+                                {% else %}
+                                <button type="button" class="btn btn-primary btn-sm w-100">Modifier le profil</button>
+                            {% endif %}
+                            {% endif %}
+                        </div>
+                        <!-- END SIDEBAR BUTTONS -->
+
+                        <div class="portlet light bordered">
+                            <!-- STAT -->
+                            <div class="row list-separated profile-stat">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <div class="uppercase profile-stat-title"> {{ comments|length }} </div>
+                                    <div class="uppercase profile-stat-text"> Commentaires </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <div class="uppercase profile-stat-title"> {{ user.livre|length }} </div>
+                                    <div class="uppercase profile-stat-text"> Livres ajouter </div>
+                                </div>
+                            </div>
+                            <!-- END STAT -->
+                            <div class="text-justify">
+                                {% if user.auter.id is defined %}
+                                <h4 class="profile-desc-title">A propos</h4>
+                                <p class="profile-desc-text text-justify"> {{user.auter.presentation }}</p>
+                                <div class="margin-top-20 profile-desc-link">
+                                    <div class="mb-3"><i class="fas fa-user"></i> {{ user.auter.pseudo }}</div>
+                                    {% if user.auter.age is not null %}
+                                            <div class="mb-3"><i class="fas fa-glass-cheers"></i> {{ user.auter.age ~ ' ans'}}</div>                                            
+                                        {% else %}
+                                            <div class="mb-3"><i class="fas fa-glass-cheers"></i> {{ user.auter.birthdate|date('d/m/Y') }}</div>
+                                            {% endif %}                                       
+                                </div>
+                                {% endif %}
+                                
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-md-9">
+                    <div class="profile-content">
+
+                        {#{% if app.user.roles == 'ROLE_AUTEUR' %}#}
+                        <h6 class="ph">
+                            Livres
+                            <span class="badge badge-dark float-right">Il y a {{ user.livre|length }} livres</span>
+                        </h6>
+                        <table class="table">
+                            <thead>
+                            {% if user.livre is not empty %}
+                            <tr>
+                                <th scope="col">Photo</th>
+                                <th scope="col">Description</th>
+                            </tr>
+                            {% endif %}
+                            </thead>
+                            <tbody>
+                            {% for livre in user.livre %}
+                                <tr>
+                                    <td style="width: 25%;">
+                                        <img style="width:100%;" src="{{ asset('assets/images/livre/'~livre.photo) }}">
+                                    </td>
+                                    <td>
+                                        <a href="{{ path('show_livre', {'slug': livre.slug, 'id': livre.id}) }}" style="font-size: .89rem">{{ livre.titre }}</a>
+                                        <div class="desc mt-1">
+                                            Catégorie : <b>{{ livre.categorie.categorie }}</b>
+                                        </div>
+                                        <div class="desc mt-1 text-justify">
+                                            {{ livre.extract|striptags|length > 490 ? livre.extract|raw|striptags|slice(0,490)|raw : livre.extract|raw }}
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            {% if user.livre is empty %}
+                                <div style="font-weight: 600;font-size: 15rem;opacity: .2;text-align: center;">
+                                    <i class="fas fa-book-open"></i>
+                                </div>
+                            {% endif %}
+                            </tbody>
+                        </table>
+                        {#{% endif %}#}
+
+                        <h6 class="ph">
+                            Commentaires
+                            <span class="badge badge-dark float-right">Il y a {{ comments|length }} commentaires</span>
+                        </h6>
+                        <table class="table">
+                            <thead>
+                            {% if comments is not empty %}
+                            <tr>
+                                <th scope="col" style="font-size:.81rem;">Notes</th>
+                                <th scope="col" style="font-size:.81rem;">Commentaires</th>
+                            </tr>
+                            {% endif %}
+                            </thead>
+                            <tbody>
+                            {% for comment in comments %}
+                                <tr>
+                                    <td>
+                                        {{ comment.rate }}/10
+                                    </td>
+                                    <td>
+                                        <div class="desc mt-1">
+                                            <a href="{{ path('show_livre', {'slug': comment.livre.slug, 'id': comment.livre.id}) }}" style="font-size: .89rem">{{ comment.livre.titre }}</a>
+                                        </div>
+                                        <div class="desc mt-1 text-justify">
+                                            {{ comment.content|striptags|raw|length > 490 ? comment.content|striptags|raw|slice(0, 490) ~ '...' : comment.content|striptags|raw  }}
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            {% if comments is empty %}
+                                <div style="font-weight: 600;font-size: 15rem;opacity: .2;text-align: center;">
+                                    <i class="fas fa-comment-slash"></i>
+                                </div>
+                            {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <style>
+        .ph {
+            background: #0c5366d1;
+            color: white;
+            padding: 1rem;
+            border-radius: .3rem;
+        }
+        .desc {
+            font-size: .75rem;
+            color: #858796;
+        }
+        table {
+            width: 100%;
+            margin-bottom: 1rem;
+            color: #858796;
+        }
+        /* Profile container */
+        .profile {
+            margin: 20px 0;
+        }
+
+        /* Profile sidebar */
+        .profile-sidebar {
+            padding: 20px 0 10px 0;
+            background: #fff;
+        }
+
+        .profile-userpic {
+            width: 50%;
+            height: auto;
+            margin: 0 auto;
+        }
+
+        .profile-userpic img {
+            float: none;
+            margin: 0 auto;
+            width: 50%;
+            height: 8rem;
+            -webkit-border-radius: 50% !important;
+            -moz-border-radius: 50% !important;
+            border-radius: 50% !important;
+        }
+
+        .profile-usertitle {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .profile-usertitle-name {
+            color: #5a7391;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 7px;
+        }
+
+        .profile-usertitle-job {
+            text-transform: uppercase;
+            color: #5b9bd1;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .profile-userbuttons {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .profile-userbuttons .btn {
+            text-transform: uppercase;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 6px 15px;
+            margin-right: 5px;
+        }
+
+        .profile-userbuttons .btn:last-child {
+            margin-right: 0px;
+        }
+
+        .profile-usermenu {
+            margin-top: 30px;
+        }
+
+        .profile-usermenu ul li {
+            border-bottom: 1px solid #f0f4f7;
+        }
+
+        .profile-usermenu ul li:last-child {
+            border-bottom: none;
+        }
+
+        .profile-usermenu ul li a {
+            color: #93a3b5;
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        .profile-usermenu ul li a i {
+            margin-right: 8px;
+            font-size: 14px;
+        }
+
+        .profile-usermenu ul li a:hover {
+            background-color: #fafcfd;
+            color: #5b9bd1;
+        }
+
+        .profile-usermenu ul li.active {
+            border-bottom: none;
+        }
+
+        .profile-usermenu ul li.active a {
+            color: #5b9bd1;
+            background-color: #f6f9fb;
+            border-left: 2px solid #5b9bd1;
+            margin-left: -2px;
+        }
+
+        /* Profile Content */
+        .profile-content {
+            padding: 20px;
+            background: #fff;
+            min-height: 460px;
+        }
+        .portlet {
+            margin-top: 0;
+            margin-bottom: 25px;
+            padding: 0;
+            border-radius: 4px;
+        }
+        .portlet.bordered {
+            border-left: 2px solid #e6e9ec!important;
+        }
+        .portlet.light {
+            padding: 12px 20px 15px;
+            background-color: #fff;
+        }
+        .portlet.light.bordered {
+            border: 1px solid #e7ecf1!important;
+        }
+        .list-separated {
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+        .profile-stat {
+            padding-bottom: 20px;
+            border-bottom: 1px solid #f0f4f7;
+        }
+        .profile-stat-title {
+            color: #7f90a4;
+            font-size: 25px;
+            text-align: center;
+        }
+        .uppercase {
+            text-transform: uppercase!important;
+        }
+        .profile-stat-text {
+            color: #5b9bd1;
+            font-size: 10px;
+            font-weight: 600;
+            text-align: center;
+        }
+        .profile-desc-title {
+            color: #7f90a4;
+            font-size: 17px;
+            font-weight: 600;
+        }
+        .profile-desc-text {
+            color: #7e8c9e;
+            font-size: 14px;
+        }
+        .margin-top-20 {
+            margin-top: 20px!important;
+        }
+        .profile-desc-link i {
+            width: 22px;
+            font-size: 19px;
+            color: #abb6c4;
+            margin-right: 5px;
+        }
+    </style>
+{% endblock %}
+

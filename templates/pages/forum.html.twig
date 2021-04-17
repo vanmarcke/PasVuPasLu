@@ -1,0 +1,129 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Nom de la personne' %}
+
+{% block body %}
+    <div class="content">
+
+        <div class="pt-5 pb-5" style="background: #093f4e;">
+            <div class="text-center">
+                <a class="btn-default btn-forum mb-5" href="{{ path('forum_addTopic') }}">
+                    <span>Démarrer une discussion ...</span>
+                </a>
+            </div>
+            <div class="interviews-content block-2-i">
+                <ul class="DiscussionList-discussions">
+                    {# boucle #}
+                    <li>
+                        <div class="DiscussionListItem">
+                            <div class="DiscussionListItem-content Slidable-content">
+                                <div class="DiscussionListItem-author">
+                                    <span class="Avatar " style="background: rgb(198, 160, 229);">A</span>
+                                </div>
+                                <a href="{{ path('forum_topic') }}" class="DiscussionListItem-main">
+                                    <h3 class="DiscussionListItem-title">Une discussion 123</h3>
+                                    <ul class="DiscussionListItem-info">
+                                        <li class="item-terminalPost">
+                                    <span><i class="icon fas fa-reply"></i>
+                                        <span class="username font-weight-bold">AbdelKarim</span>
+                                        <time datetime="" title="">Il y à quelques jours</time>
+                                    </span>
+                                        </li>
+                                    </ul>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    {# Fin de la boucle #}
+
+                    {# a supprimer apres la boucle #}
+                    <li>
+                        <div class="DiscussionListItem">
+                            <div class="DiscussionListItem-content Slidable-content">
+                                <div class="DiscussionListItem-author">
+                                    <span class="Avatar " style="background: rgb(198, 160, 229);">A</span>
+                                </div>
+                                <a href="#!" class="DiscussionListItem-main">
+                                    <h3 class="DiscussionListItem-title">Une discussion 123</h3>
+                                    <ul class="DiscussionListItem-info">
+                                        <li class="item-terminalPost">
+                                    <span><i class="icon fas fa-reply"></i>
+                                        <span class="username font-weight-bold">AbdelKarim</span>
+                                        <time datetime="" title="">Il y à quelques jours</time>
+                                    </span>
+                                        </li>
+                                    </ul>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="DiscussionListItem">
+                            <div class="DiscussionListItem-content Slidable-content">
+                                <div class="DiscussionListItem-author">
+                                    <span class="Avatar " style="background: rgb(198, 160, 229);">A</span>
+                                </div>
+                                <a href="#!" class="DiscussionListItem-main">
+                                    <h3 class="DiscussionListItem-title">Une discussion 123</h3>
+                                    <ul class="DiscussionListItem-info">
+                                        <li class="item-terminalPost">
+                                    <span><i class="icon fas fa-reply"></i>
+                                        <span class="username font-weight-bold">AbdelKarim</span>
+                                        <time datetime="" title="">Il y à quelques jours</time>
+                                    </span>
+                                        </li>
+                                    </ul>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="DiscussionListItem">
+                            <div class="DiscussionListItem-content Slidable-content">
+                                <div class="DiscussionListItem-author">
+                                    <span class="Avatar " style="background: rgb(198, 160, 229);">A</span>
+                                </div>
+                                <a href="#!" class="DiscussionListItem-main">
+                                    <h3 class="DiscussionListItem-title">Une discussion 123</h3>
+                                    <ul class="DiscussionListItem-info">
+                                        <li class="item-terminalPost">
+                                    <span><i class="icon fas fa-reply"></i>
+                                        <span class="username font-weight-bold">AbdelKarim</span>
+                                        <time datetime="" title="">Il y à quelques jours</time>
+                                    </span>
+                                        </li>
+                                    </ul>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="DiscussionListItem">
+                            <div class="DiscussionListItem-content Slidable-content">
+                                <div class="DiscussionListItem-author">
+                                    <span class="Avatar " style="background: rgb(198, 160, 229);">A</span>
+                                </div>
+                                <a href="#!" class="DiscussionListItem-main">
+                                    <h3 class="DiscussionListItem-title">Une discussion 123</h3>
+                                    <ul class="DiscussionListItem-info">
+                                        <li class="item-terminalPost">
+                                    <span><i class="icon fas fa-reply"></i>
+                                        <span class="username font-weight-bold">AbdelKarim</span>
+                                        <time datetime="" title="">Il y à quelques jours</time>
+                                    </span>
+                                        </li>
+                                    </ul>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    {# Fin #}
+
+                </ul>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+

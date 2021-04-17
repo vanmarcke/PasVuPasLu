@@ -1,0 +1,444 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+   {{ parent() }}
+   {{ encore_entry_link_tags('index') }}
+{% endblock %}
+
+{% block title 'Bienvenue sur PasVuPasLu !' %}
+
+{% block body %}
+    <div class="content">
+
+        <div class="carousel slide" data-ride="carousel">
+            <span class="illustration-title-slider">Accueil</span>
+
+            <div class="carousel-inner">
+                
+              <div class="carousel-item active">
+                <img class="d-block w-100" src="{{ asset('assets/images/illustration/' ~ carroussel_1[0].content)}}" alt="First slide">
+                <div class="illustration-quote text-center">
+                    <p class="illustration-quoteDay">Citation du jour</p>
+                    <p class="illustration-quoteMessage">{{ quote.quote }}</p>
+                    <p class="illustration-quoteAuthor">{{ quote.auteur }}</p>
+                </div>
+                
+              </div>
+
+              {% for carroussel in carroussel %}
+                  
+              
+              <div class="carousel-item">
+                  {% if carroussel.link %}
+                    <a href="{{carroussel.link}}" target="_blank">
+                      <img class="d-block w-100" src="{{ asset('assets/images/illustration/' ~ carroussel.content)}}" alt="Second slide">
+                    </a>
+                    {% else %}
+                        
+                    <img class="d-block w-100" src="{{ asset('assets/images/illustration/' ~ carroussel.content)}}" alt="Second slide">
+                    {% endif %}
+              </div>
+
+              {% endfor %}
+
+            </div>
+        </div>
+
+        <div class="separator"></div>
+
+        <div class="row block-ct">
+            <div class="col-md-6 pr-0">
+                <div class="content-block bg-bleu">
+                    <h3 class="content-block-title bg-rose text-center">{{ Auteur_titre[0].content }}</h3>
+                    <div class="p-2">
+                        <p class="text-center pt-2">{{bloc1_start[0].content}}</p>
+
+                        <ul>
+                            {% for Paragraphe in Paragraphe %}
+                                
+                            
+                            <li class="pb-3 text-justify">
+                               {{ Paragraphe.content }}
+                            </li>
+
+                            {% endfor %}
+
+                        </ul>
+                        <p class="font-weight-bold pb-4 text-center">{{bloc1_end[0].content}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 pl-0">
+                <div class="content-block bg-img" style="background-image: url({{ asset('assets/images/illustration/merlivre-crop.jpg') }});">
+                    <h3 class="content-block-title bg-transparent text-center">{{bloc2_titre[0].content}}</h3>
+                    
+                    <div class="conteneur_slogan">
+                    <div class="slogan mt-2 d-flex justify-content-center">
+                        <span>"</span>
+                            <div class="content__container">
+                                <ul class="content__container__list">
+                                    <li class="content__container__list__item">Ecrire, c'est bien...</li>
+                                    <li class="content__container__list__item">Vendre et être lu(e), c'est mieux!</li>
+                                </ul>
+                            </div>
+                        <span>"</span>
+                      </div>
+                      <div class="phrases_slogan">
+                            <p>Sortez de l’anonymat et Gagnez en visibilité !</p>
+                            <p>Augmentez votre notoriété !</p>
+                            <p>Identifiez et Développez votre lectorat.</p>
+                            <p>Soyez Vu et Lu par déjà plus de 100.000 Visiteurs /an</p>
+                            <p>Rejoignez une communauté active !</p>
+                        </div>
+                    </div>
+                    {% if app.user is null %}
+                        <br><br><br>               
+                    <div class="container1 mid">
+                        <div class="button second">
+                        <a style="text-decoration: none;" href="{{ path('security_login') }}" class="side facebook">
+                            <h1 style="font-family: initial;">Inscription</h1>
+                        </a>
+                            <div class="side fb"></div>
+                            <div class="side fb"></div>
+                            <div class="side fb"></div>
+                            <div class="side fb"></div>
+                            <div class="side fb"></div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="separator"></div>  
+        {# Les trois premiers livres - Start#}
+        
+		<div class="col-md-12">
+
+			<div class="readers-bando rounded-pill text-center col-md-12" style="background-color: #8a0b3c;">
+				Les trois couvertures les mieux notées
+			</div>
+           
+			<ul class="align" style="background-color: #8a0b3c;">
+            {% for livre in premierslivre %}
+            				
+				<li>
+                
+					<figure class='book'>
+					  <!-- Front -->
+						<ul class='hardcover_front'>
+							<li>
+                                <img src="{{ asset('assets/images/livre/' ~ livre.photo) }}" alt="" width="100%" height="100%">
+							</li>
+							<li></li>
+						</ul>
+					  <!-- Pages -->
+						<ul class='page'>
+							<li></li>
+							<li> <p style="margin-top: 50px;">Note : {{livre.coverRate|round(2)}} / 10</p>
+								<a class="btn" href="{{ path('show_livre',{'slug': livre.titre, 'id': livre.id }) }}">Voir l'extrait</a>
+							</li>
+							<li></li>
+							<li></li>
+							<li></li>
+						</ul>
+					  <!-- Back -->
+						<ul class='hardcover_back'>
+							<li></li>
+							<li></li>
+						</ul>
+						<ul class='book_spine'>
+							<li></li>
+							<li></li>
+						</ul>
+					  
+					</figure>
+				</li>				
+             {% endfor %}
+			</ul>
+		</div>
+        
+
+
+
+        <div class="separator"></div>       
+        
+            <div class="readers-box" style="position: relative!important;">
+                <div class="row mx-auto">
+                    <div class="col-md-6 text-justify">
+
+                        <div class="readers-bando bg-rose rounded-pill text-center retract">
+                           Rejoindre pas vu, pas lu, c'est :
+                        </div>
+
+                        <div class="bloc3">
+                            {{ bloc3[0].content|raw }}
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+
+                       <div class="readers-bando bg-rose rounded-pill text-center">
+                             Derniers lecteurs inscrits
+                       </div>
+
+                        <div class="text-center">
+                            {% for user in users %}
+                                <div class='user' style="position: relative;width: 15%; display: inline-block; padding: 1rem; margin: 0 auto;">
+                                    <a href="{{ path('profil_auter', {'id': user.id}) }}">
+                                        <div style="background-image: url({% if user.auter.photo is defined %}{{ asset('assets/images/profil/'~user.auter.photo) }}{% else %}{{ asset('assets/images/avatars/d.png') }}{% endif %}); background-repeat: no-repeat; background-size: 100% 100%; width: 100%; height: auto; padding-top: 105.64%; border-radius: 60rem;"></div>
+                                        <h6 class="text-center" style="color: #000000d1; white-space: nowrap; overflow: hidden; font-size: .80rem; text-overflow: ellipsis; margin-top: .7rem;">
+                                        {% if user.auter.pseudo is defined %}
+                                            {{user.auter.pseudo }}
+                                        {% else %}
+                                            {{user.nom ~ ' ' ~ user.prenom }}
+                                        {% endif %}
+                                        </h6>
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    
+                    <div class="row col-12 forum-actif">
+
+                        <div class="readers-bando bg-rose rounded-pill text-center col-12" style="margin-bottom : 15px;">
+                            Forums actifs
+                        </div>
+
+                        <div class="col-md-4 p-0 pub conteneur-pub">
+                            {% if pub1_video[0].content is null %}
+                            <a href="{{pub1[0].content}}" target="_blank">
+                            <img  src="{{ asset('assets/images/illustration/' ~ pub1_img[0].content) }}" alt="" class="pub-forum">
+                            </a>
+                            {% else %}
+                             <iframe style="width: 100%; height:100%" src="{{pub1_video[0].content}}" frameborder="0" allowfullscreen></iframe>
+
+                            {% endif %}
+
+                            
+                        </div>
+                    
+
+                        <div class="col-md-4" style="margin-top: auto;">
+
+                        
+                            <ul class="DiscussionList-discussions" style="padding: 1rem 0;">
+                                {% for forum in forums %}
+                                    <li>
+                                        <div class="DiscussionListItem">
+                                            <div class="DiscussionListItem-content Slidable-content">
+                                                <div class="DiscussionListItem-author">
+                                                    <span class="Avatar" style="background: rgb(198, 160, 229);"><img src="{% if forum.forums.auter.photo is defined %}{{ asset('assets/images/profil/'~ forum.forums.auter.photo) }}{% else %}{{ asset('assets/images/avatars/d.png') }}{% endif %}" style="width: 100%; height: 100%; border-radius: 60rem;"></span>
+                                                </div>
+                                                <a href="{{ path('forum_topic', {'slug' : forum.slug, 'id' : forum.id}) }}" class="DiscussionListItem-main">
+                                                    <h3 class="DiscussionListItem-title">{{ forum.title }}</h3>
+                                                    <ul class="DiscussionListItem-info">
+                                                        <li class="item-terminalPost">
+                                                            <span><i class="icon fas fa-reply"></i>
+                                                                <span class="username font-weight-bold">
+                                                                {% if forum.forums.auter.pseudo is defined%}
+                                                                    {{forum.forums.auter.pseudo }}
+                                                                {% else %}
+                                                                    {{forum.forums.nom ~ ' ' ~ forum.forums.prenom }}
+                                                                {% endif %}
+                                                                </span>
+                                                                <time datetime="" title="">Publié le {{ forum.createdAt |date('d/m/y') }}</time>
+                                                            </span>
+                                                        </li>
+                                                    </ul>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+                        <div class="col-md-4 p-0 pub conteneur-pub">
+                            {% if pub2_video[0].content is null %}
+                            <a href="{{pub2[0].content}}" target="_blank">
+                            <img  src="{{ asset('assets/images/illustration/' ~ pub2_img[0].content) }}" alt="" class="pub-forum">
+                            </a>
+                            {% else %}
+                             <iframe style="width: 100%; height:100%" src="{{pub2_video[0].content}}" frameborder="0" allowfullscreen></iframe>
+
+                            {% endif %}
+
+                            
+                        </div>
+                    </div>
+
+                    {% if app.user is null %}
+                        <div class="col-md-12">
+                            <a href="{{ path('security_login') }}" style="top: 0; right: auto; float: none!important;" class="btn-default w-100">Pas encore inscrit ! Cliquez ici pour créer un compte</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="row bg-purple mx-auto mt-3 justify-content-around" style="height:auto;">
+                <div class="readers-bando col-md-12 d-flex justify-content-center pb-xl-5">
+                Lecteurs les plus actifs 
+                </div>
+                
+                    {% set numero = 1 %}
+                    {% for ids in ids %}                        
+                        <div class="col-md-1 mt-2 mb-5 img-activ-lector" style="height: 10vh; width:15vh;">
+                            <a href="{{ path('profil_auter', {'id': ids[0].user.id}) }}">
+                                <img class="" src="{% if ids[0].photo is defined %}{{ asset('assets/images/profil/'~ ids[0].photo) }}{% else %}{{ asset('assets/images/avatars/d.png') }}{% endif %}" style="border-radius: 50%;height:100%;width:100%;">
+                                <p class="text-center">N° {{numero}} {{ ids[0].pseudo|striptags|length > 7 ? ids[0].pseudo|striptags|slice(0,7) : ids[0].pseudo }}... </p>                         
+                            </a>
+                        </div>
+                        {% set numero = numero + 1 %}
+                    {% endfor %}
+               
+  
+            </div>
+            <div class="separator"></div>
+
+            
+                <div class="row mx-auto block-entrevue">                
+                    <div class="col-md-12 p-0">
+                        <div class="anime text-center">
+                            <h3 class="p-2" style="font-style : italic;">Interviews d'auteurs et d'acteurs du marché du livre ! ! !</h3>
+                            <img class="mx-auto" style="height : 200px;" src="{{ asset('assets/images/illustration/news.jpg') }}">
+                            <h4 class="p-2" style="font-style : italic;">Rendez-vous sur :
+                                <a href="https://www.pasvupaslumagazine.fr/" target="_blank" style="font-weight: 600;">www.pasvupaslumagazine.fr</a>
+                            </h4>
+                        </div>
+                    </div>               
+                </div>
+            
+        <div class="separator"></div>
+       
+
+
+            <div class="carousel slide" data-ride="carousel">
+                
+    
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                 
+
+                    <div class="block-quote bg-rose">
+                        <div class="quote-1 a-white">
+                            <div class="pad-1">
+                                <img src="{{ asset('assets/images/illustration/plume.png') }}" class="plume">
+                                <div style="text-align: center; letter-spacing: 0.02rem; font-size: 1.21rem; position: absolute; top: 1.4rem; margin: 0 auto; width: 81%;">L'édito de la semaine</div>
+                                <p>{{ editable.quateAuter|raw }}</p>
+                                <div class="quote-nobody" style="width: 77%; bottom: 1.5rem; position: absolute;">{{ editable.quateInsp }}</div>
+                            </div>
+                        </div>
+                        <div class="bg-quote" style="background-image: url({{ asset('assets/images/illustration/pasvupaslu.png') }});"></div>
+                    </div>
+
+                  </div>
+    
+                 {% for carroussel in carroussel_bas %}
+                      
+                 <div class="carousel-item">
+                    {% if carroussel.link %}
+                     <a href="{{carroussel.link}}" target="_blank"> <img class="d-block w-100" src="{{ asset('assets/images/illustration/' ~ carroussel.content)}}" alt="Second slide"></a>
+                    {% else %}
+                        <img class="d-block w-100" src="{{ asset('assets/images/illustration/' ~ carroussel.content)}}" alt="Second slide">
+                    {% endif %}
+                </div>
+    
+                  {% endfor %}
+    
+                </div> 
+                
+            </div>
+            
+            
+
+
+        <div class="separator"></div>
+
+        <div class="block-quote bg-purple custom-b">
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="box-quote-2">
+                        <a href="{{ path('authors') }}" class="color-blue">Les dix derniers auteurs inscrits</a>
+                  
+                        <a href="https://www.festivalpasvupaslu.fr" target="_blank" class="color-black pl-3">Festival Pas Vu, Pas Lu</a>
+                      
+                        <a href="http://pasvupaslumagazine.fr/" target="_blank" class="color-purple pl-5">Le Magazine Pas Vu Pas Lu</a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="text-center item-category pl-5">
+                         <p class="m-0">                          
+                            <a href="{{ path('register_user') }}">
+                                <span>Inscription</span>
+                            </a>                          
+                        </p>                                                      
+                        <p class="m-0">
+                            <a href="{{ path('show_livres') }}">
+                                <span>Livres</span>
+                            </a>
+                        </p>
+                        <p class="m-0">                            
+                            <a href="{{ path('authors') }}">
+                                <span>Auteurs</span>
+                            </a> 
+                        </p>
+                        <p class="m-0">
+                            <a href="http://terhoma.org/" target="_blank">
+                                <span>Association Terhoma</span>
+                            </a>                           
+                        </p>
+                        <p class="m-0">
+                            <a href="http://terhoma.org/Notre-mission/" target="_blank">
+                                <span>Partage</span>
+                            </a>                            
+                        </p>
+                        <p class="m-0">
+                            <a href="http://terhoma.org/Devenir-M%C3%A9c%C3%A8ne/" target="_blank">
+                                <span> Devenir Mécène </span>
+                            </a>
+                        <p class="m-0">
+                            <a href="http://terhoma.org/www-terhoma-org/Faire-un-don/" target="_blank">
+                            
+                                <span >FAIRE UN DON</span>
+                            </a>                                                     
+                        </p>                    
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="box-quote-2 box-quote-3">
+                        <a style="text-decoration:none;line-height: 1.2;color:black!important" href="https://www.zeitverschiebung.net/fr/city/2988507">
+                            <div style="color:gray;">Heure actuelle</div>Paris, France
+                        </a>
+                        <iframe src="https://www.zeitverschiebung.net/clock-widget-iframe-v2?language=fr&amp;size=small&amp;timezone=Europe%2FParis" width="100%" height="90" frameborder="0" seamless=""></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="separator"></div>
+
+        <div class="block-quote bg-purple block-favorites custom-t custom-b" style="height: 14rem;">
+            <div class="row mx-auto">
+                <div class="col-md-4">
+                    <img src="{{ asset('assets/images/illustration/home-gif.gif') }}">
+                </div>
+                <div class="a-white col-md-5 pl-0" style="color:white">
+                    <p class="p-favorites">{{ editable.contentEditable|raw }}</p>
+                </div>
+                <div class="col-md-3">
+                    <img src="{{ asset('assets/images/illustration/home-love.png') }}">
+                </div>
+            </div>
+        </div>
+
+        <div class="separator"></div>        
+    </div>    
+   
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('index') }}
+{% endblock %}

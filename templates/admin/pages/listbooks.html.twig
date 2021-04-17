@@ -1,0 +1,104 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title 'Liste des livres' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+
+            <div class="col-xl-12 col-lg-12">
+
+                {# Menu du header #}
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">
+                            Liste des livres
+                            <span class="badge badge-primary float-right">Il y a {{ countLivre }} livre(s)</span>
+                        </h6>
+                    </div>
+                    {% for message in app.Flashes('success') %}
+                        <div class="alert alert-success alert-dismissible fade show text-center" role="alert" id="success">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    <div class="card-body live-search-list">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Photo</th>
+                                <th scope="col">Information du livre</th>
+                                <th scope="col" style="text-align: right">Options</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for livre in livres %}
+                                <tr class="search">
+                                    <td style="max-width: 38rem;">
+                                        <img style="width: 100%; min-height: 10%;max-height: 10% border-radius: .3rem;" src="{{ asset('assets/images/livre/'~ livre.photo) }}" alt="">
+                                    </td>
+                                    <td>
+                                        {{ livre.titre }}
+                                        <div class="desc mt-1">
+                                            Catégorie : <b>{{ livre.categorie.categorie }}</b>
+                                            <p style="display: inline-block;margin-left: 1rem">Editeur : <b>
+
+                                            <a href="{{ path('profil_auter',{'id': livre.user.id }) }}">
+                                            {% if livre.user.auter.pseudo is defined%}
+                                                    {{livre.user.auter.pseudo }}
+                                                {% else %}
+                                                    {{livre.user.nom ~ ' ' ~ livre.user.prenom }}
+                                                {% endif %}
+                                                </a></b></p>
+                                                
+                                            <p style="display: inline-block;margin-left: 1rem">Date de parution : <b>{{ livre.createdAt|date('d/m/Y') }}</b>
+                                        </div>
+                                        <div class="desc mt-1 text-justify">
+                                            {{ livre.extract|striptags|length > 600 ? livre.extract|raw|striptags|slice(0,600)|raw : livre.extract|raw }}
+                                        </div>
+                                    </td>
+                                    <th scope="row" style="text-align: right">
+                                        <a href="{{ path('admin_edit_livre', {'id':livre.id}) }}" class="btn btn-primary btn-circle btn-sm mb-1">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="{{ path('show_livre', {'slug': livre.slug, 'id': livre.id}) }}" target="_blank" class="btn btn-info btn-circle btn-sm mb-1">
+                                            <i class="far fa-eye"></i>
+                                        </a>
+                                        <form method="post" action="{{ path('admin_delete_livre', {id: livre.id}) }}" style="display: inline-block">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <input type="hidden" name="_token" value="{{ csrf_token("delete" ~ livre.id) }}">
+                                            <button class="btn btn-danger btn-circle btn-sm" onclick="return confirm('ATTENTION : Êtes-vous sûr de bien vouloir supprimer ce livre ? Tous les commentaires associés seront supprimés ! \n');">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </th>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        {% if livres is empty %}
+                            <h5 class="m-3 text-center">il y a actuellement aucun livre sur le site</h5>
+                        {% endif %}
+                        {% include("admin/_no-result.html.twig") %}
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <style>
+        tbody {
+            background: #f8f9fc;
+        }
+        .desc {
+            font-size: .75rem;
+            color: #858796;
+        }
+    </style>
+{% endblock %}
+
+

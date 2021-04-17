@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+   {{ parent() }}
+   {{ encore_entry_link_tags('magazine') }}
+{% endblock %}
+
+{% block title 'l\'article ' ~ articlesMag.titles %}
+
+{% block body %}
+    <div class="content">
+        <div class="illustration" style="padding-top: 3rem!important;">
+            <span class="illustration-title about-title" style="width: 100%; left: 0; height: auto; min-height: 3.2rem; border-radius: .2rem; top: 0; background: #c40c50; color: white; opacity: 1;"><span style="font-size: .85rem;margin-bottom: .81rem">{{ articlesMag.titles }}</span><span style="display:block;font-size: .99rem;margin-bottom: .81rem">Article du {{ articlesMag.createdAt|date('d/m/Y') }}</span> </span>
+        </div>
+
+        <div class="blog-content" style="min-height: 60vh; margin: 0 11%; margin-top: 66px">
+            <div>
+                <p>
+                    {{ articlesMag.contents|raw }}
+                </p>
+            </div>
+
+            <div>
+                <img alt="{{ articlesMag.titles }}" src="{{ asset ('assets/images/magazine/'~articlesMag.imagArt) }}" class="d-block" />
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('magazine') }}
+{% endblock %}

@@ -1,0 +1,245 @@
+<!-- Sidebar -->
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="javascript:void(0)">
+        <div class="sidebar-brand-icon rotate-n-15">
+            <img src="{{ asset('assets/images/illustration/logo-header.png') }}" style="width: 52px">
+        </div>
+        <div class="sidebar-brand-text mx-3">PasVupasLu</div>
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('home') }}" target="_blank">
+            <i class="fas fa-home"></i>
+            <span>Retourner sur le site</span></a>
+    </li>
+
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ path('admin-home') }}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span>
+        </a>
+    </li>
+
+    <!-- Nav Item - Tables -->
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('admin_emails') }}">
+            <i class="fas fa-paper-plane"></i>
+            <span>Mailing</span>
+        </a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Interface
+    </div>
+
+    <!-- Nav Item - Utilities Collapse Menu -->
+
+        <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#bandeaux" aria-expanded="false" aria-controls="collapseUtilities">
+            <i class="fas fa-images"></i>
+            <span>Bandeaux</span>
+        </a>
+        <div id="bandeaux" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Pub</h6>
+                <a class="collapse-item" href="{{ path('carroussel_bandeau', {bandeau_cle:'bandeau_auteur'}) }}"> Auteurs</a>
+                <a class="collapse-item" href="{{ path('carroussel_bandeau', {bandeau_cle:'bandeau_livre'}) }}">Livres</a>
+                <a class="collapse-item" href="{{ path('carroussel_bandeau', {bandeau_cle:'bandeau_prix_terhoma'}) }}">Prix Terhoma</a>
+                <a class="collapse-item" href="{{ path('carroussel_bandeau', {bandeau_cle:'bandeau_magazine'}) }}">Magazine</a>
+                <a class="collapse-item" href="{{ path('carroussel_bandeau', {bandeau_cle:'bandeau_actualite'}) }}">Actualité</a>
+                <a class="collapse-item" href="{{ path('carroussel_bandeau', {bandeau_cle:'bandeau_edito'}) }}">Edito</a>
+                <a class="collapse-item" href="{{ path('carroussel_bandeau', {bandeau_cle:'bandeau_podcast'}) }}">Podcast</a>
+                <a class="collapse-item" href="{{ path('carroussel_bandeau', {bandeau_cle:'bandeau_contact'}) }}">Contact</a>
+                <a class="collapse-item" href="{{ path('carroussel_bandeau', {bandeau_cle:'bandeau_service_pub'}) }}">Service Pub</a>
+                <a class="collapse-item" href="{{ path('carroussel_bandeau', {bandeau_cle:'bandeau_inscription'}) }}">Inscription</a>
+                <a class="collapse-item" href="{{ path('carroussel_bandeau', {bandeau_cle:'bandeau_inscription_lecteur'}) }}">Inscription lecteur</a>
+                <a class="collapse-item" href="{{ path('carroussel_bandeau', {bandeau_cle:'bandeau_inscription_auteur'}) }}">Inscription auteur</a>
+                <a class="collapse-item" href="{{ path('carroussel_bandeau', {bandeau_cle:'bandeau_info_legal'}) }}">Info légales</a>
+            </div>
+        </div>
+    </li> 
+
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#publicites" aria-expanded="false" aria-controls="collapseUtilities">
+            <i class="fas fa-images"></i>
+            <span>Publicités</span>
+        </a>
+        <div id="publicites" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Pub</h6>
+                <a class="collapse-item" href="{{ path('carroussel') }}"> Carroussel haut</a>
+                <a class="collapse-item" href="{{ path('carroussel_bas') }}"> Carroussel bas</a>
+                <a class="collapse-item" href="{{ path('admin-pub') }}"> Forum</a>
+            </div>
+        </div>
+    </li> 
+
+    <!-- Nav Item - Utilities Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="false" aria-controls="collapseUtilities">
+            <i class="fas fa-fw fa-wrench"></i>
+            <span>Catégories</span>
+        </a>
+        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Catégories</h6>
+                <a class="collapse-item" href="{{ path('admin_category') }}">Ajouter ou modifier</a>
+            </div>
+        </div>
+    </li> 
+
+    <!-- Nav Item - UtilitiesMag Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilitiesMag" aria-expanded="false" aria-controls="collapseUtilitiesMag">
+            <i class="fas fa-book-open"></i>
+            <span>Magazine</span>
+        </a>
+        <div id="collapseUtilitiesMag" class="collapse" aria-labelledby="headingUtilitiesMag" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Magazine</h6>
+                <a class="collapse-item" href="{{ path('admin_magazine') }}">Ajouter ou modifier</a>
+            </div>
+        </div>
+    </li>
+ 
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePagestree" aria-expanded="true" aria-controls="collapsePagestree">
+            <i class="far fa-newspaper"></i>
+            <span>Editos</span>
+        </a>
+        <div id="collapsePagestree" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Editos</h6>
+                <a class="collapse-item" href="{{ path('admin-edito') }}">Liste des éditos</a>
+                <a class="collapse-item" href="{{ path('admin_newedito') }}">Ajouter un édito</a>
+            </div>
+        </div>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseone"   aria-expanded="true" aria-controls="collapsefour">
+            <i class="fa fa-newspaper"></i>
+            <span>Actualités</span>
+        </a>
+        <div id="collapseone" class="collapse" aria-labelledby="headingfour" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Actualités</h6>
+                <a class="collapse-item" href="{{ path('admin_news') }}">Liste des actualités</a>
+                <a class="collapse-item" href="{{ path('add_news') }}">Ajouter une actualité</a>
+            </div>
+        </div>
+    </li> 
+
+     <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsefour"   aria-expanded="true" aria-controls="collapsefour">
+            <i class="fa fa-trophy"></i>
+            <span>Prix Terhoma</span>
+        </a>
+        <div id="collapsefour" class="collapse" aria-labelledby="headingfour" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Prix</h6>
+                <a class="collapse-item" href="{{ path('admin_prices') }}">Liste des prix</a>
+                <a class="collapse-item" href="{{ path('new_prices') }}">Ajouter un prix</a>
+            </div>
+        </div>
+    </li> 
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsefive"   aria-expanded="true" aria-controls="collapsefive">
+            <i class="fa fa-microphone"></i>
+            <span>Podcasts</span>
+        </a>
+        <div id="collapsefive" class="collapse" aria-labelledby="headingfive" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Podcasts</h6>
+                <a class="collapse-item" href="{{ path('admin_podcast') }}">Liste des podcasts</a>
+                <a class="collapse-item" href="{{ path('new_podcast') }}">Ajouter un podcast</a>
+            </div>
+        </div>
+    </li> 
+
+
+    <!-- Nav Item - Tables -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwot" aria-expanded="true" aria-controls="collapseTwot">
+            <i class="fas fa-book-open"></i>
+            <span>Livres</span>
+        </a>
+        <div id="collapseTwot" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Livres</h6>
+                <a class="collapse-item" href="{{ path('admin_livre') }}">Liste des livres</a>
+                <a class="collapse-item" href="{{ path('admin_add_livre') }}">Ajouter un livre</a>
+                <a class="collapse-item" href="{{ path('admin_couponLivre') }}">Promo livre</a>
+            </div>
+        </div>
+    </li>    
+
+
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Utilisateurs
+    </div>
+    
+    <!-- Nav Item - Tables -->
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('admin_coupon') }}">
+            <i class="fas fa-percent"></i>
+            <span>Coupon</span>
+        </a>
+    </li>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUser" aria-expanded="true" aria-controls="collapseUser">
+            <i class="fas fa-users"></i>
+            <span>Utilisateurs</span>
+        </a>
+        <div id="collapseUser" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Listes des utilisateurs</h6>
+                <a class="collapse-item" href="{{ path('admin_user_lecteur') }}">Liste des lecteurs</a>
+                <a class="collapse-item" href="{{ path('admin_user_editor') }}">Liste des auteurs</a>
+            </div>
+        </div>
+    </li>    
+
+    <!-- Nav Item - Tables -->
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('admin_comments') }}">
+            <i class="fas fa-comments"></i>
+            <span>Commentaires</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('info_legal') }}">
+            <i class="fas fa-info"></i>
+            <span>Infos légales</span>
+        </a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+
+</ul>
+<!-- End of Sidebar -->

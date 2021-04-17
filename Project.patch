@@ -1,0 +1,2135 @@
+Index: templates/pages/identification.html.twig
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- templates/pages/identification.html.twig	(date 1551269534602)
++++ templates/pages/identification.html.twig	(date 1551269534602)
+@@ -0,0 +1,133 @@
++{% extends 'base.html.twig' %}
++
++{% block stylesheets '<link rel="stylesheet" href="http://pasvupaslu.com/css/8.css">' %}
++
++{% block title 'Identification' %}
++
++{% block body %}
++
++    <div class="vbox wb_container" id="wb_main" style="height: 1170px;">
++
++        <div class="wb_cont_inner">
++            <div id="wb_element_instance337" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal" style="text-align: center;">
++                    <span style="color:rgba(255,255,255,1);">D E J A &nbsp; M E M B R E &nbsp;</span>
++                </p>
++
++                <p class="wb-stl-normal" style="text-align: center;">
++                    <em>
++                        <span style="color:rgba(255,255,255,1);">C o n n e c t e z - v o u s &nbsp;!</span>
++                    </em>
++                </p>
++            </div>
++
++            <div id="wb_element_instance338" class="wb_element wb_text_element" style=" line-height: normal;">
++                <h3 class="wb-stl-heading3" style="text-align: center;">
++                    <span style="color:rgba(13,9,13,1);">Inscription / Connexion&nbsp;</span>
++                </h3>
++            </div>
++
++            <div id="wb_element_instance339" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance340" class="wb_element wb-elm-orient-horizontal">
++                <div class="wb-elm-line"></div>
++            </div>
++
++            <div id="wb_element_instance341" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance342" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance343" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/bandeaueven" src="{{ asset('assets/images/gallery/d651114c26c8d0d079a962200d92886a_1200x303.jpg') }}">
++            </div>
++
++            <div id="wb_element_instance344" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/bandeaumembre" src="{{ asset('assets/images/gallery/8425e380e80e7be5d98d9e7c8f34877c_66x100.png') }}">
++            </div>
++
++            <div id="wb_element_instance345" class="wb_element wb-elm-orient-horizontal">
++                <div class="wb-elm-line"></div>
++            </div>
++
++            <div id="wb_element_instance346" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance347" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal" style="text-align: center;">INSCRIPTION LECTEUR</p>
++            </div>
++
++            <div id="wb_element_instance348" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/livre ouvert" src="{{ asset('assets/images/gallery/12cf4fa08fd84de973e92eb82ace7134_150x109.png') }}">
++            </div>
++
++            <div id="wb_element_instance349" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance350" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal" style="text-align: center;">INSCRIPTION AUTEUR</p>
++            </div>
++
++            <div id="wb_element_instance351" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/livre ouvert" src="{{ asset('assets/images/gallery/12cf4fa08fd84de973e92eb82ace7134_150x109.png') }}">
++            </div>
++
++            <div id="wb_element_instance352" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/bandeaumembre" src="{{ asset('assets/images/gallery/8425e380e80e7be5d98d9e7c8f34877c_66x100.png') }}">
++            </div>
++
++            <div id="wb_element_instance353" class="wb_element">
++                <a class="wb_button" href="{{ path('registration-reader') }}"><span>Cliquer ici !</span></a>
++            </div>
++
++            <div id="wb_element_instance354" class="wb_element">
++                <a class="wb_button" href="{{ path('registration-author') }}"><span>Cliquer ici !</span></a>
++            </div>
++
++            <div id="wb_element_instance355" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal" style="text-align: center;">D E V E N I R &nbsp; &nbsp;M E M B R E&nbsp;</p>
++
++                <p class="wb-stl-normal" style="text-align: center;"><span style="color:rgba(255,255,255,1);"><em>Pas Vu, Pas lu est une communauté destinée </em></span></p>
++
++                <p class="wb-stl-normal" style="text-align: center;"><span style="color:rgba(255,255,255,1);"><em>à tous les amoureux du livre.&nbsp;</em></span></p>
++
++                <p class="wb-stl-normal" style="text-align: center;"><em>(Enregistrement des inscriptions à compter du 1er Mars 2019)</em></p>
++            </div>
++
++            <div id="wb_element_instance356" class="wb_element wb-elm-orient-vertical">
++                <div class="wb-elm-line"></div>
++            </div>
++
++            <div id="wb_element_instance357" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/visuelinscriplecteur" src="{{ asset('assets/images/gallery/5f905d7dda1b419a1f706cff4b0f02d9_285x191.jpg') }}">
++            </div>
++
++            <div id="wb_element_instance358" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/visuelinscriptauteur" src="{{ asset('assets/images/gallery/92e9d7cbea4b6ccf12cddebae8a2c5da_275x192.jpg') }}">
++            </div>
++
++            <div id="wb_element_instance359" class="wb_element wb_text_element" style=" line-height: normal;">
++                <h5 class="wb-stl-subtitle" style="text-align: center;"><strong>Tarif&nbsp;&nbsp;: 60 euros TTC Annuel *</strong></h5>
++            </div>
++
++            <div id="wb_element_instance360" class="wb_element wb_text_element" style=" line-height: normal;">
++                <h5 class="wb-stl-subtitle" style="text-align: center;"><strong>&nbsp;Tarif :&nbsp;12 euros TTC Annuel *</strong></h5>
++            </div>
++
++            <div id="wb_element_instance361" class="wb_element wb_text_element" style=" line-height: normal;">
++                <h5 class="wb-stl-subtitle"><em>* Le paiement de votre abonnement permet à l'Association Terhoma de se développer en toute indépendance et&nbsp;sans demander de subventions. Votre abonnement est un acte&nbsp;&nbsp;d'économie solidaire !</em></h5>
++            </div>
++
++        </div>
++        <div class="wb_cont_outer"></div>
++        <div class="wb_cont_bg"></div>
++    </div>
++
++{% endblock %}
+Index: templates/base.html.twig
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- templates/base.html.twig	(date 1551262078937)
++++ templates/base.html.twig	(date 1551262078937)
+@@ -0,0 +1,29 @@
++<!DOCTYPE html>
++<html>
++    <head>
++        <meta charset="UTF-8">
++        <title>{% block title '' %}</title>
++        <meta charset="utf-8">
++        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
++        <meta name="description" content="">
++        <meta name="author" content="">
++        {# a editer #}
++        <link rel="stylesheet" href="http://pasvupaslu.com/css/bootstrap.min.css">
++        <link rel="stylesheet" href="http://pasvupaslu.com/css/1.css">
++        <link rel="stylesheet" href="http://pasvupaslu.com/css/common.css">
++        <link rel="stylesheet" href="http://pasvupaslu.com/css/site.css">
++        <link rel="stylesheet" href="{{ asset('assets/css/search.css') }}">
++        {# Fien #}
++        {% block stylesheets '' %}
++    </head>
++    <body>
++        {% include("components/_header.html.twig") %}
++        {% include("components/_menu.html.twig") %}
++        {% block body %}{% endblock %}
++        {% include("components/_footer.html.twig") %}
++        <script src="http://pasvupaslu.com/js/jquery-1.11.3.min.js"></script>
++        <script src="http://pasvupaslu.com/js/bootstrap.min.js"></script>
++        <script src="http://pasvupaslu.com/js/main.js"></script>
++        {% block javascripts '' %}
++    </body>
++</html>
+Index: templates/pages/authors.html.twig
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- templates/pages/authors.html.twig	(date 1551264266084)
++++ templates/pages/authors.html.twig	(date 1551264266084)
+@@ -0,0 +1,260 @@
++{% extends 'base.html.twig' %}
++
++{% block stylesheets '<link rel="stylesheet" href="http://pasvupaslu.com/css/6.css">' %}
++
++{% block title 'Auteurs' %}
++
++{% block body %}
++
++    <div class="vbox wb_container" id="wb_main" style="height: 1670px;">
++
++        <div class="wb_cont_inner">
++            <div id="wb_element_instance253" class="wb_element wb_text_element" style=" line-height: normal;">
++                <h3 class="wb-stl-heading3" style="text-align: center;">
++                    <span style="color:rgba(13,8,13,1);">Auteurs</span>
++                </h3>
++            </div>
++
++            <div id="wb_element_instance254" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance255" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal" style="text-align: center;">
++                    <em>
++                        <span style="color:rgba(255,255,255,1);">Ils ont besoin&nbsp;de vous pour émerger&nbsp;</span>
++                    </em>
++                </p>
++            </div>
++
++            <div id="wb_element_instance256" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal" style="text-align: center;"><em>Choisissez un auteur dans la catégorie qui vous intéresse&nbsp;</em></p>
++            </div>
++
++            <div id="wb_element_instance257" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal" style="text-align: center;"><em>Choisissez un auteur &amp; lisez un extrait de son oeuvre</em></p>
++            </div>
++
++            <div id="wb_element_instance258" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal" style="text-align: center;"><em>Attribuez une note à&nbsp;cet extrait et commentez-la</em></p>
++            </div>
++
++            <div id="wb_element_instance259" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal" style="text-align: center;"><em>Grâce à vous des auteurs émergent</em></p>
++            </div>
++
++            <div id="wb_element_instance260" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/regard" src="{{ asset('assets/images/gallery/e69ff87e577716586d3788dbc8ed6728_190x201.png') }}">
++            </div>
++
++            <div id="wb_element_instance261" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal" style="text-align: center;"><em>Suivez-leurs premiers pas&nbsp;sur Pas vu, pas lu</em></p>
++            </div>
++
++            <div id="wb_element_instance262" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/success-3227625_1920" src="{{ asset('assets/images/gallery/0ed08c0438410384ebf3025e684c9a4f_320x130.png') }}">
++            </div>
++
++            <div id="wb_element_instance263" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance264" class="wb_element wb_element_shape">
++                <a href="Science-fiction/" class="wb_shp"></a>
++            </div>
++
++            <div id="wb_element_instance265" class="wb_element wb_element_shape">
++                <a href="Romans/" class="wb_shp"></a>
++            </div>
++
++            <div id="wb_element_instance266" class="wb_element wb_element_shape">
++                <a href="Bandes-dessin%C3%A9es/" class="wb_shp"></a>
++            </div>
++
++            <div id="wb_element_instance267" class="wb_element wb_element_shape">
++                <a href="Bien-%C3%AAtre-Vie-pratique/" class="wb_shp"></a>
++            </div>
++
++            <div id="wb_element_instance268" class="wb_element wb_element_shape">
++                <a href="Mangas/" class="wb_shp"></a>
++            </div>
++
++            <div id="wb_element_instance269" class="wb_element wb_element_shape">
++                <a href="Thrillers/" class="wb_shp"></a>
++            </div>
++
++            <div id="wb_element_instance270" class="wb_element wb_element_shape">
++                <a href="Essais/" class="wb_shp"></a>
++            </div>
++
++            <div id="wb_element_instance271" class="wb_element wb_element_shape">
++                <a href="Jeunesse/" class="wb_shp"></a>
++            </div>
++
++            <div id="wb_element_instance272" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal" style="text-align: center;">
++                    <a data-finalurl="mi:5d14e62b_116/" data-name="Bien-être &amp; Vie pratique" href="Bien-%C3%AAtre-Vie-pratique/">B-E&nbsp;&amp; V P</a>
++                </p>
++            </div>
++
++            <div id="wb_element_instance273" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal" style="text-align: center;"><a data-finalurl="mi:5d14e62b_101/" data-name="Essais" href="Essais/">Essais</a></p>
++            </div>
++
++            <div id="wb_element_instance274" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance275" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance276" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal" style="text-align: center;">
++                    <a data-finalurl="mi:5d14e62b_113/" data-name="Jeunesse" href="Jeunesse/">Jeunesse</a>
++                </p>
++            </div>
++
++            <div id="wb_element_instance277" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance278" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal" style="text-align: center;"><a data-finalurl="mi:5d14e62b_100/" data-name="Romans" href="Romans/">Roman</a></p>
++            </div>
++
++            <div id="wb_element_instance279" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance280" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal" style="text-align: center;">
++                    <a data-finalurl="mi:5d14e62b_112/" data-name="Bandes-dessinées" href="Bandes-dessin%C3%A9es/">BD</a>
++                </p>
++            </div>
++
++            <div id="wb_element_instance281" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance282" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance283" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance284" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance285" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal" style="text-align: center;">
++                    <a data-finalurl="mi:5d14e62b_109/" data-name="Mangas" href="Mangas/">Mangas</a>
++                </p>
++            </div>
++
++            <div id="wb_element_instance286" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal" style="text-align: center;"><a data-finalurl="mi:5d14e62b_102/" data-name="Science-fiction" href="Science-fiction/">S F</a></p>
++            </div>
++
++            <div id="wb_element_instance287" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal" style="text-align: center;"><a data-finalurl="mi:5d14e62b_103/" data-name="Thrillers" href="Thrillers/">Thrillers</a></p>
++            </div>
++
++            <div id="wb_element_instance288" class="wb_element wb_element_shape">
++                <a href="Po%C3%A9sies/" class="wb_shp"></a>
++            </div>
++
++            <div id="wb_element_instance289" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance290" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal" style="text-align: center;"><a data-finalurl="mi:5d14e62b_104/" data-name="Poésies" href="Po%C3%A9sies/">Poésie</a></p>
++            </div>
++
++            <div id="wb_element_instance291" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance292" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance293" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance294" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance295" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance296" class="wb_element wb-elm-orient-horizontal">
++                <div class="wb-elm-line"></div>
++            </div>
++
++            <div id="wb_element_instance297" class="wb_element wb-elm-orient-horizontal">
++                <div class="wb-elm-line"></div>
++            </div>
++
++            <div id="wb_element_instance298" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance299" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance300" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance301" class="wb_element wb-elm-orient-horizontal">
++                <div class="wb-elm-line"></div>
++            </div>
++
++            <div id="wb_element_instance302" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance303" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++            <div id="wb_element_instance304" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-custom3" style="text-align: center;">
++                    <strong>
++                        <span style="color:rgba(255,255,255,1);"><em>Nouveaux auteurs de la semaine !</em></span>
++                    </strong>
++                </p>
++            </div>
++
++            <div id="wb_element_instance305" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance306" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance307" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance308" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal" style="text-align: center;">
++                    <a data-finalurl="mi:5d14e62b_122/" data-name="Nouvelles" href="Nouvelles/"><strong>NOUVELLES</strong></a>
++                </p>
++            </div>
++
++        </div>
++    </div>
++
++{% endblock %}
++
++
+Index: templates/pages/books.html.twig
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- templates/pages/books.html.twig	(date 1551266197553)
++++ templates/pages/books.html.twig	(date 1551266197553)
+@@ -0,0 +1,93 @@
++{% extends 'base.html.twig' %}
++
++{% block stylesheets '<link rel="stylesheet" href="http://pasvupaslu.com/css/5.css">' %}
++
++{% block title 'Livres' %}
++
++{% block body %}
++
++    <div class="vbox wb_container" id="wb_main" style="height: 1013px;">
++
++        <div class="wb_cont_inner">
++
++            <div id="wb_element_instance212" class="wb_element wb_text_element" style=" line-height: normal;">
++                <h3 class="wb-stl-heading3" style="text-align: center;">
++                    <span style="color:rgba(15,6,15,1);">Livres</span>
++                </h3>
++            </div>
++
++            <div id="wb_element_instance213" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance214" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal" style="text-align: center;">
++                    <strong>
++                        <em>
++                            <span style="color:rgba(255,255,255,1);">Les nouveautés de la semaine&nbsp;</span>
++                        </em>
++                    </strong>
++                </p>
++            </div>
++
++            <div id="wb_element_instance215" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal" style="text-align: center;">
++                    <strong>
++                        <em>
++                            <span style="color:rgba(255,255,255,1);">Les mieux notés</span>
++                        </em>
++                    </strong>
++                </p>
++            </div>
++
++            <div id="wb_element_instance216" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance217" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/boy-160174_1280" src="{{ asset('assets/images/gallery/4a1c3e20d9fb3cfbc4765768ca22a06e_78x150.png') }}">
++            </div>
++
++            <div id="wb_element_instance218" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance219" class="wb_element wb_text_element" style=" line-height: normal;">
++                <h3 class="wb-stl-heading3">
++                    <span style="color:rgba(15,7,15,1);">Leur succès dépend de vous !</span>
++                </h3>
++            </div>
++
++            <div id="wb_element_instance220" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/girl-160169_1280" src="{{ asset('assets/images/gallery/7fed96fdff7756294602e2b1fa8b1dab_102x150.png') }}">
++            </div>
++
++            <div id="wb_element_instance221" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/literature-149713_1280" src="{{ asset('assets/images/gallery/bdb4a0a345907e348bd8a4d2cfc0c118_204x103.png') }}">
++            </div>
++
++            <div id="wb_element_instance222" class="wb_element wb-elm-orient-horizontal">
++                <div class="wb-elm-line"></div>
++            </div>
++
++            <div id="wb_element_instance223" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance224" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance225" class="wb_element" style="width: 100%; display: none;">
++                <script type="text/javascript">
++                    $(function() {
++                        $("#wb_element_instance225").hide();
++                    });
++                </script>
++            </div>
++        </div>
++        <div class="wb_cont_outer"></div>
++        <div class="wb_cont_bg"></div>
++    </div>
++
++{% endblock %}
+Index: templates/pages/readers.html.twig
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- templates/pages/readers.html.twig	(date 1551264648665)
++++ templates/pages/readers.html.twig	(date 1551264648665)
+@@ -0,0 +1,94 @@
++{% extends 'base.html.twig' %}
++
++{% block stylesheets '<link rel="stylesheet" href="http://pasvupaslu.com/css/7.css">' %}
++
++{% block title 'Lecteurs' %}
++
++{% block body %}
++
++    <div class="vbox wb_container" id="wb_main" style="height: 1042px;">
++
++        <div class="wb_cont_inner">
++            <div id="wb_element_instance1520" class="wb_element wb_text_element" style=" line-height: normal;">
++                <h3 class="wb-stl-heading3" style="text-align: center;">
++                    <span style="color:rgba(13,8,13,1);">Lecteurs</span>
++                </h3>
++            </div>
++
++            <div id="wb_element_instance1521" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance1522" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal">
++                    <strong>
++                        <span style="color:rgba(255,255,255,1);">REJOINDRE PAS VU, PAS LU, C'EST :</span>
++                    </strong>
++                </p>
++            </div>
++
++            <div id="wb_element_instance1523" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance1524" class="wb_element wb-elm-orient-horizontal">
++                <div class="wb-elm-line"></div>
++            </div>
++
++            <div id="wb_element_instance1525" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance1526" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance1527" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance1528" class="wb_element wb-elm-orient-horizontal">
++                <div class="wb-elm-line"></div>
++            </div>
++
++            <div id="wb_element_instance1529" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/visuelsalon2" src="{{ asset('assets/images/gallery/3afa35bfbdabee2fc695cd9e5c7d7344_1200x532.jpg') }}">
++            </div>
++
++            <div id="wb_element_instance1530" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal">Découvrir&nbsp;de nouveaux auteurs et de petites maisons d'édition</p>
++
++                <p class="wb-stl-normal">Donner son avis et noter les textes mis en ligne,</p>
++
++                <p class="wb-stl-normal">Avoir la possibilite de participer à un comité de lecture ,</p>
++
++                <p class="wb-stl-normal">Avoir la possibilité de devenir membre d'un jury,</p>
++
++                <p class="wb-stl-normal">Pouvoir être Interviewé(e) ,</p>
++
++                <p class="wb-stl-normal">Recevoir des livres gratuits ( En fonction des actions menées par les maisons d'éditions, les auteurs et le département édition de Terhoma.</p>
++
++                <p class="wb-stl-normal">Avoir des réductions sur certains livres,</p>
++
++                <p class="wb-stl-normal">Rencontrer des auteurs,&nbsp;des éditeurs et d'autres&nbsp;lecteurs pour Echanger et partager,</p>
++
++                <p class="wb-stl-normal">Participer à nos évènements ( Dans la limite des places disponibles)</p>
++
++                <p class="wb-stl-normal">Recevoir gratuitement son entrée&nbsp;au salon Pas vu, pas lu, dès la 1ère édition.</p>
++            </div>
++
++            <div id="wb_element_instance1531" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance1532" class="wb_element">
++                <a class="wb_button" href="Inscription-Lecteur/">
++                    <span>Inscription !</span>
++                </a>
++            </div>
++        </div>
++    </div>
++
++{% endblock %}
++
++
+Index: templates/pages/about.html.twig
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- templates/pages/about.html.twig	(date 1551262686348)
++++ templates/pages/about.html.twig	(date 1551262686348)
+@@ -0,0 +1,205 @@
++{% extends 'base.html.twig' %}
++
++{% block stylesheets '<link rel="stylesheet" href="http://pasvupaslu.com/css/2.css">' %}
++
++{% block title 'A propos de nous' %}
++
++{% block body %}
++
++    <div class="vbox wb_container" id="wb_main" style="height: 1590px;">
++
++        <div class="wb_cont_inner">
++            <div id="wb_element_instance113" class="wb_element wb_text_element" style=" line-height: normal;">
++                <h3 class="wb-stl-heading3" style="text-align: center;">
++                    <span style="color:rgba(10,6,10,1);">A propos de nous</span>
++                </h3>
++            </div>
++
++            <div id="wb_element_instance114" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance115" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal">
++                    <span style="color:rgba(255,255,255,1);">Cette plateforme est mise en ligne par l'association Terhoma <a data-finalurl="http://terhoma.org/Accueil/" data-name="terhoma.org/Accueil/" href="http://terhoma.org/Accueil/">(www.terhoma.org</a>).&nbsp;</span>
++                </p>
++            </div>
++
++            <div id="wb_element_instance116" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-custom1" style="text-align: justify;">
++                    <span class="wb-stl-special">
++                        <span style="color:rgba(255,255,255,1);">
++                            <em>Si le livre est reconnu comme un bien&nbsp;culturel, le marché du livre et sa distribution laissent la part belle aux gros éditeurs et très peu d'espace pour les petites maisons d'édition et les nouveaux auteurs. &nbsp;</em>
++                        </span>
++                    </span>
++                </p>
++
++                <p class="wb-stl-custom1" style="text-align: justify;">
++                    <span class="wb-stl-special">
++                        <span style="color:rgba(255,255,255,1);">
++                            <em>La création de cette plateforme est liée à notre certitude que l'émergence de nouveaux talents&nbsp;enrichit&nbsp;la littérature et lui offre la plus belle des promesses :&nbsp;</em>
++                        </span>
++                    </span>
++                </p>
++
++                <p class="wb-stl-custom1" style="text-align: center;">
++                    <span class="wb-stl-special">
++                        <span style="color:rgba(255,255,255,1);"><em><strong>La diversité.</strong></em></span>
++                    </span>
++                </p>
++
++            </div>
++
++            <div id="wb_element_instance117" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/etagere" src="{{ asset('assets/images/gallery/') }}ae1484604f3accc5e3e68313abf3f326_120x98.png">
++            </div>
++
++            <div id="wb_element_instance118" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/etagere" src="{{ asset('assets/images/gallery/') }}ae1484604f3accc5e3e68313abf3f326_120x98.png">
++            </div>
++
++            <div id="wb_element_instance119" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/etagere" src="{{ asset('assets/images/gallery/') }}ae1484604f3accc5e3e68313abf3f326_120x98.png">
++            </div>
++
++            <div id="wb_element_instance120" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/etagere" src="{{ asset('assets/images/gallery/') }}ae1484604f3accc5e3e68313abf3f326_120x98.png">
++            </div>
++
++            <div id="wb_element_instance121" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/etagere" src="{{ asset('assets/images/gallery/') }}ae1484604f3accc5e3e68313abf3f326_120x98.png">
++            </div>
++
++            <div id="wb_element_instance122" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/etagere" src="{{ asset('assets/images/gallery/') }}ae1484604f3accc5e3e68313abf3f326_120x98.png">
++            </div>
++
++            <div id="wb_element_instance123" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/etagere" src="{{ asset('assets/images/gallery/') }}ae1484604f3accc5e3e68313abf3f326_120x98.png">
++            </div>
++
++            <div id="wb_element_instance124" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal">
++                    <span style="color:rgba(36,34,35,1);"><strong>Une volonté d'accompagner !</strong></span>
++                </p>
++            </div>
++
++            <div id="wb_element_instance125" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal"><em>L<span style="color:rgba(255,255,255,1);">es frais d'inscription, en plus des avantages offerts à chaque membre, donnent&nbsp;à l'association Terhoma des moyens financiers pour :</span></em></p>
++                <ul>
++                    <li class="wb-stl-normal"><span style="color:rgba(255,255,255,1);">Le développement de nos ateliers d'écriture,</span></li>
++                    <li class="wb-stl-normal"><span style="color:rgba(255,255,255,1);">L'organisation de nos évènements,</span></li>
++                    <li class="wb-stl-normal"><span style="color:rgba(255,255,255,1);">L'organisation du salon Pas vu, pas lu,</span></li>
++                    <li class="wb-stl-normal"><span style="color:rgba(255,255,255,1);">La promotion de nouveaux auteurs,</span></li>
++                    <li class="wb-stl-normal"><span style="color:rgba(255,255,255,1);">La promotion de petits éditeurs ,</span></li>
++                    <li class="wb-stl-normal"><span style="color:rgba(255,255,255,1);">L'édition de nouveaux auteurs&nbsp;</span></li>
++                </ul>
++            </div>
++
++            <div id="wb_element_instance126" class="wb_element wb_text_element" style=" line-height: normal;">
++                <h5 class="wb-stl-subtitle" style="text-align: center;">
++                    <em>* Votre don donne droit à une réduction fiscale représentant&nbsp;66&nbsp;%&nbsp;des sommes versées </em>
++                </h5>
++                <h5 class="wb-stl-subtitle" style="text-align: center;">
++                    <em>(dans la limite de dons représentant&nbsp;20&nbsp;%&nbsp;du revenu imposable)</em>
++                </h5>
++            </div>
++
++            <div id="wb_element_instance127" class="wb_element">
++                <a class="wb_button" href="http://www.terhoma.org/Faire-un-don/"><span>Faire un don !</span></a>
++            </div>
++
++            <div id="wb_element_instance128" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance129" class="wb_element wb_text_element" style=" line-height: normal;">
++                <h5 class="wb-stl-subtitle" style="text-align: center;">
++                    <em>Vous pouvez nous aider à faire vivre cette plateforme en faisant un don* </em>
++                </h5>
++                <h5 class="wb-stl-subtitle" style="text-align: center;">
++                    <em>à</em>
++                </h5>
++                <h5 class="wb-stl-subtitle" style="text-align: center;">
++                    <em>l'association Terhoma .</em>
++                </h5>
++            </div>
++
++            <div id="wb_element_instance130" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/mandala" src="{{ asset('assets/images/gallery/2a1e04a4414b29eaf42560b660a3c79c_60x58.png') }}">
++            </div>
++
++            <div id="wb_element_instance131" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/mandala" src="{{ asset('assets/images/gallery/2a1e04a4414b29eaf42560b660a3c79c_60x58.png') }}">
++            </div>
++
++            <div id="wb_element_instance132" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/etagere" src="{{ asset('assets/images/gallery/ae1484604f3accc5e3e68313abf3f326_120x98.png') }}">
++            </div>
++
++            <div id="wb_element_instance133" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/etagere" src="{{ asset('assets/images/gallery/ae1484604f3accc5e3e68313abf3f326_120x98.png') }}">
++            </div>
++
++            <div id="wb_element_instance134" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/etagere" src="{{ asset('assets/images/gallery/ae1484604f3accc5e3e68313abf3f326_120x98.png') }}">
++            </div>
++
++            <div id="wb_element_instance135" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/lunegarcon" src="{{ asset('assets/images/gallery/5ae8d5b63bdd87a0cef696c76ffaf13c.png') }}">
++            </div>
++
++            <div id="wb_element_instance136" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance137" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/ic" src="{{ asset('assets/images/gallery/bdde57d173ccb70100bc731fd58f82ca_45x70.jpg') }}">
++            </div>
++
++            <div id="wb_element_instance138" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/the hours" src="{{ asset('assets/images/gallery/2fb8198b28c46066957baf5d9d6bb509_49x72.jpg') }}">
++            </div>
++
++            <div id="wb_element_instance139" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/visuelapropos" src="{{ asset('assets/images/gallery/1909e3a6cbf6f7c37c5f6146572b731e.jpg') }}">
++            </div>
++
++            <div id="wb_element_instance140" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance141" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance142" class="wb_element wb-elm-orient-horizontal">
++                <div class="wb-elm-line"></div>
++            </div>
++
++            <div id="wb_element_instance143" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance144" class="wb_element wb-elm-orient-horizontal">
++                <div class="wb-elm-line"></div>
++            </div>
++
++            <div id="wb_element_instance145" class="wb_element wb-elm-orient-horizontal">
++                <div class="wb-elm-line"></div>
++            </div>
++
++            <div id="wb_element_instance146" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance147" class="wb_element">
++                <iframe title="YouTube video player" class="youtube-player" allowfullscreen="" type="text/html" src="//www.youtube.com/embed/XKOBU0udTnk?controls=1&amp;amp;showinfo=1" frameborder="0"></iframe>
++            </div>
++
++        </div>
++    </div>
++
++{% endblock %}
++
++
+Index: templates/pages/registration-author.html.twig
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- templates/pages/registration-author.html.twig	(date 1551268188644)
++++ templates/pages/registration-author.html.twig	(date 1551268188644)
+@@ -0,0 +1,242 @@
++{% extends 'base.html.twig' %}
++
++{% block stylesheets '<link rel="stylesheet" href="http://pasvupaslu.com/css/28.css">' %}
++
++{% block title 'Inscription Auteur' %}
++
++{% block body %}
++
++    <div class="vbox wb_container" id="wb_main" style="height: 1510px;">
++
++        <div class="wb_cont_inner">
++            <div id="wb_element_instance1244" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal" style="text-align: center;"><b>&nbsp; &nbsp;</b>
++                    <strong> <em>&nbsp;Inscription Auteur</em></strong>
++                </p>
++                <p class="wb-stl-normal" style="text-align: center;">
++                    <em>
++                        <span style="color:rgba(255,255,255,1);">(Enregistrement des inscriptions à compter du 15&nbsp;février 2019)</span>
++                    </em>
++                </p>
++            </div>
++
++            <div id="wb_element_instance1245" class="wb_element wb_text_element" style=" line-height: normal;">
++                <h3 class="wb-stl-heading3" style="text-align: center;"><span style="color:rgba(13,9,13,1);">Inscription Auteur</span></h3>
++            </div>
++
++            <div id="wb_element_instance1246" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance1247" class="wb_element wb-elm-orient-horizontal">
++                <div class="wb-elm-line"></div>
++            </div>
++
++            <div id="wb_element_instance1248" class="wb_element wb-elm-orient-horizontal">
++                <div class="wb-elm-line"></div>
++            </div>
++
++            <div id="wb_element_instance1249" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance1250" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance1251" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance1252" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/bandeaueven" src="{{ asset('assets/images/gallery/d651114c26c8d0d079a962200d92886a_1200x303.jpg') }}">
++            </div>
++
++            <div id="wb_element_instance1253" class="wb_element wb-elm-orient-horizontal">
++                <div class="wb-elm-line"></div>
++            </div>
++
++            <div id="wb_element_instance1254" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance1255" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal"><em><strong>Devenir membre Auteur, c'est facile !</strong></em></p>
++
++                <p class="wb-stl-normal">1/ Avant de commencer, prenez connaissance <a data-finalurl="mi:5d14e62b_124/" data-name="Informations Légales" href="Informations-L%C3%A9gales/">des conditions générales de ventes</a> et des conditions générales d'utilisation&nbsp;du site.</p>
++
++                <p class="wb-stl-normal">2/Remplissez le questionnaire ci-dessous,</p>
++
++                <p class="wb-stl-normal">3/ Téléchargez&nbsp;la couverture et un extrait de votre ouvrage *</p>
++
++                <p class="wb-stl-normal">4/ Effectuez votre paiement,</p>
++
++                <p class="wb-stl-normal">5/ Vérifiez votre inscription sur votre boite mail.</p>
++
++                <h5 class="wb-stl-subtitle"><strong><em>Contactez-nous si vous avez besoin d'aide !</em></strong></h5>
++
++                <p><span style="color:rgba(255,255,255,1);"><strong><em>* Couverture (format Jpeg), Extrait ( format e.pub OU pdf)</em></strong></span></p>
++            </div>
++
++            <div id="wb_element_instance1256" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/livre ouvert" src="{{ asset('assets/images/gallery/12cf4fa08fd84de973e92eb82ace7134_150x109.png') }}">
++            </div>
++
++            <div id="wb_element_instance1257" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal" style="text-align: center;">Tarif Annuel TTC</p>
++
++                <p class="wb-stl-normal" style="text-align: center;"><strong>60 Euros</strong></p>
++            </div>
++
++            <div id="wb_element_instance1258" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/visuelinscriptauteur" src="{{ asset('assets/images/gallery/92e9d7cbea4b6ccf12cddebae8a2c5da_444x310.jpg') }}">
++            </div>
++
++            <div id="wb_element_instance1259" class="wb_element wb-elm-orient-horizontal">
++                <div class="wb-elm-line"></div>
++            </div>
++
++            <div id="wb_element_instance1260" class="wb_element">
++                <form class="wb_form" method="post" enctype="multipart/form-data">
++                    <input type="hidden" name="wb_form_id" value="4a18c23b">
++                    <textarea name="message" rows="3" cols="20" class="hpc"></textarea>
++                    <table>
++                        <tbody>
++                        <tr>
++                            <th>Nom&nbsp;&nbsp;</th>
++                            <td>
++                                <input type="hidden" name="wb_input_0" value="Nom">
++                                <input class="form-control form-field" type="text" value="" name="wb_input_0" required="required">
++                            </td>
++                        </tr>
++                        <tr>
++                            <th>Prénom&nbsp;&nbsp;</th>
++                            <td>
++                                <input type="hidden" name="wb_input_1" value="Prénom">
++                                <input class="form-control form-field" type="text" value="" name="wb_input_1" required="required">
++                            </td>
++                        </tr>
++                        <tr>
++                            <th>Pseudo ou nom de Plume&nbsp;&nbsp;</th>
++                            <td>
++                                <input type="hidden" name="wb_input_2" value="Pseudo ou nom de Plume">
++                                <input class="form-control form-field" type="text" value="" name="wb_input_2" required="required">
++                            </td>
++                        </tr>
++                        <tr>
++                            <th>email&nbsp;&nbsp;</th>
++                            <td>
++                                <input type="hidden" name="wb_input_3" value="email">
++                                <input class="form-control form-field" type="text" value="" name="wb_input_3" required="required">
++                            </td>
++                        </tr>
++                        <tr>
++                            <th>téléphone&nbsp;&nbsp;</th>
++                            <td>
++                                <input type="hidden" name="wb_input_4" value="téléphone">
++                                <input class="form-control form-field" type="text" value="" name="wb_input_4" required="required">
++                            </td>
++                        </tr>
++                        <tr>
++                            <th>Catégorie souhaitée &nbsp;&nbsp;</th>
++                            <td>
++                                <input type="hidden" name="wb_input_5" value="Catégorie souhaitée ">
++                                <select class="form-control form-field" name="wb_input_5" required="required">
++                                    <option value="0">Romans</option>
++                                    <option value="1">Nouvelles</option>
++                                    <option value="2">Essais</option>
++                                    <option value="3">Thrillers</option>
++                                    <option value="4">Poésies</option>
++                                    <option value="5">Mangas</option>
++                                    <option value="6">Jeunesse</option>
++                                    <option value="7">Bandes-Dessinées</option>
++                                    <option value="8">Vie Pratique et Bien-être</option>
++                                </select>
++                            </td>
++                        </tr>
++                        <tr class="area-row">
++                            <th>Message&nbsp;&nbsp;</th>
++                            <td>
++                                <input type="hidden" name="wb_input_6" value="Message">
++                                <textarea class="form-control form-field form-area-field" rows="3" cols="20" name="wb_input_6" required="required"></textarea>
++                            </td>
++                        </tr>
++                        <tr>
++                            <th>Pièces jointes&nbsp;&nbsp;</th>
++                            <td>
++                                <div class="form-file-wrapper">
++                                    <input class="form-field" type="file" multiple="" name="wb_input_7[]" required="required">
++                                </div>
++                            </td>
++                        </tr>
++                        <tr>
++                            <th>&nbsp;&nbsp;</th>
++                            <td>
++                                <label class="checkbox-label ">
++                                    <input class="form-control form-field" type="checkbox" value="1" name="wb_input_8"> Je veux recevoir les actualités de pas vu, pas lu</label>
++                            </td>
++                        </tr>
++                        <tr>
++                            <th>&nbsp;&nbsp;</th>
++                            <td>
++                                <label class="checkbox-label ">
++                                    <input class="form-control form-field" type="checkbox" value="1" name="wb_input_9" required="required"> J’accepte les termes et <a data-finalurl="mi:5d14e62b_124/" data-name="Informations Légales" href="Informations-L%C3%A9gales/">conditions de ventes et d'utilisation </a>du site Internet.</label>
++                            </td>
++                        </tr>
++                        <tr class="form-footer">
++                            <td colspan="2">
++                                <button type="submit" class="btn btn-default">Envoyer</button>
++                            </td>
++                        </tr>
++                        </tbody>
++                    </table>
++                    <input type="hidden" name="MAX_FILE_SIZE" value="2097152">
++                </form>
++            </div>
++
++            <div id="wb_element_instance1261" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal" style="text-align: justify;">
++                    <em>
++                        <span style="color:rgba(0,0,0,1);">Pour la sécurité de votre&nbsp;transaction, nous avons opté pour la plateforme de paiement paypal. Vous pouvez donc, une fois connecté(e), payer par carte bancaire ou via votre compte Paypal, si vous en avez un.</span>
++                    </em>
++                </p>
++            </div>
++
++            <div id="wb_element_instance1262" class="wb_element" style=" overflow: hidden;">
++                <div style="height: 100%;">
++                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
++                        <input type="hidden" name="cmd" value="_s-xclick">
++                        <input type="hidden" name="hosted_button_id" value="XQPB7P6SA84RU">
++                        <table>
++                            <tbody>
++                            <tr>
++                                <td>
++                                    <input type="hidden" name="on0" value="">
++                                </td>
++                            </tr>
++                            <tr>
++                                <td>
++                                    <select name="os0">
++                                        <option value="Inscription Auteur">Inscription Auteur : €60,00 EUR - annuel</option>
++                                        <option value="Inscription Lecteur">Inscription Lecteur : €12,00 EUR - annuel</option>
++                                    </select>
++                                </td>
++                            </tr>
++                            </tbody>
++                        </table>
++                        <input type="hidden" name="currency_code" value="EUR">
++                        <input type="image" src="https://www.paypalobjects.com/fr_FR/FR/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal, le réflexe sécurité pour payer en ligne"><img alt="" border="0" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1"></form>
++                </div>
++            </div>
++
++            <div id="wb_element_instance1263" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/book-3658687_1920" src="{{ asset('assets/images/gallery/fcc675f512067a4eaf8cafd56d59432a_300x300.png') }}">
++            </div>
++
++        </div>
++        <div class="wb_cont_outer"></div>
++        <div class="wb_cont_bg"></div>
++    </div>
++
++{% endblock %}
++
+Index: templates/pages/registration-reader.html.twig
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- templates/pages/registration-reader.html.twig	(date 1551268510127)
++++ templates/pages/registration-reader.html.twig	(date 1551268510127)
+@@ -0,0 +1,90 @@
++{% extends 'base.html.twig' %}
++
++{% block stylesheets '<link rel="stylesheet" href="http://pasvupaslu.com/css/27.css">' %}
++
++{% block title 'Inscription lecteur' %}
++
++{% block body %}
++
++    <div class="vbox wb_container" id="wb_main" style="height: 910px;">
++
++        <div class="wb_cont_inner">
++            <div id="wb_element_instance1201" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal" style="text-align: center;"><b>&nbsp; &nbsp;</b><strong> <em>&nbsp;Inscription Lecteur</em></strong></p>
++
++                <p class="wb-stl-normal" style="text-align: center;"><em><span style="color:rgba(255,255,255,1);">(Enregistrement des inscriptions à compter du 1er Mars 2019)</span></em><span style="color:rgba(255,255,255,1);">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
++            </div>
++
++            <div id="wb_element_instance1202" class="wb_element wb_text_element" style=" line-height: normal;">
++                <h3 class="wb-stl-heading3" style="text-align: center;"><span style="color:rgba(13,9,13,1);">Inscription Lecteur</span></h3>
++            </div>
++
++            <div id="wb_element_instance1203" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance1204" class="wb_element wb-elm-orient-horizontal">
++                <div class="wb-elm-line"></div>
++            </div>
++
++            <div id="wb_element_instance1205" class="wb_element wb-elm-orient-horizontal">
++                <div class="wb-elm-line"></div>
++            </div>
++
++            <div id="wb_element_instance1206" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance1207" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance1208" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance1209" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/bandeaueven" src="{{ asset('assets/images/gallery/d651114c26c8d0d079a962200d92886a_1200x303.jpg') }}">
++            </div>
++
++            <div id="wb_element_instance1210" class="wb_element wb-elm-orient-horizontal">
++                <div class="wb-elm-line"></div>
++            </div>
++
++            <div id="wb_element_instance1211" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance1212" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal"><em><strong>Devenir membre lecteur, c'est facile !</strong></em></p>
++
++                <p class="wb-stl-normal">1/ Remplissez le questionnaire ci-dessous,</p>
++
++                <p class="wb-stl-normal">2/ Effectuez votre paiement,</p>
++
++                <p class="wb-stl-normal">3/ Vérifiez votre inscription sur votre boite mail.</p>
++
++                <p class="wb-stl-normal">4/ Commencez votre activité en vous connectant à votre espace.</p>
++
++                <p class="wb-stl-normal">&nbsp;</p>
++            </div>
++
++            <div id="wb_element_instance1213" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/livre ouvert" src="{{ asset('assets/images/gallery/12cf4fa08fd84de973e92eb82ace7134_150x109.png') }}">
++            </div>
++
++            <div id="wb_element_instance1214" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal" style="text-align: center;">Tarif Annuel TTC</p>
++                <p class="wb-stl-normal" style="text-align: center;"><strong>12 Euros</strong></p>
++            </div>
++
++            <div id="wb_element_instance1215" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/visuelinscriplecteur" src="{{ asset('assets/images/gallery/5f905d7dda1b419a1f706cff4b0f02d9_444x309.jpg') }}">
++            </div>
++
++        </div>
++        <div class="wb_cont_outer"></div>
++        <div class="wb_cont_bg"></div>
++    </div>
++
++{% endblock %}
+Index: templates/pages/index.html.twig
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- templates/pages/index.html.twig	(date 1551208880630)
++++ templates/pages/index.html.twig	(date 1551208880630)
+@@ -0,0 +1,510 @@
++{% extends 'base.html.twig' %}
++
++{% block title 'Bienvenue sur Pasvupaslu' %}
++
++{% block body %}
++
++    <div class="vbox wb_container" id="wb_main" style="height: 2200px;">
++
++        <div class="wb_cont_inner">
++            <div id="wb_element_instance26" class="wb_element wb_text_element" style=" line-height: normal;">
++                <h3 class="wb-stl-heading3" style="text-align: center;"><span style="color:rgba(13,5,13,1);"><strong>Accueil</strong></span></h3>
++            </div>
++
++            <div id="wb_element_instance27" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance28" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal" style="text-align: center;">
++                    <span style="color:rgba(255,255,255,1);">Lecte<span style="color:rgba(46,44,46,1);"><span style="color:rgba(255,255,255,1);">ur,&nbsp;Venez</span></span> découvrir de nouveaux auteurs,&nbsp;</span>
++                </p>
++
++                <ul>
++                    <li class="wb-stl-normal" style="text-align: justify;">
++                        <p class="wb-stl-custom3">
++                            <em>
++                                <span style="color:rgba(255,255,255,1);">
++                                    Découvrez, dans la catégorie qui vous intéresse ( Roman, Essai, Thriller, Science-fiction, Bande-Dessinée, Littérature Jeunesse, Manga, Bien-etre &amp; Vie Pratique&nbsp;) un auteur et un extrait de son oeuvre.
++                                </span>
++                            </em>
++                        </p>
++                    </li>
++
++                    <li class="wb-stl-normal" style="text-align: justify;">
++                        <p class="wb-stl-custom3">
++                            <em>
++                                <span style="color:rgba(255,255,255,1);">
++                                    Donnez une note d'émotion sur votre lecture et justifiez-la par vos&nbsp;commentaires.
++                                </span>
++                            </em>
++                        </p>
++                    </li>
++
++                    <li class="wb-stl-normal" style="text-align: justify;">
++                        <p class="wb-stl-custom3">
++                            <em>
++                                <span style="color:rgba(255,255,255,1);">
++                                    Votre note et vos commentaires offriront aux auteurs les premières réactions sur leurs oeuvres.&nbsp;
++                                </span>
++                            </em>
++                        </p>
++                    </li>
++
++                    <li class="wb-stl-normal" style="text-align: justify;">
++                        <p class="wb-stl-custom3">
++                            <em>
++                                <span style="color:rgba(255,255,255,1);">
++                                    La somme de toutes les notes permettra aux auteurs les plus appréciés d'être mis en avant par un classement de satisfaction.
++                                </span>
++                            </em>
++                        </p>
++                    </li>
++
++                    <li class="wb-stl-normal" style="text-align: justify;">
++                        <p class="wb-stl-custom3">
++                            <i>Grâce à vous, de nouveaux auteurs sont édités</i>
++                        </p>
++                    </li>
++                </ul>
++
++                <p class="wb-stl-normal" style="text-align: center;">
++                    <span style="color:rgba(255,255,255,1);">
++                        Devenez acteur de l'émergence de nouveaux talents !
++                    </span>
++                </p>
++            </div>
++
++            <div id="wb_element_instance29" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/marquepage" src="{{ asset('assets/images/gallery/b05e2a6a196bfe1243771a8d6d9737bc_250x252.png') }}">
++            </div>
++
++            <div id="wb_element_instance30" class="wb_element wb_text_element" style=" line-height: normal;">
++                <h3 class="wb-stl-heading3" style="text-align: center;">
++                    <span style="color:rgba(255,255,255,1);">
++                        Auteur, Editeur, faites-vous connaître !
++                    </span>
++                </h3>
++            </div>
++
++            <div id="wb_element_instance31" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal" style="text-align: center;">
++                    <span style="color:rgba(15,255,255,1);">
++                        <span class="wb-stl-highlight">
++                            Rejoindre les acteurs de&nbsp;&nbsp;Pas vu, pas lu !
++                        </span>
++                    </span>
++                </p>
++            </div>
++
++            <div id="wb_element_instance32" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal">
++                    <a data-finalurl="mi:5d14e62b_115/" data-name="Auteurs" href="Auteurs/">
++                        <span style="color:rgba(12,83,102,1);">
++                            <em>
++                                Nouveaux auteurs de la semaine...
++                            </em>
++                        </span>
++                    </a>
++                </p>
++            </div>
++
++            <div id="wb_element_instance33" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance34" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance35" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/pen-1674850_1280" src="{{ asset('assets/images/gallery/1a19af1e480e7ea92a0d91c6bf8e3f43_70x140.png') }}">
++            </div>
++
++            <div id="wb_element_instance36" class="wb_element wb_element_shape">
++                <a href="Connexion/inscription-php/" class="wb_shp"></a>
++            </div>
++
++            <div id="wb_element_instance37" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal" style="text-align: center;">
++                    <a data-finalurl="mi:5d14e62b_108/" data-name="Inscription" href="Connexion/inscription-php/">Inscription</a>
++                </p>
++            </div>
++
++            <div id="wb_element_instance38" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/livrespalm" src="{{ asset('assets/images/gallery/afa7a821c462b7dfe056656ecd1705e3_621.30769230769x410.jpg') }}">
++            </div>
++
++            <div id="wb_element_instance39" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance40" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/ipadpasvu" src="{{ asset('assets/images/gallery//4a662552a76ec3ccbf02b9691fd6402e_600x278.png') }}">
++            </div>
++
++            <div id="wb_element_instance41" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance42" class="wb_element" style=" overflow: hidden;">
++                <div style="height: 100%;">
++                    <div style="text-align:center;padding:1em 0;">
++                        <h4>
++                            <a style="text-decoration:none;" href="https://www.zeitverschiebung.net/fr/city/2988507">
++                                <span style="color:gray;">Heure actuelle</span>
++                                <br>Paris, France
++                            </a>
++                        </h4>
++                        <iframe src="https://www.zeitverschiebung.net/clock-widget-iframe-v2?language=fr&amp;size=small&amp;timezone=Europe%2FParis" width="100%" height="90" frameborder="0" seamless=""></iframe>
++                    </div>
++                </div>
++            </div>
++
++            <div id="wb_element_instance43" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal"><em>"Qui que vous soyez qui voulez cultiver, vivifier, édifier, attendrir, apaiser, mettez des&nbsp;livres&nbsp;partout." </em></p>
++                <p class="wb-stl-normal" style="text-align: center;"><strong><em>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Victor Hugo</em></strong></p>
++            </div>
++
++            <div id="wb_element_instance44" class="wb_element wb-elm-orient-horizontal">
++                <div class="wb-elm-line"></div>
++            </div>
++
++            <div id="wb_element_instance45" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance46" class="wb_element wb-elm-orient-horizontal">
++                <div class="wb-elm-line"></div>
++            </div>
++
++            <div id="wb_element_instance47" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/visuelaccueil" src="{{ asset('assets/images/gallery/e21d59f9c768cdd3996406767ee5f2c0.jpg') }}">
++            </div>
++
++            <div id="wb_element_instance48" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-custom1" style="text-align: center;"><span style="color:rgba(196,12,80,1);"><strong>Citation du jour</strong></span></p>
++                <p class="wb-stl-custom1" style="text-align: center;"><em>"Chaque jour mes certitudes me remplissent de doute, j'avance !"</em></p>
++                <p class="wb-stl-custom1" style="text-align: center;"><strong>Stéphane Théri</strong></p>
++            </div>
++
++            <div id="wb_element_instance49" class="wb_element wb-elm-orient-horizontal">
++                <div class="wb-elm-line"></div>
++            </div>
++
++            <div id="wb_element_instance50" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-custom3" style="text-align: center;">
++                    <a data-finalurl="mi:5d14e62b_115/" data-name="Auteurs" href="Auteurs/">
++                        <span style="color:rgba(255,255,255,1);">Auteurs</span>
++                    </a>
++                    <a data-finalurl="mi:5d14e62b_105/" data-name="Livres" href="Livres/">
++                        <span style="color:rgba(255,255,255,1);">LIVRES</span>
++                    </a>
++                    <a data-finalurl="mi:5d14e62b_102/" data-name="Science-fiction" href="Science-fiction/">
++                        <span style="color:rgba(255,255,255,1);"> Science-fiction</span>
++                    </a>
++                </p>
++
++                <p class="wb-stl-custom3" style="text-align: center;">
++                    <a data-finalurl="mi:5d14e62b_106/" data-name="Interviews" href="Interviews/">
++                        <span style="color:rgba(255,255,255,1);">INTERVIEWS</span>
++                    </a>
++                    <a data-finalurl="mi:5d14e62b_116/" data-name="Bien-être &amp;amp; Vie pratique" href="Bien-%C3%AAtre-Vie-pratique/">
++                        <span style="color:rgba(255,255,255,1);">bien-être &amp; vie pratique </span>
++                    </a>
++                </p>
++
++                <p class="wb-stl-custom3" style="text-align: center;">
++                    <a data-finalurl="mi:5d14e62b_117/" data-name="Nos Evénements" href="Nos-Ev%C3%A9nements/">
++                        <span style="color:rgba(255,255,255,1);">Evènements</span>
++                    </a>
++                    <a data-finalurl="mi:5d14e62b_121/" data-name="Editeurs" href="Editeurs/">
++                        <span style="color:rgba(255,255,255,1);">Editeurs</span>
++                    </a>
++                    <a data-finalurl="mi:5d14e62b_120/" data-name="Rendez-vous Pas vu, Pas lu" href="Rendez-vous-Pas-vu-Pas-lu/">
++                        <span style="color:rgba(255,255,255,1);">RENDEZ-VOUS</span>
++                    </a>
++                    <a data-finalurl="mi:5d14e62b_108/" data-name="Inscription" href="Connexion/inscription-php/">
++                        <span style="color:rgba(255,255,255,1);">Inscription</span>
++                    </a>
++                    <a data-finalurl="mi:5d14e62b_100/" data-name="Romans" href="Romans/">
++                        <span style="color:rgba(255,255,255,1);">Romans</span>
++                    </a>
++                    <a data-finalurl="mi:5d14e62b_110/" data-name="A propos de nous" href="A-propos-de-nous/">
++                        <span style="color:rgba(255,255,255,1);">A propos de Nous</span>
++                    </a>
++                </p>
++
++                <p class="wb-stl-custom3" style="text-align: center;">
++                    <a data-finalurl="mi:5d14e62b_107/" data-name="Lecteurs" href="5d14e62b_107/">
++                        <span style="color:rgba(255,255,255,1);">LECTEURS&nbsp;</span>
++                    </a>
++                    <a data-finalurl="mi:5d14e62b_114/" data-name="Salon Pas Vu, Pas Lu" href="Salon-Pas-Vu-Pas-Lu/">
++                        <span style="color:rgba(255,255,255,1);">SALON PAS VU, PAS LU</span>
++                    </a>
++                </p>
++
++                <p class="wb-stl-custom3" style="text-align: center;">
++                    <a data-finalurl="mi:5d14e62b_112/" data-name="Bandes-dessinées" href="Bandes-dessin%C3%A9es/">
++                        <span style="color:rgba(255,255,255,1);">Bandes-dessinées</span>
++                    </a>
++                    <a data-finalurl="mi:5d14e62b_113/" data-name="Jeunesse" href="Jeunesse/">
++                        <span style="color:rgba(255,255,255,1);">&nbsp;Jeunesse</span>
++                    </a>
++                </p>
++
++                <p class="wb-stl-custom3" style="text-align: center;">
++                    <a data-finalurl="mi:5d14e62b_119/" data-name="Un auteur émerge !" href="Un-auteur-%C3%A9merge/">
++                        <span style="color:rgba(255,255,255,1);">Emergence </span>
++                    </a>
++                    <a data-finalurl="mi:5d14e62b_104/" data-name="Poésies" href="Po%C3%A9sies/">
++                        <span style="color:rgba(255,255,255,1);">Poésies </span>
++                    </a>
++                    <a data-finalurl="mi:5d14e62b_118/" data-name="Revue de presse" href="Revue-de-presse/">
++                        <span style="color:rgba(255,255,255,1);">Revue de presse</span></a>
++                    <a data-finalurl="mi:5d14e62b_103/" data-name="Thrillers" href="Thrillers/">
++                        <span style="color:rgba(255,255,255,1);"> Thrillers </span>
++                    </a>
++
++
++                <p class="wb-stl-custom3" style="text-align: center;">
++                    <a data-finalurl="http://terhoma.org/Accueil/" data-name="terhoma.org/Accueil/" href="http://terhoma.org/Accueil/">
++                        <span style="color:rgba(255,255,255,1);">Association Terhoma </span>
++                    </a>
++                    <a data-finalurl="http://terhoma.org/Notre-mission/" data-name="terhoma.org/Notre-mission/" href="http://terhoma.org/Notre-mission/">
++                        <span style="color:rgba(255,255,255,1);">Partage</span>
++                    </a>
++                    <a data-finalurl="mi:5d14e62b_109/" data-name="Mangas" href="Mangas/">
++                        <span style="color:rgba(255,255,255,1);">Mangas</span>
++                    </a>
++                </p>
++
++                <p class="wb-stl-custom3" style="text-align: center;">
++                    <a data-finalurl="http://terhoma.org/Faire-un-don/" data-name="terhoma.org/Faire-un-don/" href="http://terhoma.org/Faire-un-don/">
++                        <span style="color:rgba(255,255,255,1);">FAIRE UN DON</span>
++                    </a>
++                    <a data-finalurl="http://terhoma.org/Devenir-Mécène/" data-name="terhoma.org/Devenir-Mécène/" href="http://terhoma.org/Devenir-M%C3%A9c%C3%A8ne/">
++                        <span style="color:rgba(255,255,255,1);"> Devenir Mécène </span>
++                    </a>
++                    <a data-finalurl="mi:5d14e62b_101/" data-name="Essais" href="Essais/">
++                        <span style="color:rgba(255,255,255,1);">Essais</span>
++                    </a>
++                </p>
++            </div>
++
++            <div id="wb_element_instance51" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance52" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance53" class="wb_element wb-elm-orient-horizontal">
++                <div class="wb-elm-line"></div>
++            </div>
++
++            <div id="wb_element_instance54" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance55" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal"><a data-finalurl="mi:5d14e62b_120/" data-name="Rendez-vous Pas vu, Pas lu" href="Rendez-vous-Pas-vu-Pas-lu/">
++                        <span style="color:rgba(5,1,5,1);">
++                            <em>Prochain Rendez-vous, pas vu, pas lu</em>
++                        </span>
++                    </a>
++                </p>
++            </div>
++
++            <div id="wb_element_instance56" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance57" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance58" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal">
++                    <a data-finalurl="mi:5d14e62b_121/" data-name="Editeurs" href="Editeurs/">
++                        <em>
++                            <span style="color:rgba(143,16,64,1);">Un éditeur vous ouvre&nbsp;ses portes</span>
++                        </em>
++                    </a>
++                </p>
++            </div>
++
++            <div id="wb_element_instance59" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal">
++                    <span style="color:rgba(255,255,255,1);">
++                        <em>L e s &nbsp; c o u p s &nbsp; d e &nbsp; c o e u r &nbsp; d e &nbsp; l a &nbsp; r é d a c t i o n . . .</em>
++                    </span>
++                </p>
++            </div>
++
++            <div id="wb_element_instance60" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal" style="text-align: center;">
++                    <strong>
++                        <em>I n t e r v i e w &nbsp; ! &nbsp; ! &nbsp; !&nbsp;</em>
++                    </strong>
++                </p>
++            </div>
++
++            <div id="wb_element_instance61" class="wb_element wb_element_picture" title="">
++                <a href="Correction-Occitane/">
++                    <img alt="gallery/exclamation" src="{{ asset('assets/images/gallery/569169d0d740000275dd4aab74d4d219_255x84.jpg') }}">
++                </a>
++            </div>
++
++            <div id="wb_element_instance62" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance63" class="wb_element wb-elm-orient-vertical">
++                <div class="wb-elm-line"></div>
++            </div>
++
++            <div id="wb_element_instance64" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal" style="text-align: center;">
++                    <strong>
++                        <em>N o t r e &nbsp; A c t u a l i t é</em>
++                    </strong>
++                </p>
++            </div>
++
++            <div id="wb_element_instance65" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/femmeactu" src="{{ asset('assets/images/gallery/f6406d77279eabde1e6844e59bf9abe8_253x113.04255319149.jpg') }}">
++            </div>
++
++            <div id="wb_element_instance66" class="wb_element wb-elm-orient-vertical">
++                <div class="wb-elm-line"></div>
++            </div>
++
++            <div id="wb_element_instance67" class="wb_element wb_text_element" style=" line-height: normal;">
++                <h5 class="wb-stl-subtitle" style="text-align: center;">
++                    <a data-finalurl="mi:5d14e62b_127/" data-name="Correction Occitane" href="Correction-Occitane/">
++                        <em>Arlette Thoma vous parle de son métier </em>
++                    </a>
++
++                    <em>
++                        <a data-finalurl="mi:5d14e62b_106/" data-name="Interviews" href="Interviews/">&nbsp;(voir l'interview)</a>
++                    </em>
++                </h5>
++            </div>
++
++            <div id="wb_element_instance68" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/visuelrevue" src="{{ asset('assets/images/gallery/958d232426e9972b63106d7efbcd7072_262x76.jpg') }}">
++            </div>
++
++            <div id="wb_element_instance69" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal" style="text-align: center;">
++                    <em>
++                        <strong>R e v u e &nbsp; d e &nbsp; p r e s s e . . .</strong>
++                    </em>
++                </p>
++            </div>
++
++            <div id="wb_element_instance70" class="wb_element wb_text_element" style=" line-height: normal;">
++                <h5 class="wb-stl-subtitle" style="text-align: center;">
++                    <em>Pas vu, pas lu fait le buzz.&nbsp;</em>
++                </h5>
++
++                <h5 class="wb-stl-subtitle" style="text-align: center;">
++                    <em>Ils ont dit ou écrit... (Lire la suite)&nbsp;</em>
++                </h5>
++            </div>
++
++            <div id="wb_element_instance71" class="wb_element wb_text_element" style=" line-height: normal;">
++                <h5 class="wb-stl-subtitle" style="text-align: center;">
++                    <em>Chaque jour, un chantier se met en place </em>
++                </h5>
++
++                <h5 class="wb-stl-subtitle" style="text-align: center;">
++                    <em>et permet à Pas vu, pas lu d'émerger.&nbsp;</em>
++                </h5>
++            </div>
++
++            <div id="wb_element_instance72" class="wb_element wb-elm-orient-horizontal">
++                <div class="wb-elm-line"></div>
++            </div>
++
++            <div id="wb_element_instance73" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/coup de coeur" src="{{ asset('assets/images/gallery/0b90e89fc260a49aa802813baefdaf82_260x160.png') }}">
++            </div>
++
++            <div id="wb_element_instance74" class="wb_element wb-elm-orient-horizontal">
++                <div class="wb-elm-line"></div>
++            </div>
++
++            <div id="wb_element_instance75" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/ezgif.com-video-to-gif" src="{{ asset('assets/images/gallery/7b2c2efef716d3ac8b00a8267db67829.gif') }}">
++            </div>
++
++            <div id="wb_element_instance76" class="wb_element wb-elm-orient-horizontal">
++                <div class="wb-elm-line"></div>
++            </div>
++
++            <div id="wb_element_instance77" class="wb_element wb_element_picture" title="">
++                <a href="Christine-Deviers-Joncour/">
++                    <img alt="gallery/exclamation" src="{{ asset('assets/images/gallery/569169d0d740000275dd4aab74d4d219_255x84.jpg') }}">
++                </a>
++            </div>
++
++            <div id="wb_element_instance78" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal" style="text-align: center;">
++                    <em>
++                        <strong>I n t e r v i e w &nbsp;! ! !&nbsp;</strong>
++                    </em>
++                </p>
++            </div>
++
++            <div id="wb_element_instance79" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal" style="text-align: center;">
++                    <strong>
++                        <em>A c t u a l i t é&nbsp; &nbsp;d u &nbsp; L i v r e</em>
++                    </strong>
++                </p>
++            </div>
++
++            <div id="wb_element_instance80" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/visuelevenement" src="{{ asset('assets/images/gallery/569169d0d740000275dd4aab74d4d219_255x84.jpg') }}">
++            </div>
++
++            <div id="wb_element_instance81" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal" style="text-align: center;">
++                    <em>
++                        <strong>I n t e r v i e w &nbsp; ! ! !&nbsp;</strong>
++                    </em>
++                </p>
++            </div>
++
++            <div id="wb_element_instance82" class="wb_element wb_element_picture" title="">
++                <img alt="gallery/exclamation" src="{{ asset('assets/images/gallery/569169d0d740000275dd4aab74d4d219_255x84.jpg') }}">
++            </div>
++
++            <div id="wb_element_instance83" class="wb_element wb_text_element" style=" line-height: normal;">
++                <h5 class="wb-stl-subtitle" style="text-align: center;">
++                    <a data-finalurl="mi:5d14e62b_128/" data-name="Christine Deviers Joncour" href="Christine-Deviers-Joncour/">
++                        <em>Christine Deviers Joncour,&nbsp;</em>
++                    </a>
++                </h5>
++
++                <h5 class="wb-stl-subtitle" style="text-align: center;">
++                    <a data-finalurl="mi:5d14e62b_128/" data-name="Christine Deviers Joncour" href="Christine-Deviers-Joncour/">
++                        <em>Auteur / Ghost writer/ Illustratrice</em>
++                    </a>
++                </h5>
++            </div>
++
++            <div id="wb_element_instance84" class="wb_element wb_text_element" style=" line-height: normal;">
++                <h5 class="wb-stl-subtitle" style="text-align: center;">
++                    <em>Evènements à ne pas manquer !</em>
++                </h5>
++            </div>
++
++        </div>
++
++    </div>
++
++{% endblock %}
+\ No newline at end of file
+Index: templates/pages/category.html.twig
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- templates/pages/category.html.twig	(date 1551266641756)
++++ templates/pages/category.html.twig	(date 1551266641756)
+@@ -0,0 +1,63 @@
++{% extends 'base.html.twig' %}
++
++{% block stylesheets '<link rel="stylesheet" href="http://pasvupaslu.com/css/24.css">' %}
++
++{% block title 'Categories' %}
++
++{% block body %}
++
++    <div class="vbox wb_container" id="wb_main" style="height: 970px;">
++
++        <div class="wb_cont_inner">
++            <div id="wb_element_instance1082" class="wb_element wb_text_element" style=" line-height: normal;">
++                <h3 class="wb-stl-heading3" style="text-align: center;">
++                    <font color="#0a030a"><span style="caret-color: rgb(10, 3, 10);">Nouvelles</span></font>
++                </h3>
++            </div>
++
++            <div id="wb_element_instance1083" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance1084" class="wb_element wb-elm-orient-horizontal">
++                <div class="wb-elm-line"></div>
++            </div>
++
++            <div id="wb_element_instance1085" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance1086" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance1087" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance1088" class="wb_element wb_text_element" style=" line-height: normal;">
++                <p class="wb-stl-normal"><span style="color:rgba(255,255,255,1);"><em>Vous êtes auteur de nouvelles, vous souhaitez donner de la visibilité à vos créations, rendez-vous à la page<a data-finalurl="mi:5d14e62b_126/" data-name="Inscription Auteur" href="Inscription-Auteur/"> inscription </a>et remplissez le formulaire. Un membre de notre équipe reviendra vers vous.</em></span></p>
++            </div>
++
++            <div id="wb_element_instance1089" class="wb_element wb_element_shape">
++                <div class="wb_shp"></div>
++            </div>
++
++            <div id="wb_element_instance1090" class="wb_element wb_element_picture" title="">
++                <a href="Inscription-Auteur/"><img alt="gallery/visuelcorrection" src="{{ asset('assets/images/gallery/6f1a0adae718b8f5f34d8fced72e3f21_113x80.jpg') }}"></a>
++            </div>
++
++            <div id="wb_element_instance1091" class="wb_element" style="width: 100%; display: none;">
++                <script type="text/javascript">
++                    $(function() {
++                        $("#wb_element_instance1091").hide();
++                    });
++                </script>
++            </div>
++        </div>
++        <div class="wb_cont_outer"></div>
++        <div class="wb_cont_bg"></div>
++    </div>
++
++{% endblock %}
++
+Index: templates/components/_menu.html.twig
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- templates/components/_menu.html.twig	(date 1551269405352)
++++ templates/components/_menu.html.twig	(date 1551269405352)
+@@ -0,0 +1,110 @@
++<div id="wb_element_instance9" class="wb_element wb-menu">
++    <ul class="hmenu">
++        <li class="{% if current_menu is defined and current_menu == 'home' %}active{% endif %}">
++            <a href="{{ path('home') }}" target="_self">Accueil</a>
++        </li>
++
++        <li class="{% if current_menu is defined and current_menu == 'about' %}active{% endif %}">
++            <a href="{{ path('about') }}" target="_self">A propos de nous</a>
++        </li>
++
++        <li class="{% if current_menu is defined and current_menu == 'authors' %}active{% endif %}">
++            <a href="{{ path('authors') }}" target="_self">Auteurs</a>
++        </li>
++
++        <li class="{% if current_menu is defined and current_menu == 'readers' %}active{% endif %}">
++            <a href="{{ path('readers') }}" target="_self">Lecteurs</a>
++        </li>
++        {# Liste déroulante #}
++        <li class="{% if current_menu is defined and current_menu == 'books' %}active{% endif %}">
++            <a href="{{ path('books') }}" target="_self">Livres</a>
++            <ul>
++                <li>
++                    <a href="{{ path('category') }}" target="_self">Nouvelles</a>
++                </li>
++
++                <li>
++                    <a href="{{ path('category') }}" target="_self">Romans</a>
++                </li>
++
++                <li>
++                    <a href="{{ path('category') }}" target="_self">Essais</a>
++                </li>
++
++                <li>
++                    <a href="{{ path('category') }}" target="_self">Science-fiction</a>
++                </li>
++
++                <li>
++                    <a href="{{ path('category') }}" target="_self">Thrillers</a>
++                </li>
++
++                <li>
++                    <a href="{{ path('category') }}" target="_self">Poésies</a>
++                </li>
++
++                <li>
++                    <a href="{{ path('category') }}" target="_self">Mangas</a>
++                </li>
++
++                <li>
++                    <a href="{{ path('category') }}" target="_self">Bandes-dessinées</a>
++                </li>
++
++                <li>
++                    <a href="{{ path('category') }}" target="_self">Jeunesse</a>
++                </li>
++
++                <li>
++                    <a href="{{ path('category') }}" target="_self">Bien-être &amp; Vie pratique</a>
++                </li>
++            </ul>
++        </li>
++        {# Fin de la liste déroulante #}
++        <li class="{% if current_menu is defined and current_menu == 'editors' %}active{% endif %}">
++            <a href="#!" target="_self">Editeurs</a>
++        </li>
++
++        {# Liste déroulante #}
++        <li>
++            <a href="#!" target="_self">Interviews</a>
++            <ul>
++                <li>
++                    <a href="#!" target="_self">Christine Deviers Joncour</a>
++                </li>
++
++                <li>
++                    <a href="#!" target="_self">Correction Occitane</a>
++                </li>
++            </ul>
++        </li>
++        {# Fin de la iste déroulante #}
++
++        {# Liste déroulante #}
++        <li class="{% if current_menu is defined and current_menu == '...' %}active{% endif %}">
++            <a href="#!" target="_self">Nos Evénements</a>
++            <ul>
++                <li>
++                    <a href="#!" target="_self">Salon Pas Vu, Pas Lu</a>
++                </li>
++
++                <li>
++                    <a href="#!" target="_self">Revue de presse</a>
++                </li>
++
++                <li>
++                    <a href="#!" target="_self">Un auteur émerge !</a>
++                </li>
++
++                <li>
++                    <a href="#!" target="_self">Rendez-vous Pas vu, Pas lu</a>
++                </li>
++            </ul>
++        </li>
++        {# Fin la liste déroulante #}
++        <li class="{% if current_menu is defined and current_menu == '...' %}active{% endif %}">
++            <a href="http://terhoma.org/Contact/" target="_blank">Contact</a>
++        </li>
++    </ul>
++    <div class="clearfix"></div>
++</div>
+\ No newline at end of file
+Index: templates/components/_footer.html.twig
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- templates/components/_footer.html.twig	(date 1551213130484)
++++ templates/components/_footer.html.twig	(date 1551213130484)
+@@ -0,0 +1,135 @@
++</div>
++
++<div class="vbox wb_container" id="wb_footer">
++
++    <div class="wb_cont_inner" style="">
++        <div id="wb_element_instance10" class="wb_element wb_text_element" style=" line-height: normal;">
++            <p class="wb-stl-custom1" style="text-align: center;"><span style="color:rgba(255,255,255,1);">
++                    <em>N O U S &nbsp; C O N T A C T E R &nbsp; !</em>
++                </span>
++            </p>
++        </div>
++
++        <div id="wb_element_instance11" class="wb_element wb_element_picture" title="">
++            <a href="mailto:contact@pasvupaslu.com"><img alt="gallery/iconemail" src="{{ asset('assets/images/icons/d9ae8c1b9a4cc4cc925abec44cc1dd7c_60x66.png') }}"></a>
++        </div>
++
++        <div id="wb_element_instance12" class="wb_element wb_element_picture" title="">
++            <a href="mailto:contact@pasvupaslu.com"><img alt="gallery/iconpost" src="{{ asset('assets/images/icons/35ead54231683e3de281d374ca1dca6b_60x69.png') }}"></a>
++        </div>
++
++        <div id="wb_element_instance13" class="wb_element wb_element_picture" title="">
++            <img alt="gallery/regard" src="{{ asset('assets/images/icons/e69ff87e577716586d3788dbc8ed6728_70x69.png') }}">
++        </div>
++
++        <div id="wb_element_instance14" class="wb_element wb_text_element" style=" line-height: normal;">
++            <p class="wb-stl-footer" style="text-align: center;">© 2018 <a href="http://pasvupaslu.com">pasvupaslu.com</a></p>
++        </div>
++
++        <div id="wb_element_instance15" class="wb_element wb_element_picture" title="">
++            <img alt="gallery/iconetel" src="{{ asset('assets/images/icons/85c264c118e3c78861e70aa4d71e9546_60x69.png') }}">
++        </div>
++
++        <div id="wb_element_instance16" class="wb_element wb_element_picture" title="">
++            <img alt="gallery/iconecarte" src="{{ asset('assets/images/icons/5a1e9988883d3b4fb257970aa54af0ae_63x69.png') }}">
++        </div>
++
++        <div id="wb_element_instance17" class="wb_element" style=" overflow: hidden;">
++            <div style="height: 100%;">
++                <marquee direction="left" behavior="scroll" scrollamount="3" style="height:25px;width:290px;background-color:#C40C50;font-family:Arial;font-size:12pt;color:#ffffff;font-style:italic;border-width:0;border-style:dotted;border-color:#000000; "> www.pasvupaslu.com Le marque-page des nouveaux talents !</marquee>
++            </div>
++        </div>
++
++        <div id="wb_element_instance18" class="wb_element wb_element_shape">
++            <div class="wb_shp"></div>
++        </div>
++
++        <div id="wb_element_instance19" class="wb_element wb_element_picture" title="">
++            <img alt="gallery/books-1900467_1280" src="{{ asset('assets/images/gallery/86f26d4fbafb686bdd314b59b2180671_200x255.jpg') }}">
++        </div>
++
++        <div id="wb_element_instance20" class="wb_element wb_text_element" style=" line-height: normal;">
++            <h5 class="wb-stl-subtitle">
++                <a data-finalurl="mi:5d14e62b_5/" data-name="Accueil" href="">Accueil</a>
++            </h5>
++
++            <h5 class="wb-stl-subtitle">
++                <a data-finalurl="mi:5d14e62b_110/" data-name="A propos de nous" href="A-propos-de-nous/">A propos de nous</a>
++            </h5>
++
++            <h5 class="wb-stl-subtitle">
++                <a data-finalurl="mi:5d14e62b_115/" data-name="Auteurs" href="Auteurs/">Auteurs</a>
++            </h5>
++
++            <h5 class="wb-stl-subtitle">
++                <a data-finalurl="mi:5d14e62b_105/" data-name="Livres" href="Livres/">Livres</a>
++            </h5>
++
++            <h5 class="wb-stl-subtitle">
++                <a data-finalurl="mi:5d14e62b_107/" data-name="Lecteurs" href="5d14e62b_107/">Lecteurs</a>
++            </h5>
++
++            <h5 class="wb-stl-subtitle">
++                <a data-finalurl="mi:5d14e62b_121/" data-name="Editeurs" href="Editeurs/">Editeurs </a>
++            </h5>
++
++            <h5 class="wb-stl-subtitle">
++                <a data-finalurl="mi:5d14e62b_106/" data-name="Interviews" href="Interviews/">Interviews</a>
++            </h5>
++
++            <h5 class="wb-stl-subtitle">
++                <a data-finalurl="mi:5d14e62b_117/" data-name="Nos Evénements" href="Nos-Ev%C3%A9nements/">Nos évènements</a>
++            </h5>
++
++            <h5 class="wb-stl-subtitle">
++                <a data-finalurl="mi:5d14e62b_108/" data-name="Inscription" href="Connexion/inscription-php/">Inscription</a>
++            </h5>
++        </div>
++
++        <div id="wb_element_instance21" class="wb_element wb_text_element" style=" line-height: normal;">
++            <h5 class="wb-stl-subtitle">
++                <a data-finalurl="mi:5d14e62b_124/" data-name="Informations Légales" href="Informations-L%C3%A9gales/">Informations Légales</a>
++            </h5>
++
++            <h5 class="wb-stl-subtitle">
++                <a data-finalurl="mi:5d14e62b_124/" data-name="Informations Légales" href="Informations-L%C3%A9gales/">Conditions Générales d'Utilisation&nbsp;</a>
++                </h5>
++
++            <h5 class="wb-stl-subtitle">
++                <a data-finalurl="mi:5d14e62b_124/" data-name="Informations Légales" href="Informations-L%C3%A9gales/">Conditions Générales de Ventes</a>
++            </h5>
++
++            <h5 class="wb-stl-subtitle">
++                <a data-finalurl="mi:5d14e62b_124/" data-name="Informations Légales" href="Informations-L%C3%A9gales/">Vie Privée / Cookies</a>
++            </h5>
++
++            <h5 class="wb-stl-subtitle">Service Publicité</h5>
++
++            <h5 class="wb-stl-subtitle">
++                <a data-finalurl="http://terhoma.org/Devenir-Mécène/" data-name="terhoma.org/Devenir-Mécène/" href="http://terhoma.org/Devenir-M%C3%A9c%C3%A8ne/">Devenir Mécène</a>
++            </h5>
++
++            <h5 class="wb-stl-subtitle">Participer à un évènement</h5>
++
++            <h5 class="wb-stl-subtitle">Exposer au Salon Pas vu, pas lu</h5>
++        </div>
++
++        <div id="wb_element_instance22" class="wb_element wb_element_shape">
++            <div class="wb_shp"></div>
++        </div>
++
++        <div id="wb_element_instance23" class="wb_element wb-elm-orient-horizontal">
++            <div class="wb-elm-line"></div>
++        </div>
++
++        <div id="wb_element_instance24" class="wb_element wb_element_shape">
++            <div class="wb_shp"></div>
++        </div>
++
++        <div id="wb_element_instance25" class="wb_element">
++            <a class="wb_button" href="http://terhoma.org/Faire-un-don/">
++                <span>Faire un don !</span>
++            </a>
++        </div>
++    </div>
++</div>
+\ No newline at end of file
+Index: templates/components/_header.html.twig
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- templates/components/_header.html.twig	(date 1551269445362)
++++ templates/components/_header.html.twig	(date 1551269445362)
+@@ -0,0 +1,63 @@
++<div class="vbox wb_container" id="wb_header">
++
++    <div class="wb_cont_inner">
++        <div id="wb_element_instance0" class="wb_element wb_text_element" style=" line-height: normal;">
++            <h3 class="wb-stl-heading3" style="text-align: center;">P A S &nbsp; &nbsp;V U , &nbsp;P A S &nbsp; L U</h3>
++        </div>
++
++        <div id="wb_element_instance1" class="wb_element wb_element_shape">
++            <div class="wb_shp"></div>
++        </div>
++
++        <div id="wb_element_instance2" class="wb_element wb_text_element" style=" line-height: normal;">
++            <p style="text-align: center;"><em><span style="color:rgba(255,255,255,1);">Le marque-page des nouveaux&nbsp;talents &nbsp;!</span></em></p>
++        </div>
++
++        <div id="wb_element_instance3" class="wb_element wb_text_element" style=" line-height: normal;">
++            <p class="wb-stl-custom2" style="text-align: center;">
++                <em><span style="color:rgba(255,255,255,1);">"Toute littérature est assaut contre la frontière."</span></em>
++            </p>
++
++            <p style="text-align: right;">
++                <strong>
++                    <span style="color:rgba(255,255,255,1);">
++                        Franz Kafka
++                    </span>
++                </strong>
++            </p>
++        </div>
++
++        <div id="wb_element_instance4" class="wb_element wb_element_picture" title="">
++            <img alt="gallery/regard" src="{{ asset('assets/images/gallery/e69ff87e577716586d3788dbc8ed6728_142x150.png') }}">
++        </div>
++
++        <div id="wb_element_instance5" class="wb_element">
++            <a class="wb_button" href="{{ path('identification') }}">
++                <span>Inscription / Connexion</span>
++            </a>
++        </div>
++
++        <div id="wb_element_instance6" class="wb_element wb_element_picture" title="">
++            <img alt="gallery/apple-157250" src="{{ asset('assets/images/gallery/dc5d33387ea6ac4c97b176b4740b02b7_165x110.png') }}">
++        </div>
++
++        <div id="wb_element_instance7" class="wb_element wb_element_picture" title="">
++            <img alt="gallery/livresrange" src="{{ asset('assets/images/gallery/7ef4155aeeab14b16525dce3aba54790_297x170.png') }}">
++        </div>
++
++        <div id="wb_element_instance8" class="wb_element" style=" overflow: hidden;">
++            <div style="height: 100%;">
++                <div class="recherche_p">
++                    <form action="" id="searchthis" method="POST">
++                        <input id="search" name="q" type="text" placeholder="Rechercher">
++                        <input id="search-btn" type="submit" value="Rechercher">
++                    </form>
++                </div>
++            </div>
++        </div>
++
++    </div>
++</div>
++
++{# Contenu du site la div et fermer dans le footer #}
++<div class="wb_cont_inner">
+\ No newline at end of file

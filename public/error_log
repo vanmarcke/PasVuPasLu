@@ -1,0 +1,46 @@
+[20-Jun-2019 16:38:45 UTC] PHP Fatal error:  Uncaught ErrorException: Notice: Array to string conversion in /home/cp1057164p07/public_html/pasvupaslu.com/prod/src/Controller/LivreController.php:295
+Stack trace:
+#0 /home/cp1057164p07/public_html/pasvupaslu.com/prod/vendor/symfony/http-kernel/HttpKernel.php(150): App\Controller\LivreController->edit_comment(Object(App\Entity\Comment), Object(Symfony\Component\HttpFoundation\Request), Object(Doctrine\ORM\EntityManager))
+#1 /home/cp1057164p07/public_html/pasvupaslu.com/prod/vendor/symfony/http-kernel/HttpKernel.php(67): Symfony\Component\HttpKernel\HttpKernel->handleRaw(Object(Symfony\Component\HttpFoundation\Request), 1)
+#2 /home/cp1057164p07/public_html/pasvupaslu.com/prod/vendor/symfony/http-kernel/Kernel.php(198): Symfony\Component\HttpKernel\HttpKernel->handle(Object(Symfony\Component\HttpFoundation\Request), 1, true)
+#3 /home/cp1057164p07/public_html/pasvupaslu.com/prod/public/index.php(25): Symfony\Component\HttpKernel\Kernel->handle(Object(Symfony\Component\HttpFoundation\Request))
+#4 {main}
+  throw in /home/cp1057164p07/public_html/pasvupaslu.com/prod/src/Controller/LivreController.php on line 295
+[20-Jun-2019 16:39:53 UTC] PHP Fatal error:  Uncaught ErrorException: Notice: Array to string conversion in /home/cp1057164p07/public_html/pasvupaslu.com/prod/src/Controller/LivreController.php:301
+Stack trace:
+#0 /home/cp1057164p07/public_html/pasvupaslu.com/prod/vendor/symfony/http-kernel/HttpKernel.php(150): App\Controller\LivreController->edit_comment(Object(App\Entity\Comment), Object(Symfony\Component\HttpFoundation\Request), Object(Doctrine\ORM\EntityManager))
+#1 /home/cp1057164p07/public_html/pasvupaslu.com/prod/vendor/symfony/http-kernel/HttpKernel.php(67): Symfony\Component\HttpKernel\HttpKernel->handleRaw(Object(Symfony\Component\HttpFoundation\Request), 1)
+#2 /home/cp1057164p07/public_html/pasvupaslu.com/prod/vendor/symfony/http-kernel/Kernel.php(198): Symfony\Component\HttpKernel\HttpKernel->handle(Object(Symfony\Component\HttpFoundation\Request), 1, true)
+#3 /home/cp1057164p07/public_html/pasvupaslu.com/prod/public/index.php(25): Symfony\Component\HttpKernel\Kernel->handle(Object(Symfony\Component\HttpFoundation\Request))
+#4 {main}
+  throw in /home/cp1057164p07/public_html/pasvupaslu.com/prod/src/Controller/LivreController.php on line 301
+[20-Jun-2019 16:41:44 UTC] PHP Fatal error:  Uncaught ErrorException: Notice: Array to string conversion in /home/cp1057164p07/public_html/pasvupaslu.com/prod/src/Controller/LivreController.php:301
+Stack trace:
+#0 /home/cp1057164p07/public_html/pasvupaslu.com/prod/vendor/symfony/http-kernel/HttpKernel.php(150): App\Controller\LivreController->edit_comment(Object(App\Entity\Comment), Object(Symfony\Component\HttpFoundation\Request), Object(Doctrine\ORM\EntityManager))
+#1 /home/cp1057164p07/public_html/pasvupaslu.com/prod/vendor/symfony/http-kernel/HttpKernel.php(67): Symfony\Component\HttpKernel\HttpKernel->handleRaw(Object(Symfony\Component\HttpFoundation\Request), 1)
+#2 /home/cp1057164p07/public_html/pasvupaslu.com/prod/vendor/symfony/http-kernel/Kernel.php(198): Symfony\Component\HttpKernel\HttpKernel->handle(Object(Symfony\Component\HttpFoundation\Request), 1, true)
+#3 /home/cp1057164p07/public_html/pasvupaslu.com/prod/public/index.php(25): Symfony\Component\HttpKernel\Kernel->handle(Object(Symfony\Component\HttpFoundation\Request))
+#4 {main}
+  throw in /home/cp1057164p07/public_html/pasvupaslu.com/prod/src/Controller/LivreController.php on line 301
+[20-Jun-2019 16:42:56 UTC] PHP Fatal error:  Uncaught ErrorException: Notice: Array to string conversion in /home/cp1057164p07/public_html/pasvupaslu.com/prod/src/Controller/LivreController.php:301
+Stack trace:
+#0 /home/cp1057164p07/public_html/pasvupaslu.com/prod/vendor/symfony/http-kernel/HttpKernel.php(150): App\Controller\LivreController->edit_comment(Object(App\Entity\Comment), Object(Symfony\Component\HttpFoundation\Request), Object(Doctrine\ORM\EntityManager))
+#1 /home/cp1057164p07/public_html/pasvupaslu.com/prod/vendor/symfony/http-kernel/HttpKernel.php(67): Symfony\Component\HttpKernel\HttpKernel->handleRaw(Object(Symfony\Component\HttpFoundation\Request), 1)
+#2 /home/cp1057164p07/public_html/pasvupaslu.com/prod/vendor/symfony/http-kernel/Kernel.php(198): Symfony\Component\HttpKernel\HttpKernel->handle(Object(Symfony\Component\HttpFoundation\Request), 1, true)
+#3 /home/cp1057164p07/public_html/pasvupaslu.com/prod/public/index.php(25): Symfony\Component\HttpKernel\Kernel->handle(Object(Symfony\Component\HttpFoundation\Request))
+#4 {main}
+  throw in /home/cp1057164p07/public_html/pasvupaslu.com/prod/src/Controller/LivreController.php on line 301
+[20-Jun-2019 16:44:44 UTC] PHP Fatal error:  Uncaught ErrorException: Notice: Array to string conversion in /home/cp1057164p07/public_html/pasvupaslu.com/prod/src/Controller/LivreController.php:301
+Stack trace:
+#0 /home/cp1057164p07/public_html/pasvupaslu.com/prod/vendor/symfony/http-kernel/HttpKernel.php(150): App\Controller\LivreController->edit_comment(Object(App\Entity\Comment), Object(Symfony\Component\HttpFoundation\Request), Object(Doctrine\ORM\EntityManager))
+#1 /home/cp1057164p07/public_html/pasvupaslu.com/prod/vendor/symfony/http-kernel/HttpKernel.php(67): Symfony\Component\HttpKernel\HttpKernel->handleRaw(Object(Symfony\Component\HttpFoundation\Request), 1)
+#2 /home/cp1057164p07/public_html/pasvupaslu.com/prod/vendor/symfony/http-kernel/Kernel.php(198): Symfony\Component\HttpKernel\HttpKernel->handle(Object(Symfony\Component\HttpFoundation\Request), 1, true)
+#3 /home/cp1057164p07/public_html/pasvupaslu.com/prod/public/index.php(25): Symfony\Component\HttpKernel\Kernel->handle(Object(Symfony\Component\HttpFoundation\Request))
+#4 {main}
+  throw in /home/cp1057164p07/public_html/pasvupaslu.com/prod/src/Controller/LivreController.php on line 301
+[30-Sep-2019 22:07:14 Europe/Paris] PHP Fatal error:  Uncaught ErrorException: Catchable Fatal Error: Object of class App\Entity\AllCoupons could not be converted to string in /home/cp1057164p07/public_html/pasvupaslu.com/prod/src/Controller/Admin/AdminCouponLivreController.php:90
+Stack trace:
+#0 /home/cp1057164p07/public_html/pasvupaslu.com/prod/vendor/symfony/http-kernel/HttpKernel.php(150): App\Controller\Admin\AdminCouponLivreController->verefi2('24', Object(App\Repository\AllCouponsRepository), Object(App\Repository\UserRepository))
+#1 /home/cp1057164p07/public_html/pasvupaslu.com/prod/vendor/symfony/http-kernel/HttpKernel.php(67): Symfony\Component\HttpKernel\HttpKernel->handleRaw(Object(Symfony\Component\HttpFoundation\Request), 1)
+#2 /home/cp1057164p07/public_html/pasvupaslu.com/prod/vendor/symfony/http-kernel/Kernel.php(198): Symfony\Component\HttpKernel\HttpKernel->handle(Object(Symfony\Component\HttpFoundation\Request), 1, true)
+#3 /home/cp1057164p07/public_html/pasvupaslu.com/prod/public/index.php(25): Symfony\Component\HttpKernel\Kernel->handle(Obje in /home/cp1057164p07/public_html/pasvupaslu.com/prod/src/Controller/Admin/AdminCouponLivreController.php on line 90

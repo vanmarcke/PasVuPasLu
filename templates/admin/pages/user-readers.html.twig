@@ -1,0 +1,92 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block stylesheets %}
+    <link href="{{ asset('assets/admin/vendor/ckeditor/ckeditor.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block title 'Liste des lecteurs' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+
+            <div class="col-xl-12 col-lg-12">
+
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">
+                            Liste des lecteurs inscrits
+                            <span class="badge badge-primary float-right">Il y a {{ CountLecteurs }} lecteur(s) inscrit(s)</span>
+                        </h6>
+                    </div>
+                    {% for message in app.Flashes('success') %}
+                        <div class="alert alert-success alert-dismissible fade show text-center" role="alert" id="success">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    <div class="card-body live-search-list">
+
+                        {% for user in users %}
+                            <a href="{{ path('admin_edit_user', {'id': user.id}) }}" class="row bg mb-4 search">
+                                <div class="col-md-10">
+                                    <img src="{% if user.auter.photo is defined %}{{ asset('assets/images/profil/'~ user.auter.photo) }}{% else %}{{ asset('assets/images/avatars/d.png') }}{% endif %}"" class="float-left photo">
+                                    <div class="d">
+                                        <h4 class="list-group-item-heading name">{{ user.nom ~' '~ user.prenom }}</h4>
+                                        <p class="list-group-item-text title m-0">{{ user.email }}</p>
+                                        <p class="list-group-item-text title m-0">Inscrit le {{ user.dateRegistration|date('d/m/Y') }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="expertise">
+                                        <div class="read-more">
+                                            <button type="button" class="btn btn-primary btn-more">
+                                                Voir le profil &nbsp;
+                                                <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        {% endfor %}
+                        {% if users is empty %}
+                            <h5 class="m-3 text-center">Aucun lecteur n'est actuellement inscrit sur le site</h5>
+                        {% endif %}
+                        {% include("admin/_no-result.html.twig") %}
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    </div>
+
+    <style>
+        .photo {
+            border-radius: 45px;
+            margin-right: 20px;
+            width: 90px;
+            height:90px
+        }
+        .name {
+            font-weight: 700;
+        }
+        .bg {
+            text-decoration: none!important;
+            color: #000000b0!important;
+            font-size: .87rem;
+            background: #f8f9fc;
+            padding: 1rem;
+            border-radius: .3rem;
+            transition: .2s;
+        }
+        .bg:hover {
+            opacity: .94;
+        }
+    </style>
+{% endblock %}
+
+

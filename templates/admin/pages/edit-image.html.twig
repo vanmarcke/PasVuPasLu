@@ -1,0 +1,41 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title 'Modifier la catégorie ' ~ image.cle %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+
+            <div class="mx-auto col-xl-8 col-lg-7">
+
+                {# Menu du header #}
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Modifier l'image</h6>
+                    </div>
+                    <div class="card-body">
+                        {{ form_start(form, { 'attr': {'class': 'user'} }) }}
+                            <div class="input-group mt-3">
+                                       <span class="input-group-btn w-100 position-absolute" style="background: #eaecf4;">
+                                           <span class="btn btn-default btn-file w-100 text-left">
+                                               Télécharger une autre photo (Format : Jpeg, Paysage Taille Max: 2Mo)
+                                               {{ form_widget(form.imagMag) }}
+                                           </span>
+                                       </span>
+                                <input type="text" class="form-control invisible" readonly>
+                            </div>
+                            <img id='img-upload' src="{{ asset('assets/images/magazine/'~image.imagMag) }}" style="height: 15rem;width: 100%;margin-bottom:2rem;">
+                            <input type="text" name="temporary" hidden value="{{ image.imagMag }}">
+                            {{ form_errors(form.imagMag) }}
+                            <button class="btn btn-primary btn-user btn-block w-50 mx-auto">
+                                Mettre un jour l'image
+                            </button>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

@@ -1,0 +1,117 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Pas Vu pas Lu - Les Auteurs' %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags("auteur") }}
+{% endblock stylesheets %}
+
+
+{% block body %}
+    <div class="content" style="display: grid">
+
+        <div class="carousel slide" data-ride="carousel">
+            <span class="illustration-title-slider">Auteurs</span>
+
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                {% if carroussel_first.link %}
+                <a href="{{carroussel_first.link}}" target="_blank">
+                    <img class="d-block w-100" src="{{ asset('assets/images/illustration/' ~ carroussel_first.content)}}" alt="First slide">
+                </a>
+                {% else %}
+                <img class="d-block w-100" src="{{ asset('assets/images/illustration/' ~ carroussel_first.content)}}" alt="First slide">
+                    
+                {% endif %}
+              </div>
+
+              {% for carroussel in carroussel %}
+
+                <div class="carousel-item">
+                    {% if carroussel.link %}
+                    <a href="{{carroussel.link}}" target="_blank">
+                        <img class="d-block w-100" src="{{ asset('assets/images/illustration/' ~ carroussel.content)}}" alt="Second slide">
+                    </a>
+                    {% else %}
+                        
+                    <img class="d-block w-100" src="{{ asset('assets/images/illustration/' ~ carroussel.content)}}" alt="Second slide">
+                    {% endif %}
+                </div>
+
+              {% endfor %}
+
+            </div>
+
+        </div>
+
+
+
+        <div class="separator"></div>
+
+        <div class="bare-author">
+            <div class="color-author" style="background-color: #991b4f"><span>Présentez vous sur votre page proﬁl</span></div>
+            <div class="color-author" style="background-color: #e0881d"><span>Enregistrez un extrait de votre ouvrage dans sa catégorie</span></div>
+            <div class="color-author" style="background-color: #17908a">
+                <img src="{{ asset('assets/images/illustration/success.png') }}" class="hidden-response" style="position: absolute;top: 36%;">
+                <span>Sur votre  page proﬁl, présentez vos actualités</span>
+                <img src="{{ asset('assets/images/illustration/logo.png') }}" class="hidden-response" style="position: absolute;top: 0;right: 2.8rem;">
+            </div>
+            <div class="color-author" style="background-color: #15457c"><span>Participez aux forums de discussion et échangez avec vos lecteurs</span></div>
+            <div class="color-author" style="background-color: #659934"><span>Suivez les notes et critiques des lecteurs</span></div>
+        </div>
+
+        <div class="separator"></div>
+
+        <div class="block-quote pt-3" style="background-color: #0c5366;height: 100%;">
+            {% for categorie in categories %}
+                {% if categorie.id %}
+
+                    <div class="category shadow rounded" style="background-image: url({{ asset('assets/images/categorie/'~categorie.photo) }});">
+                        <a href="{{ path('category', {
+                            'categorie' : categorie.categorie,
+                        }) }}" class="nom-category">
+                            {{ categorie.categorie }}
+                        </a>
+                    </div>
+
+                    
+                {% endif %}
+
+            {% endfor %}
+            <div class="smartphone mb-5">
+                <div class="smartphone-box shadow">
+                    <div class="smartphone-img" style="background:url({{ asset('assets/images/illustration/wirte.png') }}); background-size:cover;"></div>
+                                 
+                    <p class="title">Les dix derniers auteurs inscrits</p>
+                    {% for user in users %}
+
+                        <a class="lien2" href="{{ path('profil_auter', {'id': user.id}) }}" style="padding:10px;"> 
+                            <div class="infocardContainers mt-2" style="margin-top: 2rem !important;">
+
+                                <div id="main">
+                                  <img src="{% if user.auter.photo is defined %}{{ asset('assets/images/profil/'~user.auter.photo) }}{% else %}{{ asset('assets/images/avatars/d.png') }}{% endif %}"></img>
+                                </div>
+                                <div id="textbois">
+                                    <h2 class="nom">
+                                            {% if user.auter.pseudo is defined%}
+                                                {{user.auter.pseudo }}
+                                            {% else %}
+                                            {% if (user.nom|length > 10) or (user.prenom|length > 8) %}
+                                                {{user.nom ~ ' ' ~ user.prenom|slice(0, 1) ~ '.' }}
+                                            {% else %}
+                                                {{user.nom ~ ' ' ~ user.prenom }}
+                                            {% endif %}
+                                            {% endif %}
+                                        
+                                    </h2>
+                                    <p class="lien">Inscrit le {{ user.dateRegistration|date('d/m/Y') }} </p>
+                                </div>
+                        
+                            </div>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

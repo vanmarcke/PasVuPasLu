@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Actualités{% endblock %}
+
+{% block stylesheets %}
+   {{ parent() }}
+   {{ encore_entry_link_tags('news') }}
+{% endblock %}
+
+{% block body %}
+  
+    <div class="content">
+
+        <div class="carousel slide" data-ride="carousel">
+            <span class="illustration-title-slider">Les Actualités Terhoma</span>
+
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                  {% if carroussel_first.link %}
+                  <a href="{{carroussel_first.link}}" target="_blank">
+                      <img class="d-block w-100" src="{{ asset('assets/images/illustration/' ~ carroussel_first.content)}}" alt="First slide">
+                  </a>
+                  {% else %}
+                  <img class="d-block w-100" src="{{ asset('assets/images/illustration/' ~ carroussel_first.content)}}" alt="First slide">
+                      
+                  {% endif %}
+                </div>
+  
+                {% for carroussel in carroussel %}
+  
+                  <div class="carousel-item">
+                      {% if carroussel.link %}
+                      <a href="{{carroussel.link}}" target="_blank">
+                          <img class="d-block w-100" src="{{ asset('assets/images/illustration/' ~ carroussel.content)}}" alt="Second slide">
+                      </a>
+                      {% else %}
+                          
+                      <img class="d-block w-100" src="{{ asset('assets/images/illustration/' ~ carroussel.content)}}" alt="Second slide">
+                      {% endif %}
+                  </div>
+  
+                {% endfor %}
+  
+              </div>
+        </div>    
+    
+            <div class="separator"></div>   
+
+            <div class="content">
+        
+                    {% if news is not empty %}
+                    {% for new in news %}
+            
+                <div class="header-container">                    
+
+                    <div class="right">
+                        <img src="{{ asset('assets/images/news/'~new.photo) }}" alt="placeholder" >
+                    </div>
+
+                    <div class="left">
+                        <div class="inner">
+                            <h1>{{ new.title|raw }}</h1>
+                    
+                        {{ new.subtitle|raw }}
+                        </div>
+                    </div>
+
+                </div>
+
+                    <div class="article-container">
+                        {{ new.text|raw }}
+                        
+                    </div>  
+                <div class="separator"></div> 
+            {% endfor %}
+            
+            {% else %}
+
+                <div class="alert alert-warning mx-auto text-center">
+                    <strong>
+                        Aucune Actualité n'est actuellement présente sur cette page.
+                    </strong>
+                </div>
+
+            {% endif %}
+        </div>
+    </div>    
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('news') }}
+{% endblock %} 
+

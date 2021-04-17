@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+
+    <div id="paypal-button"></div>
+
+    <script>
+        paypal.Button.render({
+            env: 'sandbox', // Or 'production'
+            commit: true, // Show a 'Pay Now' button
+
+            style: {
+                color: 'blue',
+                size: 'responsive',
+                shape: 'rect',
+                tagline: false
+            },
+            // Set up the payment:
+            // 1. Add a payment callback
+            payment: function(data, actions) {
+                // 2. Make a request to your server
+                return actions.request.post('{{ path('newPay') }}')
+                    .then(function(res) {
+                        // 3. Return res.id from the response
+                        return res;
+                    });
+            },
+            // Execute the payment:
+            // 1. Add an onAuthorize callback
+            onAuthorize: function(data, actions) {
+                // 2. Make a request to your server
+                return actions.request.post('{{ path('process') }}', {
+                    token: data.orderID,
+                    payerID:   data.payerID
+                })
+                    .then(function(res) {
+                    // 3. Show the buyer a confirmation message.
+                        window.location.replace(res);
+                    });
+            }
+        }, '#paypal-button');
+    </script>
+
+{% endblock %}

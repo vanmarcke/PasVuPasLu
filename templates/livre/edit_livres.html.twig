@@ -1,0 +1,126 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css" integrity="sha256-AWdeVMUYtwLH09F6ZHxNgvJI37p+te8hJuSMo44NVm0=" crossorigin="anonymous" />
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+
+{% endblock %}
+
+{% block body %}
+    {#{{ dump(app.user ) }}#}
+    {% set categories = categories_repository.findAll() %}
+    {% form_theme form 'bootstrap_4_layout.html.twig' %}
+    {% if form is defined %}
+    <div class="container" style="background: #ffffff; margin-top: 0rem!important; padding: 0;">
+        <div class="row">
+
+            <div class="col-xl-12 col-lg-12">
+
+                <div class="card shadow mb-4">
+                    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+                    <div class="card-header py-3">
+                        <h6>Modifier le livre</h6>
+                    </div>
+                    <div class="card-body">
+                        <form action="" method="POST" class="user">
+                            <div class="form-group row m-1 pb-4">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    {{ form_row(form.titre) }}
+                                </div>
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    {{ form_row(form.categorie) }}
+
+                                </div>
+                                
+                                    <div class="col-sm-12 mb-3 mb-sm-0">
+                                        {{ form_row(form.video) }}
+                                    </div>
+                           
+                            </div>
+
+                            <div class="col-sm-12 mb-3 mb-sm-0">
+                                <div class="form-group">
+                                    <img id='img-upload' class="rounded mx-auto d-block" style="width: 25%;"/>
+                                    {{ form_row(form.photo) }}
+                                    <input type="text" name="photo-hidden" hidden value="{{ livre }}">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12 mb-3 mb-sm-0">
+                                    {{ form_row(form.extract) }}
+                                </div>
+                            </div>
+
+                            <button class="login btn-default w-50 mx-auto">
+                                Sauvegarder les modifications
+                            </button>
+
+                            {{ form_rest(form) }}
+                            {{ form_end(form) }}
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    {% endif %}
+
+
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('assets/admin/vendor/ckeditor/ckeditor.js') }}"></script>
+    <script>
+        {# Remplace le textarea par le plugin Ckeditor #}
+        CKEDITOR.replace('livre_form[extract]', {
+            width: '100%',
+            removePlugins : 'elementspath',
+            enterMode: CKEDITOR.ENTER_BR,
+            shiftEnterMode:CKEDITOR.ENTER_P,
+            toolbar: [{ name: 'basicstyles', groups: [ 'basicstyles' ], items: [ 'Bold', 'Italic', 'Underline', "-", 'TextColor', 'BGColor' ] },
+                { name: 'styles', items: [ 'Format', 'Font', 'FontSize' ] },
+                { name: 'scripts', items: [ 'Subscript', 'Superscript' ] },
+                { name: 'justify', groups: [ 'blocks', 'align' ], items: [ 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock' ] },
+                { name: 'paragraph', groups: [ 'list', 'indent' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'] },
+                { name: 'links', items: [ 'Link', 'Unlink' ] }
+            ],
+        });
+        $(document).on('change', '.btn-file :file', function() {
+            var input = $(this),
+                label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+            input.trigger('fileselect', [label]);
+        });
+
+        $('.btn-file :file').on('fileselect', function(event, label) {
+
+            var input = $(this).parents('.input-group').find(':text'),
+                log = label;
+
+            if( input.length ) {
+                input.val(log);
+            } else {
+                if( log ) alert(log);
+            }
+
+        });
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#img-upload').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#livre_form_photo").change(function(){
+            readURL(this);
+        });
+    </script>
+{% endblock %}

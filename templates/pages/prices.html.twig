@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Prix Theroma{% endblock %}
+
+{% block stylesheets %}
+   {{ parent() }}
+   {{ encore_entry_link_tags('prices') }}
+{% endblock %}
+
+{% block body %}
+  
+        <div class="content">
+
+            <div class="carousel slide" data-ride="carousel">
+                <span class="illustration-title-slider">Les prix Terhoma</span>
+    
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                      {% if carroussel_first.link %}
+                      <a href="{{carroussel_first.link}}" target="_blank">
+                          <img class="d-block w-100" src="{{ asset('assets/images/illustration/' ~ carroussel_first.content)}}" alt="First slide">
+                      </a>
+                      {% else %}
+                      <img class="d-block w-100" src="{{ asset('assets/images/illustration/' ~ carroussel_first.content)}}" alt="First slide">
+                          
+                      {% endif %}
+                    </div>
+      
+                    {% for carroussel in carroussel %}
+      
+                      <div class="carousel-item">
+                          {% if carroussel.link %}
+                          <a href="{{carroussel.link}}" target="_blank">
+                              <img class="d-block w-100" src="{{ asset('assets/images/illustration/' ~ carroussel.content)}}" alt="Second slide">
+                          </a>
+                          {% else %}
+                              
+                          <img class="d-block w-100" src="{{ asset('assets/images/illustration/' ~ carroussel.content)}}" alt="Second slide">
+                          {% endif %}
+                      </div>
+      
+                    {% endfor %}
+      
+                  </div>
+            </div>
+
+
+    
+            <div class="separator"></div>        
+    
+            <div class="content">
+        
+            {% if prices is not empty %}
+            {% for price in prices %}
+            
+                <div class="header-container">
+
+                    <div class="left">
+                        <div class="inner">
+                            <h1>{{ price.title|raw }}</h1>
+                    
+                        <p>{{ price.title2|raw}}</p>
+                        </div>
+                    </div>
+
+                    <div class="right">
+                        <img src="{{ asset('assets/images/prix/'~price.photo) }}" alt="placeholder" >
+                    </div>
+                </div>
+                    <div class="article-container">
+                        {{ price.text|raw}}
+                        
+                    </div>  
+                <div class="separator"></div> 
+            {% endfor %}
+            {% else %}
+
+                <div class="alert alert-warning mx-auto text-center">
+                    <strong>
+                        Aucun Prix n'est actuellement présent sur cette page.
+                    </strong>
+                </div>
+
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('prices') }}
+{% endblock %} 

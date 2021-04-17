@@ -1,0 +1,41 @@
+
+<nav class="navbar navbar-expand-md navbar-light bg-light navbar-custom">
+    <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav mx-auto">
+            <a class="nav-item nav-link text-nowrap {% if current_menu is defined and current_menu == 'home' %}active{% endif %}" href="{{ path('home') }}">Accueil <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link text-nowrap" target="_blank" href="https://www.terhoma.org">A propos de nous</a>
+            <a class="nav-item nav-link text-nowrap {% if current_menu is defined and current_menu == 'authors' %}active{% endif %}" href="{{ path('authors') }}">Auteurs</a>
+            <div class="dropdown show">
+                <a href="{{ path('show_livres') }}" class="droplists {% if current_menu is defined and current_menu == 'books' %}active{% endif %}" id="drop1" aria-haspopup="true" aria-expanded="false">
+                    Livres
+                </a>
+
+                <div class="dropdown-menu text-center" aria-labelledby="drop1">
+                    {% for categorie in categories %}
+
+                            <a class="dropdown-item" href="{{ path('category', {
+                                'categorie' : categorie.categorie,
+                            }) }}" >{{ categorie.categorie }}</a>
+
+                    {% endfor %}
+                    
+                </div>
+            </div>
+             <a class="nav-item nav-link text-nowrap" href="{{ path('prix_terhoma') }}">Prix Terhoma</a>
+
+
+             <a class="nav-item nav-link text-nowrap" href="{{ path("magazine") }}">Le Magazine</a>
+
+              <a class="nav-item nav-link text-nowrap" href="{{ path('news') }}">Actualités</a>
+
+            <a class="nav-item nav-link text-nowrap {% if current_menu is defined and current_menu == 'edito' %}active{% endif %}" href="{{ path('edito') }}">L’édito</a>
+            <a class="nav-item nav-link text-nowrap {% if current_menu is defined and current_menu == 'podcast' %}active{% endif %}" href="{{ path('podcast') }}">Podcasts</a>
+
+            <a class="nav-item nav-link text-nowrap {% if current_menu is defined and current_menu == 'contact' %}active{% endif %}" href="{{ path('contact') }}">Contact</a>
+        </div>
+    </div>
+</nav>

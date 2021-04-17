@@ -1,0 +1,29 @@
+{% block body %}
+    {% set categories = categories_repository.findAll() %}
+    {% form_theme form 'bootstrap_4_layout.html.twig' %}
+    <div class="row">
+        <form class="wb_form" method="post" enctype="multipart/form-data">
+        <div class="col-md-8 col-sm-12">
+            <h3>Rédiger un categorie</h3>
+            {{ form_row(form.categorie) }}
+            {{ form_errors(form.categorie)}}
+        </div>
+        <button class="btn w-100 submit bg-success ">Ajouter</button>
+        {{ form_rest(form) }}
+        {{ form_end(form) }}
+        </form>
+    </div>
+
+    {% for categorie in categories %}
+    <div>
+        <ul>
+            <li>
+                {{ categorie.categorie }}
+            </li>
+        </ul>
+    </div>
+    {% endfor %}
+
+
+
+{% endblock %}

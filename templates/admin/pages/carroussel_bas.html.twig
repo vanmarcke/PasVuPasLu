@@ -1,0 +1,54 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title 'Edition carroussel' %}
+
+{% block body %}
+    <div class="container-fluid">
+
+        <!-- Content Row -->
+        <h3>Carroussel bas</h3>
+
+
+        <div class="col-lg-12 mb-5 mt-3">
+            <div style="background: white; border-radius: .6rem; border-left: 0.25rem solid #1cc88a !important; border-right: 0.25rem solid #1cc88a !important; padding: 2rem; box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15) !important;">
+               
+                {% for message in app.Flashes('success') %}
+                <div class="alert alert-success alert-dismissible fade show text-center" role="alert" id="success">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{ message }}
+                </div>
+                {% endfor %}
+                {% set numero = 2 %}
+                {% for carroussel in carroussel %}
+                    
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <span>Image {{numero}} </span>
+                        <img src="{{ asset('assets/images/illustration/' ~ carroussel.content)}}" width="100%" alt="">
+                        <input type="text" class="form-control mt-1" value="{{carroussel.link}}" disabled>
+                        
+
+                    </div>
+                    <div class="col-md-2">
+                        <span>Taille 1200x280</span><br>
+                        <a href="{{path('carroussel_photo_bas',{'id':carroussel.id})}}" class="btn btn-secondary mt-1 col-md-10">Modifier</a> <br>
+                        <a href="{{path('carroussel__bas_rem',{'id':carroussel.id})}}" class="btn btn-danger mt-1 col-md-10">Supprimer</a>
+                    </div>
+                </div>
+                {% set numero = numero + 1 %}
+                {% endfor %}
+
+
+            </div>
+            <a href="{{path('carroussel_add')}}" class="btn btn-primary shadow mt-1">Ajouter image</a>
+        </div>
+  
+        <!-- /.container-fluid -->
+
+    </div>
+    <!-- End of Main Content -->
+{% endblock %}
+

@@ -1,0 +1,93 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title 'Liste des Actualités' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+
+            <div class="col-xl-12 col-lg-12">
+
+                {# Menu du header #}
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">
+                            Liste des actualités
+                            {# <span class="badge badge-primary float-right">Il y a {{ countPrice }} prix Terhoma</span> #}
+                        </h6>
+                    </div>
+                    {% for message in app.Flashes('success') %}
+                        <div class="alert alert-success alert-dismissible fade show text-center" role="alert" id="success">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    <div class="table-responsive">
+                        <table class="table">
+                         <thead>
+                            <tr>
+                                <th scope="col">Photo</th>
+                                <th scope="col">Informations</th>
+                                <th scope="col" style="text-align: right">Options</th>
+                            </tr>
+                         </thead>
+                            <tbody>
+                            {% for new in news %}
+                                <tr class="search">
+                                  
+                                    <td style="max-width: 38rem;">
+                                        <img style="width: 40%; min-height: 10%;max-height: 10% border-radius: .3rem;" src="{{ asset('assets/images/news/'~ new.photo) }}" alt="">
+                                    </td>
+                                    <td>
+                                        <div class="col-md-6">
+                                        {{ new.title }}
+                                        </div>
+                                        <div class="col-md-12">
+                                        {{ new.subtitle|raw }}
+                                        </div>
+                                       
+                                        <div class="desc mt-1" style="max-width: 38rem;">
+                                        {{ new.text|raw }}
+                                        </div>
+                                    </td>
+                                    <td scope="row" style="text-align: right">
+                                        <a href="{{ path('edit_news', {'id':new.id}) }}" class="btn btn-primary btn-circle btn-sm mb-1">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <form method="post" action="{{ path('delete_news', {id: new.id}) }}" style="display: inline-block">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <input type="hidden" name="_token" value="{{ csrf_token("delete" ~ new.id) }}">
+                                            <button class="btn btn-danger btn-circle btn-sm" onclick="return confirm('ATTENTION : Êtes-vous sûr de bien vouloir supprimer cette actualité ?');">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                   
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        {% if news is empty %}
+                            <h5 class="m-3 text-center">il y a actuellement aucune actualité sur le site</h5>
+                        {% endif %}
+                        {% include("admin/_no-result.html.twig") %}
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <style>
+        tbody {
+            background: #f8f9fc;
+        }
+        .desc {
+            font-size: .75rem;
+            color: #858796;
+        }
+    </style>
+{% endblock %}

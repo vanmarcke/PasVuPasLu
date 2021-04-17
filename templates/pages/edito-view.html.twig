@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'l\'édito ' ~ edito.title %}
+
+{% block body %}
+    <div class="content">
+        <div class="illustration" style="padding-top: 3rem!important;">
+            <span class="illustration-title about-title" style="width: 100%; left: 0; height: auto; min-height: 3.2rem; border-radius: .2rem; top: 0; background: black; color: white; opacity: 1;">{{ edito.title }}<span style="display:block;font-size: .99rem;margin-bottom: .81rem">Edito du {{ edito.createdAt|date('d/m/Y') }}</span> </span>
+        </div>
+
+        <div class="blog-content p-5" style="margin: 0 11%;">
+            <p>
+                {{ edito.content|raw }}
+            </p>
+        </div>
+    </div>
+{% endblock %}

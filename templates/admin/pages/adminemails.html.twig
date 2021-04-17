@@ -1,0 +1,52 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block stylesheets %}
+   {{ parent() }}
+   {{ encore_entry_link_tags('emails') }}
+{% endblock %}
+
+
+{% block title%}Mailing{% endblock %}
+
+{% block body %}
+{% for message in app.Flashes('success') %}
+    <div class="alert alert-success alert-dismissible fade show  m-2 text-center" role="alert" id="success">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        {{ message }}
+    </div>
+{% endfor %}
+    <div class="content">
+    {{ form_start(contactForm, {'attr': {'class':'col-md-10 mx-auto mt-15 user'}}) }}
+        
+    <div class=" msg_corp">
+        <div class="col-md-12">
+             <div class="card">
+                <div class="card-header bg-primary">
+                    <div class="text-white text-center">Envoyer un message général</div>     
+                </div>
+
+                <div class="card-body message_txt">
+                    
+                     {{form(contactForm)}}
+
+                    <div class="form-group text-center">
+                        <button type="submit" class="btn btn-primary">Envoyer le message</button>
+                    </div>
+
+                </div>
+
+             </div>
+        </div>
+    </div> 
+
+    {{ form_end(contactForm) }}
+    </div>
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('emails') }}
+{% endblock %}

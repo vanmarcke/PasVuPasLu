@@ -1,0 +1,234 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title 'PasvuPasLu ' ~ user.nom ~' '~ user.prenom %}
+
+{% block body %}
+    <div class="container">
+        <div class="row user">
+
+            <div class="col-xl-8 col-lg-7">
+
+                {# Menu du header #}
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">informations sur l'utilisateur</h6>
+                    </div>
+                    <div class="card-body">
+                        {% if user.roles == ['ROLE_AUTEUR'] and date == false %}
+                            <div class="alert alert-danger">
+                                L'abonnement a expiré et n'a pas été renouvelé par l'utilisateur
+                            </div>
+                            {% elseif user.payerStatus == 'Cancelled' %}
+                                <div class="alert alert-danger">
+                                    L'abonnement a été annulé par l'utilisateur et ne sera pas renouvelé.
+                                </div>
+                        {% endif %}
+                        <div class="card text-white border-primary bg-primary p-1 mb-3">
+                            <div class="card-body">
+                                <a href="#!">
+                                    <img style="width:7rem;height:7rem;border-radius:60%;" class="float-left mr-3" src="{% if user.auter.photo is defined %}{{ asset('assets/images/profil/'~ user.auter.photo) }}{% else %}{{ asset('assets/images/avatars/d.png') }}{% endif %}" alt="">
+                                </a>
+                                <div class="float-left">
+                                    <h2 class="card-title ml-2" style="font-size: .97rem;font-weight: 600;"> {{ user.nom ~' '~ user.prenom }} ( {{ user.email }} )</h2>
+                                    <p class="card-text ml-2" style="font-size: .759rem;"> Inscrit le <b>{{ user.dateRegistration|date('d/m/Y') }}</b> Statut de l'abonnement <b>{{ user.payerStatus }}</b></p>
+                                    <form method="post" action="{{ path('admin_delete_user', {id: user.id}) }}" style="display: inline-block">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="hidden" name="_token" value="{{ csrf_token("delete" ~ user.id) }}">
+                                        <button class="btn btn-danger  btn-sm" onclick="return confirm('Êtes-vous sûr de bien vouloir supprimer cet utilisateur ? Tous ces livres et commentaires seront supprimés. ATTENTION : l\'abonnement doit être annulé manuellement via le site de Paypal \n');">
+                                            <i class="fas fa-trash"></i>
+                                            Supprimer l'utilisateur
+                                        </button>
+                                    </form>
+                                    <a href="{{ path('profil_auter', {'id': user.id}) }}" target="_blank" class="btn btn-primary btn-sm">
+                                        <i class="far fa-eye"></i>
+                                        Voir la page profil
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Identifiant du profil</th>
+                                <th scope="col" class="float-right">Numéro de paiement récurrent</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>{{ user.payerId }}</td>
+                                <td class="float-right">{{ user.paypalProfilId }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <h6 class="ph">
+                            Liste des livres ajoutée
+                        </h6>
+                        {% if livres is not empty %}
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Photo</th>
+                                <th scope="col">Information sur le livre</th>
+                                <th scope="col" style="text-align: right">Options</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for livre in livres %}
+                                <tr>
+                                    <td>
+                                        <img style="width:100%;" src="{{ asset('assets/images/livre/'~livre.photo) }}" alt="">
+                                    </td>
+                                    <td>
+                                        {{ livre.titre }}
+                                        <div class="desc mt-1">
+                                            <p style="display: inline-block;">Editeur : <b><a href="{{ path('profil_auter', {'id': user.id}) }}" target="_blank">{{ user.nom ~' '~ user.prenom }}</a></b></p>
+                                        </div>
+                                        <div class="desc mt-1" style="text-align: justify">                                            
+                                            {{ livre.extract|striptags|length > 500 ? livre.extract|raw|striptags|slice(0,500)|raw : livre.extract|raw }} ...
+                                        </div>
+                                    </td>
+                                    <th scope="row" style="text-align: right">
+                                        <a href="{{ path('admin_edit_livre', {'slug':livre.slug, 'id':livre.id}) }}" class="btn btn-primary btn-circle btn-sm mb-1">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="{{ path('show_livre', {'slug':livre.slug, 'id':livre.id}) }}" target="_blank" class="btn btn-info btn-circle btn-sm mb-1">
+                                            <i class="far fa-eye"></i>
+                                        </a>
+                                        <form method="post" action="{{ path('admin_delete_livre', {id: livre.id}) }}" style="display: inline-block">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <input type="hidden" name="_token" value="{{ csrf_token("delete" ~ livre.id) }}">
+                                            <button class="btn btn-danger btn-circle btn-sm" onclick="return confirm('ATTENTION : Êtes-vous sûr de bien vouloir supprimer ce livre ? Tous les commentaires associés seront supprimés ! \n');">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </th>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        {% else %}
+                            <div style="font-weight: 600;font-size: 15rem;opacity: .2;text-align: center;">
+                                <i class="fas fa-book-open"></i>
+                            </div>
+                        {% endif %}
+
+                        <h6 class="ph">
+                            Liste des commentaires
+                        </h6>
+                        {% if comments is not empty %}
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Notes</th>
+                                <th scope="col">Commentaires</th>
+                                <th scope="col" style="text-align: right">Options</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for comment in comments %}
+                            <tr>
+                                <td>
+                                    {{ comment.rate }}/10
+                                </td>
+                                <td>
+                                    <div class="desc mt-1">
+                                        <a href="{{ path('show_livre', {'slug': comment.livre.slug, 'id': comment.livre.id}) }}" style="font-size: .89rem">{{ comment.livre.titre }}</a>
+                                    </div>
+                                    <div class="desc mt-1">
+                                        {{ comment.content|length > 500 ? comment.content|slice(0, 500) ~ '...' : comment.content|striptags|raw  }}
+                                    </div>
+                                </td>
+                                <th scope="row" style="text-align: right">
+                                    <form method="post" action="{{ path('admin_delete_comment', {id: comment.id}) }}" style="display: inline-block">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="hidden" name="_token" value="{{ csrf_token("delete" ~ comment.id) }}">
+                                        <button class="btn btn-danger btn-circle btn-sm" onclick="return confirm('Êtes-vous sûr de bien vouloir supprimer ce commentaire ? \n');">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </th>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                            {% else %}
+                                <div style="font-weight: 600;font-size: 15rem;opacity: .2;text-align: center;">
+                                    <i class="fas fa-comment-slash"></i>
+                                </div>
+                            {% endif %}
+                        </table>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Donut Chart -->
+            <div class="col-xl-4 col-lg-5">
+                <div class="card shadow mb-4">
+                    <!-- Card Header - Dropdown -->
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Informations sur l'abonnement</h6>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Paiement récurrent</th>
+                                <th scope="col" class="float-right">Annuel</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>{% if user.roles == ['ROLE_AUTEUR'] %}60{% endif %} €/an</td>
+                                <td class="float-right">{{ user.subscriptionEnd|date('d/m/Y') }} <a href="{{path('admin_date_user', {id:user.id})}}"><i class="fa fa-edit text-primary"></i></a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="card-body">
+                        <table class="table">
+                            <h3 style="font-weight: 600; font-size: 1rem;">Achats effectués</h3>
+                            <thead>
+                            <tr>
+                                <th scope="col">Prix</th>
+                                <th scope="col" class="float-right">Date</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for buy in buys %}
+                            <tr>
+                                <td>{{ buy.paymentAmount }} € TTC<br> - <span style="font-size: .835rem">Ajout d'un nouveau livre</span></td>
+                                <td class="float-right">{{ buy.paymentDateAt|date('d/m/y') }}</td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        tbody {
+            background: #f8f9fc;
+        }
+        .desc {
+            font-size: .75rem;
+            color: #858796;
+        }
+        .ph {
+            background: #8bc34ad4;
+            color: white;
+            padding: 1rem;
+            border-radius: .3rem;
+        }
+    </style>
+{% endblock %}
+
+

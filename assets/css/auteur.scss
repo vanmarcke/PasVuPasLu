@@ -1,0 +1,133 @@
+.the-reply {
+    background: #d71b61;
+    padding: 1em;
+    margin: .5em 0em 0em 0em;
+    display: flex;
+}
+.hasImgReply {
+    max-width: 70px;
+    width: 100%;
+    margin-right: 1em;
+}
+.replyImg {
+    width: 100%;
+    max-width: 70px;
+    border-radius: 100%;
+}
+.hasSettingsReply .emailSection {
+    padding: 0.5em 0em;
+}
+.hasSettingsReply .emailSection {
+    color: white !important;
+    font-size: 80%;
+}
+.link-1:hover {
+    text-decoration: none;
+    background: #d71b61c7;
+}
+.emailSection {
+    padding: 0.26em 0em;
+    line-height: 1.5;
+}
+/***********A mettre dans auteur.css */
+ .infocardContainers * {
+font-family: 'Fira Sans Condensed', sans-serif;
+
+}
+.nom {
+font-size: 1em; font-style: italic; font-family: "Fira Sans Condensed", sans-serif;
+}
+.lien2 {
+
+text-decoration:none!important;
+}
+
+.lien {
+text-decoration: none;
+font-size: 0.8em;
+}
+
+.infocardContainers {
+display: flex;
+height: 100px;
+width: 100px;
+border-radius: 100px;
+background: #164d6e;
+transition: 300ms ease-in;
+margin: auto;
+
+}
+.infocardContainers:hover {
+width: 250px;
+border-radius: 100px 10px 100px 100px;
+transition: all 0.3s ease-out;
+}
+
+.infocardContainers div {
+text-color: white;
+flex-shrink: 1;
+width: 100%;
+--background-color: green;
+}
+.infocardContainers div * {
+display: flex;
+--flex: inherit;
+overflow: hidden;
+text-overflow: hidden;
+--background-color: yellow;
+color: white;
+white-space: nowrap;
+width: 0;
+height: auto;
+transition: all 250ms ease-in;
+/*transition-delay: 0.3s;*/
+}
+.infocardContainers:hover div *{
+--background-color: purple;
+display: flex;
+visibility: visible;
+transition: all 0.3s ease-out;
+transition-delay: 0.3s;
+width: 100%;
+height: auto;
+}
+
+.infocardContainers #main, .infocardContainers #main img{
+--background-color: red;
+height: 100px!important;
+width: 100px;
+border-radius: 100%;
+flex-shrink: 0;
+object-fit: cover;
+}
+.infocardContainers #main img{
+height: 200px;
+width: 200px;
+transition: none;
+display: float;
+position: relative;
+border: 5px solid white;
+margin: 0 0 0 0; padding: 0 0 0 0;
+}
+.infocardContainers #textbois {
+position: relative;
+display: flex;
+flex-direction:column;
+justify-content: center;
+align-items: center;
+padding-left: 10px;
+
+}
+
+.infocardContainers #textbois #hotlinks {
+max-width: 60%;
+max-height: 30px;
+
+--background-color: white;
+position:absolute;
+bottom: 5px;
+display: flex;
+justify-content: space-between;
+
+}
+

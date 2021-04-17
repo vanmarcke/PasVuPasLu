@@ -1,0 +1,412 @@
+{% extends 'base.html.twig' %}
+{% block title 'PasVuPasLu profil '%}
+{% block body %}
+    {#{{ dump(app.user)}}#}
+
+        {% if app.user.auter is not null %}
+            <div class="content" style="background: #f3f3f3;">
+                <div class="container pt-5">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="profile-sidebar pt-0">
+                                <!-- SIDEBAR USERPIC -->
+                                <div style="padding-top: 2rem;">
+                                    <div class="profile-userpic">
+                                        <div style="background-image:url('{{ asset('assets/images/profil/'~ app.user.auter.photo) }}');background-repeat: no-repeat; background-size: 100% 100%; width: 100%; height: auto; padding-top: 95.64%; border-radius: 60rem;"></div>
+                                    </div>
+                                </div>
+                                <!-- END SIDEBAR USERPIC -->
+                                <!-- SIDEBAR USER TITLE -->
+                                <div class="profile-usertitle">
+                                    <div class="profile-usertitle-name">
+                                        {% if app.user.auter.pseudo is defined%}
+                                            {{app.user.auter.pseudo }}
+                                        {% else %}
+                                            {{app.user.nom ~ ' ' ~ app.user.prenom }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <!-- END SIDEBAR USER TITLE -->
+                                <!-- SIDEBAR BUTTONS -->
+                                <div class="profile-userbuttons">
+                                    <a href="{{ path('settings', {'id': app.user.auter.id}) }}" class="btn btn-primary btn-sm w-100">Modifier le profil</a>
+                                </div>
+                                <!-- END SIDEBAR BUTTONS -->
+
+                                <div class="portlet light bordered">
+                                    <!-- STAT -->
+                                    <div class="row list-separated profile-stat">
+                                        <div class="col-md-6 col-sm-6 col-xs-6">
+                                            <div class="uppercase profile-stat-title"> {{ comments|length }} </div>
+                                            <div class="uppercase profile-stat-text"> Commentaires </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6 col-xs-6">
+                                            <div class="uppercase profile-stat-title"> {{ livres|length }} </div>
+                                            <div class="uppercase profile-stat-text"> Livres ajoutés </div>
+                                        </div>
+                                    </div>
+                                    <!-- END STAT -->
+                                    <div>
+                                        <h4 class="profile-desc-title">A propos</h4>
+                                        <span class="profile-desc-text"> {{app.user.auter.presentation }}</span>
+                                        <div class="margin-top-20 profile-desc-link">
+                                            <div class="mb-3"><i class="fas fa-user"></i> {{ app.user.auter.pseudo }}</div>
+                                        {% if app.user.auter.age is not null %}
+                                            <div class="mb-3"><i class="fas fa-glass-cheers"></i> {{ app.user.auter.age ~ ' ans'}}</div>                                            
+                                        {% else %}
+                                            <div class="mb-3"><i class="fas fa-glass-cheers"></i> {{ app.user.auter.birthdate|date('d/m/Y') }}</div>
+                                        {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-9">
+                            <div class="profile-content">
+                                {% for message in app.flashes('success') %}
+                                    <div class="alert alert-info text-center">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+
+                                
+                                <h6 class="ph">
+                                    Livres
+                                    <span class="badge badge-dark float-right">Il y a {{ livres|length }} livres</span>
+                                </h6>
+                                <table class="table">
+                                    <thead>
+                                    {% if app.user.livre is not empty %}
+                                        <tr>
+                                            <th scope="col">Photo</th>
+                                            <th scope="col">Description</th>
+                                        </tr>
+                                    {% endif %}
+                                    </thead>
+                                    <tbody>
+                                    {% for livre in livres %}
+                                        <tr>
+                                            <td style="width: 25%;">
+                                                {% if livre.photo == 'null' %}
+                        <div style="background: #292828; height: 10rem; border-radius: .6rem;width: 100%;float: left; margin-right: 2rem; height: 9rem;">
+                            <i class="fas fa-book-open" style="color: white;
+    font-size: 3rem;
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    padding-top: 25%;
+    opacity: .2;"></i>
+                        </div>
+                        {% else %}
+                        <img style="width: 100%;" src="{{ asset('assets/images/livre/'~livre.photo) }}">
+                        {% endif %}
+                                            </td>
+                                            <td>
+                                                <a href="{{ path('show_livre', {'slug': livre.slug, 'id': livre.id}) }}" style="font-size: .89rem">{{ livre.titre }}</a>
+                                                <div class="desc mt-1">
+                                                    Catégorie : <b>{{ livre.categorie.categorie }}</b>
+                                                </div>
+                                                <div class="desc mt-1">
+                                                    {{ livre.extract|striptags|raw|length > 490 ? livre.extract|striptags|raw|slice(0, 490) ~ '...' : livre.extract|striptags|raw  }}
+                                                </div>
+                                            </td>
+                                            <th scope="row" style="text-align: right">
+                                                <a href="{{ path('edit_livres', {id: livre.id}) }}" class="btn btn-primary btn-circle btn-sm mb-1">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <a href="{{ path('delet_livre', {id: livre.id}) }}" class="btn btn-danger btn-circle btn-sm mb-1" onclick="return confirm('Êtes-vous sûr de bien vouloir supprimer ce livre ?\n');">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    {% endfor %}
+                                    {% if app.user.livre is empty %}
+                                        <div style="font-weight: 600;font-size: 15rem;opacity: .2;text-align: center;">
+                                            <i class="fas fa-book-open"></i>
+                                        </div>
+                                    {% endif %}
+                                    </tbody>
+                                </table>
+                               
+
+                                <h6 class="ph">
+                                    Commentaires
+                                    <span class="badge badge-dark float-right">Il y a {{ comments|length }} commentaires</span>
+                                </h6>
+                                <table class="table">
+                                    <thead>
+                                    {% if comments is not empty %}
+                                        <tr>
+                                            <th scope="col" style="font-size:.81rem;">Notes</th>
+                                            <th scope="col" style="font-size:.81rem;">Commentaires</th>
+                                        </tr>
+                                    {% endif %}
+                                    </thead>
+                                    <tbody>
+                                    {% for comment in comments %}
+                                        <tr>
+                                            <td>
+                                                {{ comment.rate }}/10
+                                            </td>
+                                            <td>
+                                                <div class="desc mt-1">
+                                                    <a href="{{ path('show_livre', {'slug': comment.livre.id, 'id': comment.livre.id}) }}" style="font-size: .89rem">{{ comment.livre.titre }}</a>
+                                                </div>
+                                                <div class="desc mt-1">
+                                                    {{ comment.content|striptags|raw|length > 490 ? comment.content|striptags|raw|slice(0, 490) ~ '...' : comment.content|striptags|raw  }}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    {% if comments is empty %}
+                                        <div style="font-weight: 600;font-size: 15rem;opacity: .2;text-align: center;">
+                                            <i class="fas fa-comment-slash"></i>
+                                        </div>
+                                    {% endif %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            {% else %}
+                <div class="col-12 pt-5" style="background-color: #ececec;margin-bottom: 0!important;">
+                    <h1 style="text-align: center;">Complément d'informations</h1>
+                    <p style="text-align: center; font-style: italic; font-size: .96rem; margin-bottom: 3rem;">Vous devez compléter votre profil pour pouvoir le consulter.</p>
+                    <h3 class="col-12" style="text-align: center; margin: 2rem 0; font-size: 1rem; text-decoration: underline;">Tous les champs sont obligatoires sauf l'image de profil :</h3>
+                    <h3 class="col-12" style="text-align: center; margin: 2rem 0; font-size: 1rem; text-decoration: underline;">Vous pourrez mettre une image ou un Avatar plus tard dans "MODIFIER LE PROFIL".</h3>
+                {{ form_start(form, {'attr': {'class': 'form-group shadow p-3 mb-5 rounded', 'style': 'background-color:#ececec;margin-bottom: 0!important;'}}) }}
+
+            <div class="row">
+                <div class="col-6">
+                    {{ form_row(form.pseudo) }}
+                </div>
+                <div class="col-6">
+                    {{ form_row(form.age, {'attr': {'maxlength': '2'}}) }}
+                </div>
+                <div class="col-6">
+                    {{ form_row(form.photo, {'required': false}) }}
+                                 </div>
+              
+                <div class="col-12">
+                    {{ form_row(form.presentation, {'attr': {'minlength': '6'}}) }}
+                </div>
+
+               
+                   <h3 class="col-12" style="text-align: center; margin: 2rem 0; font-size: 1rem; text-decoration: underline;">Merci d'indiquer vos coordonnées :</h3>
+
+                <div class="col-md-6">
+                    {{ form_row(form.adress) }}
+                </div>
+                <div class="col-md-6">
+                    {{ form_row(form.ville) }}
+                </div>
+
+                <div class="col-md-4">
+                    {{ form_row(form.codePostale) }}
+                </div>
+
+                <div class="col-md-4">
+                    {{ form_row(form.country) }}
+                </div>
+                <div class="col-md-4">
+                    {{ form_row(form.telephone) }}
+                </div>
+            </div>
+
+                    <button class="login btn-default">Compléter les informations</button>
+            
+                    {{ form_end(form) }}
+
+
+
+                </div>
+    {% endif %}
+    <style>
+        .ph {
+            background: #0c5366d1;
+            color: white;
+            padding: 1rem;
+            border-radius: .3rem;
+        }
+        .desc {
+            font-size: .75rem;
+            color: #858796;
+        }
+        table {
+            width: 100%;
+            margin-bottom: 1rem;
+            color: #858796;
+        }
+        /* Profile container */
+        .profile {
+            margin: 20px 0;
+        }
+
+        /* Profile sidebar */
+        .profile-sidebar {
+            padding: 20px 0 10px 0;
+            background: #fff;
+        }
+
+        .profile-userpic {
+            width: 50%;
+            height: auto;
+            margin: 0 auto;
+        }
+
+        .profile-userpic img {
+            float: none;
+            margin: 0 auto;
+            width: 50%;
+            height: 8rem;
+            -webkit-border-radius: 50% !important;
+            -moz-border-radius: 50% !important;
+            border-radius: 50% !important;
+        }
+
+        .profile-usertitle {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .profile-usertitle-name {
+            color: #5a7391;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 7px;
+        }
+
+        .profile-usertitle-job {
+            text-transform: uppercase;
+            color: #5b9bd1;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .profile-userbuttons {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .profile-userbuttons .btn {
+            text-transform: uppercase;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 6px 15px;
+            margin-right: 5px;
+        }
+
+        .profile-userbuttons .btn:last-child {
+            margin-right: 0px;
+        }
+
+        .profile-usermenu {
+            margin-top: 30px;
+        }
+
+        .profile-usermenu ul li {
+            border-bottom: 1px solid #f0f4f7;
+        }
+
+        .profile-usermenu ul li:last-child {
+            border-bottom: none;
+        }
+
+        .profile-usermenu ul li a {
+            color: #93a3b5;
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        .profile-usermenu ul li a i {
+            margin-right: 8px;
+            font-size: 14px;
+        }
+
+        .profile-usermenu ul li a:hover {
+            background-color: #fafcfd;
+            color: #5b9bd1;
+        }
+
+        .profile-usermenu ul li.active {
+            border-bottom: none;
+        }
+
+        .profile-usermenu ul li.active a {
+            color: #5b9bd1;
+            background-color: #f6f9fb;
+            border-left: 2px solid #5b9bd1;
+            margin-left: -2px;
+        }
+
+        /* Profile Content */
+        .profile-content {
+            padding: 20px;
+            background: #fff;
+            min-height: 460px;
+        }
+        .portlet {
+            margin-top: 0;
+            margin-bottom: 25px;
+            padding: 0;
+            border-radius: 4px;
+        }
+        .portlet.bordered {
+            border-left: 2px solid #e6e9ec!important;
+        }
+        .portlet.light {
+            padding: 12px 20px 15px;
+            background-color: #fff;
+        }
+        .portlet.light.bordered {
+            border: 1px solid #e7ecf1!important;
+        }
+        .list-separated {
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+        .profile-stat {
+            padding-bottom: 20px;
+            border-bottom: 1px solid #f0f4f7;
+        }
+        .profile-stat-title {
+            color: #7f90a4;
+            font-size: 25px;
+            text-align: center;
+        }
+        .uppercase {
+            text-transform: uppercase!important;
+        }
+        .profile-stat-text {
+            color: #5b9bd1;
+            font-size: 10px;
+            font-weight: 600;
+            text-align: center;
+        }
+        .profile-desc-title {
+            color: #7f90a4;
+            font-size: 17px;
+            font-weight: 600;
+        }
+        .profile-desc-text {
+            color: #7e8c9e;
+            font-size: 14px;
+        }
+        .margin-top-20 {
+            margin-top: 20px!important;
+        }
+        .profile-desc-link i {
+            width: 22px;
+            font-size: 19px;
+            color: #abb6c4;
+            margin-right: 5px;
+        }
+    </style>
+{% endblock %}

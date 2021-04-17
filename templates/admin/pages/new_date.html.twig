@@ -1,0 +1,20 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title 'Dashboard' %}
+
+{% block body %}
+    <div class="container-fluid mb-2">
+
+        <div style="background: white; border-radius: .6rem; border-left: 0.25rem solid #1cc88a !important; border-right: 0.25rem solid #1cc88a !important; padding: 2rem; box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15) !important;">
+            <h3>{{ titre is defined ? titre : 'Modifier la date'}}</h3>
+            {{form_start(formDate)}}
+              
+                {{form_widget(formDate.subscription_end, {'attr':{'class':'col-md-6'}})}} 
+            
+                <button type="submit" class="btn btn-primary mt-1 pl-5 pr-5">Valider</button>
+                <a href="{{path('admin_edit_user', {id:user.id})}}" class="btn btn-secondary mt-1 pl-5 pr-5">Annuler</a>
+            {{form_end(formDate)}}
+        </div>
+
+    </div>
+{% endblock %}

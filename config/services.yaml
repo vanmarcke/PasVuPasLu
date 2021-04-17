@@ -1,0 +1,56 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: 'fr'
+    auter_assets_dir: '%kernel.project_dir%/public/assets/images/profil'
+    podcast_assets_dir: '%kernel.project_dir%/public/assets/images/podcasts'
+    audio_assets_dir: '%kernel.project_dir%/public/assets/audio'
+    illustration_assets_dir: '%kernel.project_dir%/public/assets/images/illustration'
+    editeur_assets_dir: '%kernel.project_dir%/public/assets/images/editeurs'
+    interview_assets_dir: '%kernel.project_dir%/public/assets/images/interviews'
+    article_assets_dir: '%kernel.project_dir%/public/assets/images/articles'
+    prix_assets_dir: '%kernel.project_dir%/public/assets/images/prix'
+    news_assets_dir: '%kernel.project_dir%/public/assets/images/news'
+    livre_assets_dir: '%kernel.project_dir%/public/assets/images/livre'
+    image_articles_coverages_directory: '%kernel.project_dir%/public/uploads/articles/coverages/'
+    categorie_assets_dir: '%kernel.project_dir%/public/assets/images/categorie'
+    image_articles_coverages_display: '/uploads/articles/coverages/'
+    images_Admin_coverages_directory: '%kernel.project_dir%/public/uploads/admin/coverages'
+    imagesAdmin_directory: '%kernel.project_dir%/public/assets/images/uploads/imageAdmin/'
+    magazine_assets_dir: '%kernel.project_dir%/public/assets/images/magazine'
+    itemperpage: 5
+    supportedLocales:
+        - fr
+
+services:
+    twig.extension.intl:
+        class: Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension }
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        bind:
+            $userActionLogger: '@monolog.logger.user_action'
+            $itemPerPage: '%itemperpage%'
+            $targetDir: '%image_articles_coverages_directory%'
+            $supportedLocales: '%supportedLocales%'
+            $locale: '%locale%'
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/*'
+        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+
+    # controllers are imported separately to make sure services can be injected
+    # as action arguments even if you don't extend any base controller class
+    App\Controller\:
+        resource: '../src/Controller'
+        tags: ['controller.service_arguments']
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones

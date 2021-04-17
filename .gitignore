@@ -1,0 +1,19 @@
+### Ignore what is contained in a directory
+### Example the vendor folder
+/vendor/
+/var/
+
+### The change made to a file
+### Example the .env environment file
+.env
+
+### I created a new directory called "save" and I want to ingon
+### /path/to/my/save/folder/
+
+
+###> symfony/webpack-encore-bundle ###
+/node_modules/
+/public/build/
+npm-debug.log
+yarn-error.log
+###< symfony/webpack-encore-bundle ###

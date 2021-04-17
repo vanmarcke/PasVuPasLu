@@ -1,0 +1,36 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title 'Modifier' %}
+
+{% block body %}
+    <div class="container-fluid">
+
+        <!-- Content Row -->
+        <h3>{{titre}}</h3>
+
+
+        <div class="col-lg-12 mb-5 mt-3">
+            <div style="background: white; border-radius: .6rem; border-left: 0.25rem solid #1cc88a !important; border-right: 0.25rem solid #1cc88a !important; padding: 2rem; box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15) !important;">
+                {{ form_start(form_info_legal, {'attr': {'class': 'row col-12 mb-3'}}) }}
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label class="control-label required" for="">Bloc</label>
+                        {{ form_widget(form_info_legal.content) }}
+                        {{ form_errors(form_info_legal.content) }}
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary w-100">Enregistrer</button>
+                    </div>
+                </div>
+                {{ form_end(form_info_legal) }}
+            </div>
+        </div>
+  
+        <!-- /.container-fluid -->
+
+    </div>
+    <!-- End of Main Content -->
+{% endblock %}
+

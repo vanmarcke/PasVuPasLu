@@ -1,0 +1,22 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title 'Dashboard' %}
+
+{% block body %}
+    <div class="container-fluid mb-2">
+
+        <div style="background: white; border-radius: .6rem; border-left: 0.25rem solid #1cc88a !important; border-right: 0.25rem solid #1cc88a !important; padding: 2rem; box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15) !important;">
+            <h3>{{ titre is defined ? titre : 'Charger un fichier image'}}</h3>
+            <small>{{ taille is defined ? taille : 'Dimensions: 1200 x 320'}}</small>
+            {{form_start(formCarroussel)}}
+                {{form_widget(formCarroussel.file, {'attr':{'accept':'image/png, image/jpeg, image/gif', 'class':'btn btn-secondary'}})}} <br>
+                <small>Lien</small>
+                {{form_widget(formCarroussel.link, {'attr':{'class':'col-md-6 mt-1'}}) }} <br>
+
+                <button type="submit" class="btn btn-primary mt-1 pl-5 pr-5">Valider</button>
+            {{form_end(formCarroussel)}}
+        </div>
+
+    </div>
+{% endblock %}
+

@@ -1,0 +1,348 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title 'Dashboard' %}
+
+{% block body %}
+    <div class="container-fluid">
+
+        <!-- Content Row -->
+        <div class="row">
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Auteurs inscrit</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ countAuteurs }}</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-success shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Lecteurs inscrit</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ countLecteurs }}</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-info shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total des livres</div>
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col-auto">
+                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{ countLivres }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-book-open fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pending Requests Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-warning shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Total des commentaires</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ countComments }}</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-comments fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Row -->
+        {% for message in app.Flashes('success') %}
+            <div class="alert alert-success alert-dismissible fade show text-center" role="alert" id="success">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ message }}
+            </div>
+        {% endfor %}
+        <div class="row">
+
+            {{ form_start(form, {'attr': {'class': 'row col-12 mb-3'}}) }}
+            <div class="col-lg-8">
+                <div class="form-group">
+                    <label class="control-label required" for="">Citation du jour</label>
+                    {{ form_widget(form.quote) }}
+                    {{ form_errors(form.quote) }}
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="form-group">
+                    <label class="control-label required" for="">Auteur</label>
+                    {{ form_widget(form.auteur) }}
+                    {{ form_errors(form.auteur) }}
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="form-group">
+                    <label for="">Mettre à jour</label>
+                    <button class="btn btn-secondary w-100">Enregistrer</button>
+                </div>
+            </div>
+            {{ form_end(form) }}
+
+
+            {{ form_start(formAuteur_titre, {'attr': {'class': 'row col-12 mb-3'}}) }}
+            <div class="col-lg-10">
+                <div class="form-group">
+                    <label class="control-label required" for="">Bloc1 Titre</label>
+                    {{ form_widget(formAuteur_titre.content, {'disabled':'true'}) }}
+                    {{ form_errors(formAuteur_titre.content) }}
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="form-group">
+                    <label for="">Mettre à jour</label>
+                    <a href="{{path('bloc_edit', {'cle':'Auteur_titre'})}}" class="btn btn-secondary w-100">Modifier</a>
+                </div>
+            </div>
+            {{ form_end(formAuteur_titre) }}
+
+            {{ form_start(formbloc1_start, {'attr': {'class': 'row col-12 mb-3'}} ) }}
+            <div class="col-lg-10">
+                <div class="form-group">
+                    <label class="control-label required" for="">Bloc1 debut</label>
+                    {{ form_widget(formbloc1_start.content, {'disabled':'true'}) }}
+                    {{ form_errors(formbloc1_start.content) }}
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="form-group">
+                    <label for="">Mettre à jour</label>
+                   <a href="{{path('bloc_edit', {'cle':'bloc1_start'})}}" class="btn btn-secondary w-100">Modifier</a>
+                </div>
+            </div>
+            {{ form_end(formbloc1_start) }}
+
+            {{ form_start(formbloc1_end, {'attr': {'class': 'row col-12 mb-3'}}) }}
+            <div class="col-lg-10">
+                <div class="form-group">
+                    <label class="control-label required" for="">Bloc1 fin</label>
+                    {{ form_widget(formbloc1_end.content, {'disabled':'true'}) }}
+                    {{ form_errors(formbloc1_end.content) }}
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="form-group">
+                    <label for="">Mettre à jour</label>
+                   <a href="{{path('bloc_edit', {'cle':'bloc1_end'})}}" class="btn btn-secondary w-100">Modifier</a>
+                </div>
+            </div>
+            {{ form_end(formbloc1_end) }}
+            
+            {{ form_start(formbloc2_titre, {'attr': {'class': 'row col-12 mb-3'}}) }}
+            <div class="col-lg-10">
+                <div class="form-group">
+                    <label class="control-label required" for="">Bloc2 titre</label>
+                    {{ form_widget(formbloc2_titre.content, {'disabled':'true'}) }}
+                    {{ form_errors(formbloc2_titre.content) }}
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="form-group">
+                    <label for="">Mettre à jour</label>
+                   <a href="{{path('bloc_edit', {'cle':'bloc2_titre'})}}" class="btn btn-secondary w-100">Modifier</a>
+                </div>
+            </div>
+            {{ form_end(formbloc2_titre) }}
+
+            <div class="col-lg-12 mb-5 mt-3">
+                <div style="background: white; border-radius: .6rem; border-left: 0.25rem solid #1cc88a !important; border-right: 0.25rem solid #1cc88a !important; padding: 2rem; box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15) !important;">
+                    <span>Puces bloc 1</span>
+                   
+                    {% for puce in puce %}
+                        <p><a href="{{ path('edit-puce1', {'id': puce.id }) }}"><i class="fa fa-edit"></i> </a> <a href="{{ path('delete-puce1', {'id': puce.id }) }}" onclick="return confirm('Voulez-vous supprimer cette ligne')"><i class="fa fa-trash text-danger"></i></a> - {{puce.content}}</p>
+                    {% endfor %}
+                    <a href="{{ path('add-puce') }}" class="btn btn-secondary col-md-3">Ajouter</a>
+                </div>
+            </div>
+
+            <div class="col-lg-12 mb-5 mt-3">
+                <div style="background: white; border-radius: .6rem; border-left: 0.25rem solid #1cc88a !important; border-right: 0.25rem solid #1cc88a !important; padding: 2rem; box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15) !important;">
+                    {{ form_start(formbloc3, {'attr': {'class': 'row col-12 mb-3'}}) }}
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label class="control-label required" for="">Bloc3</label>
+                            {{ form_widget(formbloc3.content) }}
+                            {{ form_errors(formbloc3.content) }}
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary w-100">Enregistrer</button>
+                        </div>
+                    </div>
+                    {{ form_end(formbloc3) }}
+                </div>
+            </div>
+
+
+
+            {##}
+            <div class="col-lg-12 mb-5 mt-3">
+                <div style="background: white; border-radius: .6rem; border-left: 0.25rem solid #1cc88a !important; border-right: 0.25rem solid #1cc88a !important; padding: 2rem; box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15) !important;">
+                    {{ form_start(formDasboard, {'attr': {'class': 'row col-12 mb-3'}}) }}
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="">L’édito de la semaine</label>
+                            {{ form_widget(formDasboard.quate_auter, {'attr': {'style':'height: 119px;'}}) }}
+                            {{ form_errors(formDasboard.quate_auter) }}
+                        </div>
+                        <div class="form-group d-none">
+                            <label for="">Signature</label>
+                            {{ form_widget(formDasboard.quate_insp) }}
+                            {{ form_errors(formDasboard.quate_insp) }}
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="">Les coups de coeur de la rédaction</label>
+                            {{ form_widget(formDasboard.content_editable, {'attr': {'style':'height: 201px;'}}) }}
+                            {{ form_errors(formDasboard.content_editable) }}
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <button class="btn btn-primary w-100">Enregistrer les modifications</button>
+                        </div>
+                    </div>
+                    {{ form_end(formDasboard) }}
+                </div>
+            </div>
+
+
+            {#-------#}
+            
+
+            <!-- Content Column -->
+            <div class="col-lg-6 mb-4">
+
+                <!-- Project Card Example -->
+                <div class="card shadow mb-4 live-search-list">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Les 5 derniers livres ajoutés</h6>
+                    </div>
+                    <div class="card-body">
+                        {% for livres in lastLivre %}
+                            <div class="list-five search">
+                                <div class="list-five-info p-4">
+                                    <img src="{{ asset ('assets/images/livre/'~livres.photo) }}" style="height: 10rem;">
+                                    <div class="list-five-desc-d">
+                                        <h1 class="list-five-desc text-truncate">{{ livres.titre }}</h1>
+                                        <div class="list-five-authors"><a href="{{ path('profil_auter',{'id': livres.user.id }) }}" target="_blank">{{ livres.user.nom ~' '~ livres.user.prenom }}</a></div>
+                                        <div class="list-five-authors">Date de parution : {{ livres.createdAt|date('d/m/Y') }}</div>
+                                        <div class="list-five-authors pt-3"><a href="{{ path('show_livre',{'slug': livres.slug, 'id': livres.id }) }}" target="_blank">Consulter l'extrait</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        {% include("admin/_no-result.html.twig") %}
+                        {% if lastLivre is empty %}
+                            <h5 class="m-3 text-center">il y a actuellement aucun livre sur le site</h5>
+                        {% endif %}
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-6 mb-4">
+
+                <!-- Illustrations -->
+                <div class="card shadow mb-4 live-search-list">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Les 5 livres les mieux notés</h6>
+                    </div>
+                    <div class="card-body">
+                        {% for livreRate in livreRate %}
+                        
+                            <div class="list-five search">
+                                <div class="list-five-info p-4">
+                                    <img src="{{ asset ('assets/images/livre/'~livreRate[0].photo) }}" style="height: 10rem;">
+                                     <div class="list-five-desc-d">
+                                        <h1 class="list-five-desc text-truncate">{{ livreRate[0].titre }}</h1>
+                                        <div class="list-five-authors"><a href="{{ path('profil_auter',{'id': livreRate[0].user.id }) }}" target="_blank">{{ livreRate[0].user.nom ~' '~ livreRate[0].user.prenom }}</a></div>
+                                        <div class="list-five-authors">Date de parution : {{ livreRate[0].createdAt|date('d/m/Y') }}</div>
+                                        <div class="list-five-authors pt-3"><a href="{{ path('show_livre',{'slug': livreRate[0].slug, 'id': livreRate[0].id }) }}" target="_blank">Consulter l'extrait</a></div>
+                                    </div> 
+                                </div>
+                            </div>
+                        
+                        {% endfor %}
+                        {% include("admin/_no-result.html.twig") %}
+                        {% if livreRate is empty %}
+                            <h5 class="m-3 text-center">il y a actuellement aucun livre sur le site</h5>
+                        {% endif %}
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+    </div>
+    <!-- End of Main Content -->
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/admin/vendor/ckeditor/ckeditor.js') }}"></script>
+    <script>
+        {# Remplace le textarea par le plugin Ckeditor #}
+        var areas = Array('dasboard[quate_auter]', 'dasboard[content_editable]', 'contest[content]', 'content_area[content]');
+        $.each(areas, function (i, area) {
+            CKEDITOR.replace(area, {
+                language: 'fr',
+                toolbarGroups: [{
+                    "name": "basicstyles",
+                    "groups": ["basicstyles"]
+                },
+                    {
+                        "name": "links",
+                        "groups": ["links"]
+                    },
+                    {
+                        "name": "paragraph",
+                        "groups": ["list", "blocks"]
+                    }
+                ],
+                // Remove the redundant buttons from toolbar groups defined above.
+                removeButtons: 'Underline,Strike,Subscript,Superscript,Anchor,Styles,Specialchar'
+            });
+        });
+    </script>
+{% endblock %}

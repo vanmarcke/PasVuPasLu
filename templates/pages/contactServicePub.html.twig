@@ -1,0 +1,162 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+   {{ parent() }}
+   {{ encore_entry_link_tags('contact') }}
+{% endblock %}
+
+{% block title %}
+    PasVuPasLu - Service publicité - Nous contacter
+{% endblock %}
+
+{% block body %}
+
+    {# {% form_theme form 'bootstrap_4_layout.html.twig' %} #}
+
+    <div class="content">
+        {% for message in app.Flashes('success') %}
+            <div class="alert alert-success alert-dismissible fade show mb-0 text-center" role="alert" id="success">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <div class="carousel slide" data-ride="carousel">
+            <span class="illustration-title-slider">Service Publicité</span>
+
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                  {% if carroussel_first.link %}
+                  <a href="{{carroussel_first.link}}" target="_blank">
+                      <img class="d-block w-100" src="{{ asset('assets/images/illustration/' ~ carroussel_first.content)}}" alt="First slide">
+                  </a>
+                  {% else %}
+                  <img class="d-block w-100" src="{{ asset('assets/images/illustration/' ~ carroussel_first.content)}}" alt="First slide">
+                      
+                  {% endif %}
+                </div>
+  
+                {% for carroussel in carroussel %}
+  
+                  <div class="carousel-item">
+                      {% if carroussel.link %}
+                      <a href="{{carroussel.link}}" target="_blank">
+                          <img class="d-block w-100" src="{{ asset('assets/images/illustration/' ~ carroussel.content)}}" alt="Second slide">
+                      </a>
+                      {% else %}
+                          
+                      <img class="d-block w-100" src="{{ asset('assets/images/illustration/' ~ carroussel.content)}}" alt="Second slide">
+                      {% endif %}
+                  </div>
+  
+                {% endfor %}
+  
+              </div>
+        </div>
+
+
+
+        <div class="separator"></div>
+
+
+        <div class="container pb-5 pt-2" style="background-image: url({{ asset('assets/images/illustration/nuage4.png') }}); background-size: cover;">
+
+        <div class="oiseau">                
+                    <div class="bird-container bird-container--one">
+                        <div class="bird bird--one"></div>
+                </div>
+            
+                <div class="bird-container bird-container--two">
+                    <div class="bird bird--two"></div>
+                </div>
+            
+                <div class="bird-container bird-container--three">
+                    <div class="bird bird--three"></div>
+                </div>
+            
+                <div class="bird-container bird-container--four">
+                    <div class="bird bird--four"></div>
+                </div>                
+        </div>
+
+            {{ form_start(form, {'attr': {'class': 'row form-contact', 'style': 'margin: 1rem 7rem;'}}) }}
+               <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="form-control-label" for="name">Nom</label>
+                        {{ form_widget(form.nom, {'attr': {'placeholder': 'Votre nom'}}) }}
+                        {{ form_errors(form.nom) }}
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="form-control-label" for="prenom">Prénom</label>
+                        {{ form_widget(form.prenom, {'attr': {'placeholder': 'Votre prénom'}}) }}
+                        {{ form_errors(form.prenom) }}
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label class="form-control-label" for="email">Adresse mail</label>
+                        {{ form_widget(form.email, {'attr': {'placeholder': 'Votre adresse mail'}}) }}
+                        {{ form_errors(form.email) }}
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="form-control-label" for="you">Entreprise / Organisation</label>
+                        {{ form_widget(form.entreprise) }}
+                        {{ form_errors(form.entreprise) }}
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="form-control-label" for="phone">Numéro de télèphone</label>
+                        {{ form_widget(form.telephone, {'attr': {'placeholder': 'Votre numéro de télèphone'}}) }}
+                        {{ form_errors(form.telephone) }}
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label class="form-control-label" for="object">Fonction</label>
+                        {{ form_widget(form.fonction, {'attr': {'placeholder': ''}}) }}
+                        {{ form_errors(form.fonction) }}
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label class="form-control-label" for="message">Message</label>
+                        {{ form_widget(form.objet, {'attr': {'placeholder': '', 'class': 'form-control', 'style': 'height: 193px'}}) }}
+                        {{ form_errors(form.objet) }}
+                    </div>
+                </div>
+                <div class="mx-auto">
+                                            
+                        {{ form_row(form.captchaCode) }}
+                    
+                </div>                
+
+                <div class="col-lg-12">
+                    <div class="form-group text-center">
+                        <button type="submit" class="btn btn-info btn-lg">Envoyer le message</button>
+                    </div>
+                </div>
+
+             {{ form_end(form) }}
+
+        </div>
+  </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('contact') }}
+{% endblock %}
+

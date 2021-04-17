@@ -1,0 +1,114 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title 'Gestion des administrateurs' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+
+            <div class="col-xl-8 col-lg-7">
+
+                {# Menu du header #}
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Liste des administrateurs</h6>
+                    </div>
+                    {% for message in app.Flashes('success') %}
+                        <div class="alert alert-success alert-dismissible fade show text-center" role="alert" id="success">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    <div class="card-body live-search-list">
+                        {% for admin in admins %}
+                            <div class="row bg mb-4 search">
+                                <div class="col-md-9">
+                                    <img src="{% if admin.auter.photo is defined %}{{ asset('assets/images/profil/'~ admin.auter.photo) }}{% else %}{{ asset('assets/images/avatars/d.png') }}{% endif %}"" class="float-left photo">
+                                    <div class="d">
+                                        <h4 class="list-group-item-heading name">{{ admin.nom ~' '~ admin.prenom }}</h4>
+                                        <p class="list-group-item-text title m-0">{{ admin.email }}</p>
+                                        <p class="list-group-item-text title m-0">Inscrit le {{ admin.dateRegistration|date('d/m/Y') }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="expertise">
+                                        <div class="read-more text-right">
+                                            <form method="post" action="{{ path('admin_remove_roles', {id: admin.id}) }}" style="display: inline-block">
+                                                <input type="hidden" name="_method" value="POST">
+                                                <input type="hidden" name="_token" value="{{ csrf_token("delete" ~ admin.id) }}">
+                                                <button class="btn btn-warning btn-sm" onclick="return confirm('ATTENTION : Voulez-vous vraiment retirer le role administrateur à cet utilisateur ? \n\ \n l\'utilisateur sera toujours inscrit avec le rôle auteur par défaut !');">
+                                                    <i class="fas fa-retweet"></i>
+                                                    Retirer le rôle
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        {% include("admin/_no-result.html.twig") %}
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Donut Chart -->
+            <div class="col-xl-4 col-lg-5">
+                <div class="card shadow mb-4">
+                    <!-- Card Header - Dropdown -->
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary text-center">Ajouter un administrateur</h6>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        {{ form_start(form, { 'attr': {'class': 'user position-relative'} }) }}
+                            <div class="form-group">
+                                {{ form_widget(form.nom, {'attr': {'class':'form-control-user form-control', 'placeholder': 'Nom'}}) }}
+                                {{ form_errors(form.nom) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_widget(form.prenom, {'attr': {'class':'form-control-user form-control', 'placeholder': 'Prénom'}}) }}
+                                {{ form_errors(form.prenom) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_widget(form.email, {'attr': {'class':'form-control-user form-control', 'placeholder': 'Adresse mail'}}) }}
+                                {{ form_errors(form.email) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_widget(form.password, {'attr': {'class':'form-control-user form-control', 'placeholder': 'Mot de passe'}}) }}
+                                {{ form_errors(form.password) }}
+                            </div>
+                            <button class="btn btn-primary btn-user btn-block">Ajouter l'utilisateur</button>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .photo {
+            border-radius: 45px;
+            margin-right: 20px;
+            width: 90px;
+            height:90px
+        }
+        .name {
+            font-weight: 700;
+        }
+        .bg {
+            text-decoration: none!important;
+            color: #000000b0!important;
+            font-size: .87rem;
+            background: #f8f9fc;
+            padding: 1rem;
+            border-radius: .3rem;
+            transition: .2s;
+        }
+        .bg:hover {
+            opacity: .94;
+        }
+    </style>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title 'Modifier la catégorie ' ~ categorie.categorie %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+
+            <div class="mx-auto col-xl-8 col-lg-7">
+
+                {# Menu du header #}
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Modifier la catégorie</h6>
+                    </div>
+                    <div class="card-body">
+                        {{ form_start(form, { 'attr': {'class': 'user'} }) }}
+                            <div class="col-sm-12 mb-3 mb-sm-0 mx-auto">
+                                {{ form_widget(form.categorie) }}
+                            </div>
+                            {{ form_errors(form.categorie) }}
+                            <div class="input-group mt-3">
+                                       <span class="input-group-btn w-100 position-absolute" style="background: #eaecf4;">
+                                           <span class="btn btn-default btn-file w-100 text-left">
+                                               Télécharger une autre photo… {{ form_widget(form.photo) }}
+                                           </span>
+                                       </span>
+                                <input type="text" class="form-control invisible" readonly>
+                            </div>
+                            <img id='img-upload' src="{{ asset('assets/images/categorie/'~categorie.photo) }}" style="height: 15rem;width: 100%;margin-bottom:2rem;">
+                            <input type="text" name="temporary" hidden value="{{ categorie.photo }}">
+                            {{ form_errors(form.photo) }}
+                            <button class="btn btn-primary btn-user btn-block w-50 mx-auto">
+                                Mettre un jour la catégorie
+                            </button>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

@@ -1,0 +1,108 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title 'Ajouter un livre' %}
+
+{% block body %}
+    <div class="container">
+        {{ form_start(form, {'attr': {'class':'row user'}}) }}
+
+        <div class="col-xl-8 col-lg-7">
+
+            {# Menu du header #}
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Informations sur ce livre</h6>
+                </div>
+                <div class="card-body">
+                    <div class="form-group row m-1 pb-4">
+                        <div class="col-sm-12 mb-3 mb-sm-0">
+                            {{ form_widget(form.titre, {'attr': {'class': 'form-control form-control-user'}}) }}
+                            {{ form_errors(form.titre) }}
+                        </div>
+                        <div class="form-group video-slam mt-4" style="">
+                        {{ form_row(form.video, {'attr': {'class': 'form-control form-control-user'}}) }}
+                        {{ form_errors(form.video) }}
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-3 mb-sm-0">
+                        {{ form_widget(form.extract) }}
+                        {{ form_errors(form.extract) }}
+                    </div>
+                    <div class="col-md-12 mt-3">
+                        <div class="card text-white border-primary bg-primary p-1 mb-3">
+                            <div class="card-body">
+                                <a href="{{ path('profil_auter', {'id': app.user.id}) }}" target="_blank">
+                                    <img src="{% if app.user.auter.photo is defined %}{{ asset('assets/images/profil/'~ app.user.auter.photo) }}{% else %}{{ asset('assets/images/avatars/d.png') }}{% endif %}"
+                                         style="width:7rem;height:7rem;border-radius:60%;" class="float-left mr-3"/>
+                                </a>
+                                <div class="float-left">
+                                    <h2 class="card-title ml-2" style="font-size: .97rem;font-weight: 600;"> {{ app.user.nom ~' '~ app.user.prenom }}</h2>
+                                    <p class="card-text ml-2" style="font-size: .759rem;"> Le livre à été mis en ligne le - </p>
+                                    {#<a href="{{ path('settings', {'id': app.user.auter.id}) }}" target="_blank" class="btn btn-primary btn-sm">#}
+                                    {#    <i class="fas fa-edit"></i>#}
+                                    {#    Modifier le profil#}
+                                    {#</a>#}
+                                    <a href="{{ path('profil_auter', {'id': app.user.id}) }}" target="_blank" class="btn btn-primary btn-sm">
+                                        <i class="far fa-eye"></i>
+                                        Consulter mon profil
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Donut Chart -->
+        <div class="col-xl-4 col-lg-5">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Couverture du livre</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="form-group">
+                        <label>Catégorie du livre</label>
+                        {{ form_widget(form.categorie) }}
+                    </div>
+                    
+                    <div class="input-group mt-3">
+                            <span class="input-group-btn w-100 position-absolute" style="background: #eaecf4;">
+                                <span class="btn btn-default btn-file w-100 text-center">
+                                    Télécharger une photo {{ form_widget(form.photo, {'required':true, 'attr': {'class':'imgInp w-100'}}) }}
+                                </span>
+                            </span>
+                        <input type="text" class="form-control invisible" readonly>
+                    </div>
+                    <img id='img-upload' style="height: 25rem;width: 100%;margin-bottom:2rem;">
+                    {{ form_errors(form.photo) }}
+                    <div class="col-md-12 mt-4">
+                        <button class="btn btn-primary w-100">
+                            Ajouter le livre
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{ form_end(form) }}
+    </div>
+
+    <style>
+        tbody {
+            background: #f8f9fc;
+        }
+        .desc {
+            font-size: .75rem;
+            color: #858796;
+        }
+    </style>
+{% endblock %}
+
+{% block javascripts %}
+    
+{% endblock %}
+
+

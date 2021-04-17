@@ -1,0 +1,74 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title 'liste des éditos' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+
+            <div class="col-xl-12 col-lg-12">
+
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">
+                            Liste des éditos
+                        </h6>
+                    </div>
+                    {% for message in app.Flashes('success') %}
+                        <div class="alert alert-success alert-dismissible fade show text-center" role="alert" id="success">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    {% include("admin/_no-result.html.twig") %}
+                    <div class="row live-search-list">
+
+                        {% if editos is not empty %}
+
+                            {% for edito in editos %}
+                                <div class="col-md-6 search">
+                                    <div class="card-body">
+                                        <div class="card text-white border-primary bg-primary p-1 mb-3 text-center">
+                                            <div class="card-body">
+                                                <h2 class="card-title d-block text-truncate">{{ edito.title }}</h2>
+                                                <p class="card-text d-block text-truncate">Edito du {{ edito.createdAt|date('d/m/Y') }} </p>
+
+                                                <form method="post" action="{{ path('admin_edito_delete', {id: edito.id}) }}" style="display: inline-block">
+                                                    <input type="hidden" name="_method" value="DELETE">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token("delete" ~ edito.id) }}">
+                                                    <button class="btn btn-danger btn-sm" onclick="return confirm('ATTENTION : Êtes-vous sûr de bien vouloir supprimer cet édito ? \n');">
+                                                        <i class="fas fa-trash"></i>
+                                                        Supprimer
+                                                    </button>
+                                                </form>
+
+                                                <a href="{{ path('admin_edito_edit',{'id': edito.id }) }}" class="btn btn-primary btn-sm">
+                                                    <i class="fas fa-edit"></i>
+                                                    Modifier
+                                                </a>
+                                                <a href="{{ path('edito_view', {'slug': edito.slug, 'id': edito.id }) }}" target="_blank" class="btn btn-primary btn-sm">
+                                                    <i class="far fa-eye"></i>
+                                                    Voir l'édito
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <form method="post" action="{{ path('admin_newedito') }}" class="col-md-12 text-center mt-5 mb-5 pl-3 pr-3">
+                                <h5 class="mb-3">il y a actuellement aucun edito</h5>
+                                <button class="btn btn-primary">Ajoutez votre première edito</button>
+                            </form>
+                        {% endif %}
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    </div>
+{% endblock %}

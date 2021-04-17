@@ -1,0 +1,186 @@
+<!-- HEADER -->
+<header class="row marge-header">
+
+    <div class="user-header {% if app.user %}user-connect{% endif %}">
+        <div class="d-inline-block img-header">
+            <img class="animated" src="{{ asset('assets/images/illustration/logo-header.png') }}">
+        </div>
+
+        <div class="d-sm-inline-block position-absolute text-center block-responsive {% if app.user %}line-user{% endif %}">
+            <h3 class="text-spacing header-h3 mb-0 animated">pas vu, pas lu</h3>
+            <em><span class="sub-title">Le marque-page des nouveaux talents !</span></em>
+
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
+                <div class="navbar box-user text-left">
+                    <div class="dropdown show">
+                        <a class="droplists" href="{{ path('register_user_profil') }}" role="button">
+                            <span class="online">
+                                <img src="{% if app.user.auter.photo is defined %} {{ asset('assets/images/profil/'~ app.user.auter.photo) }} {% else %} {{ asset('assets/images/avatars/d.png') }} {% endif %}">
+                            </span>
+                        </a>
+                    </div>
+
+                    <div class="notify">
+                        <a href="{{ path('messginer_inbox') }}" class="message" style="text-decoration: none"><i class="fas fa-comments"></i><span style="font-size: 1.2rem; line-height: 1.5rem;">Messagerie</span> <p></p></a>
+                    </div>
+
+                </div>
+
+            {% else %}
+
+                <a class="btn-default mt-3" href="{{ path('security_login') }}">
+                    <span>Inscription / Connexion</span>
+                </a>
+
+            {% endif %}
+
+        </div>
+        <div class="d-inline-block position-absolute img-header-2" style="right: -10rem">
+            <img src="{{ asset('assets/images/illustration/header-books.png') }}">
+        </div>
+
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <div class="menu-user">
+                <div class="dropdown-menu text-center">
+                    {% if is_granted('ROLE_AUTEUR') %}
+                        <a class="dropdown-item" href="{{ path('ajouter_livre') }}">Ajouter un livre</a>
+                        {% elseif is_granted('ROLE_ADMIN') %}
+                         <a class="dropdown-item" href="{{ path('admin-home') }}">Dashboard</a>
+                        {% else %}
+                        <a class="dropdown-item" href="{{ path('show_livres') }}">Liste des livres</a>
+                    {% endif %}
+                    <a class="dropdown-item" href="{{ path('forums') }}">Forum</a>
+                    <a class="dropdown-item" href="{{ path('security_logout') }}">Se déconnecter</a>
+                </div>
+            </div>
+        {% endif %}
+
+    </div>
+
+    <!-- Bare de recherche -->
+    <div class="col-12 col-sm col-md-6 p-0">
+        <div class="recherche_p float-sm-right">
+
+            <div class="position-absolute " style="top: -74px; right: 0;">
+                <img class="animated"src="{{ asset('assets/images/illustration/bare-search.png') }}">
+            </div>
+
+            <form action="javascript:void(0)" id="searchthis" method="GET" data-toggle="modal" data-target="#myModal">
+                <input id="search" name="qs" type="text" placeholder="Rechercher" autocomplete="off">
+                <input id="search-btn" type="submit" value="Rechercher">
+            </form>
+
+        </div>
+
+        <div class="search-sub-text float-right mt-3 text-right">
+            <em>"Toute littérature est assaut contre la frontière."</em>
+            <strong><span style="color:rgba(255,255,255,1);">Franz Kafka</span></strong>
+        </div>
+
+    </div>
+    <!-- Fin de la bare de recherche -->
+</header>
+<!-- FIN HEADER -->
+
+<!-- The Modal -->
+<div class="modal" id="myModal" style="background: #000000d9;">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="position-absolute" style="top: -74px; right: 0;">
+                <img src="/assets/images/illustration/bare-search.png">
+            </div>
+
+            <!-- Modal close -->
+            <button type="button" class="close" style="position: absolute; right: .85rem; top: 0; cursor: pointer; z-index: 99; font-weight: 900;" data-dismiss="modal">&times;</button>
+
+            <!-- Modal body -->
+            <div class="modal-body" style="min-height: 23rem;">
+                <div class="container">
+                    <h2 class="text-center mb-5 mt-3" style="font-size: .95rem;">Entrez votre recherche ci-dessous pour trouver les livres correspondant</h2>
+
+                    <div align="center">
+                        <input type="text" name="search" id="search-ajax" placeholder="Quel livre cherchez-vous ?" class="form-control" autocomplete="off">
+                    </div>
+                    <ul class="nav nav-second-level" id="result"></ul>
+                    <i class="fas fa-book-reader" id="search-i" style="font-size: 9rem; text-align: center; margin: 26px auto; display: block; opacity: .2;"></i>
+                    <div id="wait" class="text-center m-5" style="display: none;">
+                        <div class="lds-dual-ring"></div>
+                        <div style="font-weight: 600;">Chargement...</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<style>
+.animated {
+ -webkit-animation-name: rubberBand;
+  animation-name: rubberBand;
+  -webkit-animation-duration: 3s;
+  animation-duration: 3s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  }
+  @-webkit-keyframes rubberBand {
+  0% {
+  -webkit-transform: scale3d(1, 1, 1);
+  transform: scale3d(1, 1, 1);
+  }
+  30% {
+  -webkit-transform: scale3d(1.25, 0.75, 1);
+  transform: scale3d(1.25, 0.75, 1);
+  }
+  40% {
+  -webkit-transform: scale3d(0.75, 1.25, 1);
+  transform: scale3d(0.75, 1.25, 1);
+  }
+  50% {
+  -webkit-transform: scale3d(1.15, 0.85, 1);
+  transform: scale3d(1.15, 0.85, 1);
+  }
+  65% {
+  -webkit-transform: scale3d(.95, 1.05, 1);
+  transform: scale3d(.95, 1.05, 1);
+  }
+  75% {
+  -webkit-transform: scale3d(1.05, .95, 1);
+  transform: scale3d(1.05, .95, 1);
+  }
+  100% {
+  -webkit-transform: scale3d(1, 1, 1);
+  transform: scale3d(1, 1, 1);
+  }
+  }
+  @keyframes rubberBand {
+  0% {
+  -webkit-transform: scale3d(1, 1, 1);
+  transform: scale3d(1, 1, 1);
+  }
+  30% {
+  -webkit-transform: scale3d(1.25, 0.75, 1);
+  transform: scale3d(1.25, 0.75, 1);
+  }
+  40% {
+  -webkit-transform: scale3d(0.75, 1.25, 1);
+  transform: scale3d(0.75, 1.25, 1);
+  }
+  50% {
+  -webkit-transform: scale3d(1.15, 0.85, 1);
+  transform: scale3d(1.15, 0.85, 1);
+  }
+  65% {
+  -webkit-transform: scale3d(.95, 1.05, 1);
+  transform: scale3d(.95, 1.05, 1);
+  }
+  75% {
+  -webkit-transform: scale3d(1.05, .95, 1);
+  transform: scale3d(1.05, .95, 1);
+  }
+  100% {
+  -webkit-transform: scale3d(1, 1, 1);
+  transform: scale3d(1, 1, 1);
+  }
+  } 
+</style>

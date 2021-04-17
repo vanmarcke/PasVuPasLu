@@ -1,0 +1,197 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title "Coupon de réduction pour l'ajout d'un livre" %}
+
+{% block stylesheets %}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+
+            <div class="col-xl-8 col-lg-7">
+
+                {# Menu du header #}
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        {% for message in app.Flashes('success') %}
+                            <div class="alert alert-success alert-dismissible fade show text-center" role="alert" id="success">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                        <h6 class="m-0 font-weight-bold text-primary">
+                            Coupon de réduction pour l'ajout d'un nouveau livre
+                            <span class="badge badge-primary float-right mr-2">Il y a {{ coupons|length }} coupon(s)</span>
+                        </h6>
+                    </div>
+                    <div class="card-body live-search-list">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">Coupon</th>
+                                <th scope="col">Enregistrer</th>
+                                <th scope="col">Valable jusqu'au</th>
+                                <th scope="col">Statut du coupon</th>
+                                <th scope="col" style="text-align: right">Options</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for coupon in coupons %}
+                                <tr class="search">
+                                    <td>{{ coupon.coupon }}</td>
+                                    <td>{{ coupon.createdAt|date("d/m/Y") }}</td>
+                                    <td>{{ coupon.expirdateAt|date("d/m/Y") }}</td>
+                                    <th scope="col">{% if coupon.isValid == null %}Non utilisé{% else %}<span style="color: #4CAF50;">Coupon utilisé</span>{% endif %}</th>
+                                    <th scope="row" style="text-align: right">
+                                        <form method="post" action="{{ path('admin_delete_couponLivre', {id: coupon.id}) }}" style="display: inline-block">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <input type="hidden" name="_token" value="{{ csrf_token("delete" ~ coupon.id) }}">
+                                            <a href="{{ path('admin_v_coupon', {id: coupon.id}) }}" data-remote="false" data-toggle="modal" data-target="#myModal" class="btn btn-success btn-circle btn-sm">
+                                                <i class="fas fa-user"></i>
+                                            </a>
+                                            <button class="btn btn-danger btn-circle btn-sm" onclick="return confirm('Êtes-vous sûr de bien vouloir supprimer ce coupon ?\n');">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </th>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        {% include("admin/_no-result.html.twig") %}
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Donut Chart -->
+            <div class="col-xl-4 col-lg-5">
+                {{ form_start(form, { 'attr': {'class': 'card shadow mb-4 user'} }) }}
+                    <!-- Card Header - Dropdown -->
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Ajouter un nouveau coupon</h6>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        <div class="col-md-12 mb-3">
+                            <label for="coupon_form_promo">Nom du code promo</label>
+                            {{ form_widget(form.coupon) }}
+                            {{ form_errors(form.coupon) }}
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label for="coupon_form_expirdate_at">Date d'expiration</label>
+                            {{ form_widget(form.expirdate_at) }}
+                            {{ form_errors(form.expirdate_at) }}
+
+                        </div>
+                        <button class="btn btn-primary btn-user btn-block">
+                            Ajouter le coupon
+                        </button>
+                    </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+    <!-- Default bootstrap modal example -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel" style="font-size: 1rem;">utilisateurs utilisant ce code promo</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="modal-body">
+            <div id="req">
+                <div id="requeste"></div>
+                {##}
+                <table id="table_c" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Prénom</th>
+                            <th scope="col">Date</th>
+                            <th scope="col" style="text-align: right">Profil</th>
+                        </tr>
+                    </thead>
+                        <tbody>
+                            <tr class="search">
+                            <td id="nom"></td>
+                            <td id="prenom"></td>
+                            <td id="date"></td>
+                            <th scope="row" style="text-align: right" id="link"></th>
+                        </tr>
+                    </tbody>
+                </table>
+                {##}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
+    <script>
+    // $("#myModal").on("show.bs.modal", function(e) {
+    // var link = $(e.relatedTarget);
+    // $(this).find(".modal-body").load(link.attr("href"));
+    // });
+    
+       $("#myModal").on("show.bs.modal", function(e) {
+        var link = $(e.relatedTarget);
+        var response;
+        $.ajax({
+            type: "GET", 
+            url: link.attr("href"),
+            dataType: 'json',
+
+        success:function(data){
+            if(data.status == 'success') {
+              $('#table_c').show();
+              $('#requeste').html('');
+              $('#nom').html(data.nom);   
+              $('#prenom').html(data.prenom);
+              const id = data.id;
+              const date = new Date(data.date['date']);
+              const output = date.getDate() + "/" +  (date.getMonth()+1) + "/" + date.getFullYear();
+              $('#date').html(output);
+              $('#link').html("<a href='/admin/userInfo/"+id+"' class='btn btn-success btn-circle btn-sm'><i class='fas fa-street-view'></i></a>");
+            } else {
+              $('#table_c').hide();
+              $('#requeste').html(data.request);
+            }
+            $('#req').modal.load();
+       },
+       error:function(error){
+            alert(error);
+        }});
+    });
+    
+        {# Remplace le textarea par le plugin Ckeditor #}
+
+        $(function () {
+            $.fn.datepicker.dates['Fr'] = {
+                days: ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"],
+                daysShort: ["dim.", "lun.", "mar.", "mer.", "jeu.", "ven.", "sam."],
+                daysMin: ["dim.", "lun.", "mar.", "mer.", "jeu.", "ven.", "sam."],
+                months: ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"],
+                monthsShort: ["janv.", "févr.", "mars", "avril", "mai", "juin", "juil.", "août", "sept.", "oct.", "nov.", "déc."],
+                today: "Aujourd'hui",
+                monthsTitle: "Mois",
+                weekStart: 1
+            };
+            $(".js-datepicker").datepicker({
+                language: 'Fr',
+                format: "dd/mm/yyyy",
+                autoclose: true,
+                todayHighlight: false,
+            }).datepicker(new Datetime());
+        });
+    </script>
+{% endblock %}
+

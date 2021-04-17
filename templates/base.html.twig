@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title '' %}</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="{{ asset('assets/images/illustration/favicon.ico') }}" type="image/ico" sizes="16x16">
+        {% set categories = categories_repository.findAll() %}
+
+        {# En inclut les styles CSS #}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">        
+        <link rel="stylesheet" href="{{ asset('assets/js/cookie/jquery.cookiebar.css') }}">
+        {{ encore_entry_link_tags("app") }}
+        {% block stylesheets '' %}
+    </head>
+    <script> 
+        var $buoop = {required:{e:0,f:0,o:0,s:0,c:0},insecure:true,unsupported:true,style:"bottom",api:2020.06 }; 
+        function $buo_f(){ 
+        var e = document.createElement("script"); 
+        e.src = "//browser-update.org/update.min.js"; 
+        document.body.appendChild(e);
+        };
+        try {document.addEventListener("DOMContentLoaded", $buo_f,false)}
+        catch(e){window.attachEvent("onload", $buo_f)}
+    </script>
+    
+    {% if app.user is not empty %}
+        {% set subscription = app.user.subscriptionEnd|date('Y-m-d H:i:s') >= 'now'|date('Y-m-d H:i:s') %}
+    {% endif %}
+    
+    <body style="{% if app.user is not null and app.user.subscriptionEnd is not null and subscription == false %}overflow: hidden!important;{% endif %}">
+      
+        <div class="container">
+
+            {% if app.user is not null and app.user.subscriptionEnd is not null and subscription == false %}
+            <div style="position: fixed; z-index: 99999; left: 0; right: 0; top: 0; bottom: 0; background: #101010f0; color: white; font-weight: 600;">
+                <div class="container text-center" style="padding: 14.39rem;top: 50%; transform: translateY(-50%); position: relative;">
+                    Bonjour {{ app.user.prenom ~' '~ app.user.nom }},<br><br>
+                    Votre abonnement a expiré le {{ app.user.subscriptionEnd|date('d/m/Y') }}
+                    pour avoir accès de nouveau à votre compte vous devez renouveler votre abonnement annuel de
+                    {# {% if app.user.roles == ['ROLE_AUTEUR'] %}60 € TTC{% elseif app.user.roles == ['ROLE_LECTEUR'] %}12 € TTC{% endif %}. #}
+                    {% if app.user.roles == ['ROLE_AUTEUR'] %}60 € TTC{% endif %}.
+                    <br><br>Si vous pensez qu'il s'agit d'une erreur
+                    merci de nous le signaler à l'adresse mail stephane.theri@terhoma.org, pour que nous puissions régler
+                    ce problème rapidement.<br><br>
+                    <a href="{{ path('security_logout') }}" class="btn btn-secondary w-50">Se déconnecter</a>
+                </div>
+            </div>
+            {% endif %}
+            <div class="logo-move">
+                {% include "logo.html.twig" %}
+            </div>
+            {# En inclut le header html #}
+            {% include("components/_header.html.twig") %}
+            {# En inclut le menu html #}
+            {% include("components/_menu.html.twig") %}
+
+            {# Bes pages apparaîtront dans la balise body #}
+            {% block body %}{% endblock %}
+            {# En inclut le footer html #}
+            {% include("components/_footer.html.twig") %}
+            {# En inclut les scripts #}
+        </div>
+        
+        {{ encore_entry_script_tags("app") }}
+
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="{{ asset('assets/js/app.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('assets/js/cookie//jquery.cookiebar.js') }}"></script>
+        <script>
+            
+            jQuery(document).ready(function() {
+
+                $.cookieBar({
+                    message: 'Nous utilisons des cookies pour améliorer votre expérience. En poursuivant votre navigation sur ce site, vous acceptez l\'utilisation de cookies. <a href="{{ path('legal') }}" class="ml-0 pl-0">Plus d\'informations</a>',
+                    acceptButton: true,
+                    acceptText: 'J\'ai compris',
+                    acceptFunction: null,
+                    autoEnable: true,
+                    acceptOnContinue: false,
+                    acceptOnScroll: false,
+                    acceptAnyClick: false,
+                    expireDays: 365,
+                    renewOnVisit: false,
+                    forceShow: false,
+                    effect: 'slide',
+                    element: 'body',
+                    append: false,
+                    fixed: false,
+                    bottom: false,
+                    zindex: '',
+                });
+
+
+                var searchRequest = null;
+                $("#search-ajax").keyup(function() {
+
+                    $(document).ajaxStart(function(){
+                        $("#wait").css("display", "block");
+                        $("#search-i").css("display", "none");
+                    });
+
+                    $(document).ajaxComplete(function(){
+                        $("#wait").css("display", "none");
+                        $("#search-i").css("display", "none");
+                    });
+
+                    var minlength = 2;
+                    var that = this;
+                    var value = $(this).val();
+                    if(value.length <= 1) {
+                        $("#search-i").css("display", "block");
+                        $("#wait").css("display", "none");
+                    }
+                    var entitySelector = $("#result").html('');
+                    if (value.length >= minlength ) {
+                        if (searchRequest != null)
+                            searchRequest.abort();
+                        searchRequest = $.ajax({
+                            type: "GET",
+                            url: "{{ path('search') }}",
+                            data: {
+                                'q' : value
+                            },
+                            dataType: "text",
+                            success: function(msg){
+                                //we need to check if the value is the same
+                                if (value==$(that).val()) {
+                                    var result = JSON.parse(msg);
+                                    $.each(result, function(key, arr) {
+                                        $.each(arr, function(id, value) {
+                                            if (key == 'entities') {
+                                                if (id != 'error') {
+                                                    entitySelector.append(
+                                                        '<li class="list-five">\n' +
+                                                        '    <div class="list-five-info" style="padding: .8rem; background: #ced4da4a; border-radius: .2rem; border: .04rem solid #ced4da7a; margin: .1rem 0 .1rem;">\n' +
+                                                        '        <img src="/assets/images/livre/'+value.photo+'" style="width: 19%;">\n' +
+                                                        '        <div class="list-five-desc-d">\n' +
+                                                        '            <h1 class="list-five-desc text-truncate" style="color: #0c0c0c; font-size: .859rem;margin-bottom: 0;"><a style="color:black!important" href="/livre/'+value.slug+'">'+value.title+'</a></h1>\n' +
+                                                        '            <div class="list-five-authors mt-1" style="color: #0c0c0c;opacity: .8;font-size: .798rem;">Auteur : <a href="/profil/'+value.userId+'" style="color: #0c0c0c;opacity: .8;">'+value.userPrenom+' '+value.userNom+'</a></div>\n' +
+                                                        '            <div class="list-five-authors mt-1" style="color: #0c0c0c;opacity: .8;font-size: .798rem;">Catégorie : <a href="/categories/'+value.category+'" style="color: #0c0c0c;opacity: .8;">'+value.category+'</a></div>\n' +
+                                                        '        </div>\n' +
+                                                        '    </div>\n' +
+                                                        '</li>'
+                                                    );
+                                                } else {
+                                                    entitySelector.append('<li style="font-weight: 600; text-align: center; margin-top: 12%; width: 100%;">'+value+'</li>');
+                                                }
+                                            }
+                                        });
+                                    });
+                                }
+                            }
+                        });
+                    }
+                });
+            });
+        </script>
+        <script src="{{ asset('assets/js/cookie/jquery.cookiebar.js') }}"></script><script>document.addEventListener('DOMContentLoaded', function(event){cookieChoices.showCookieConsentBar('Ce site utilise des cookies pour vous offrir le meilleur service. En poursuivant votre navigation, vous acceptez l’utilisation des cookies.', 'J’accepte', 'En savoir plus', 'https://pasvupaslu.com/Informations-legales');});</script>
+        {% block javascripts '' %}
+    </body>
+</html>

@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% form_theme form 'bootstrap_4_layout.html.twig' %}
+    {% if form is defined %}
+        <div class="container pt-5 mt-5">
+            <div class="row pb-5 pt-5">
+                <div class="col-12 ">
+                    <form class="wb_form" method="post" enctype="multipart/form-data">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{ form_row(form.nom) }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form_row(form.prenom) }}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{ form_row(form.email) }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form_row(form.password) }}
+                            </div>
+                        </div>
+                        
+                        <button class="btn w-100 submit bg-success ">Inscription</button>
+                        {{ form_rest(form) }}
+                        {{ form_end(form) }}
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
