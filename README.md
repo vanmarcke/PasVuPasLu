@@ -2,7 +2,7 @@
 
 git init
 
-git remote add origin https://....
+git clone https://....
 
 créer le fichier .env
 
