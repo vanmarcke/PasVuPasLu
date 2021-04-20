@@ -120,6 +120,16 @@ use App\Repository\ContentRepository;
     }   
     
 
+	 /**
+     * @Route("auteurs", name="authors")
+     */
+    public function authors() {
+       
+        return $this->render('auteur/auteurs.html.twig', [
+        'current_menu' => 'authors',
+    ]);
+}
+
     /**
      * @Route("/categories/{categorie}", name="category", methods={"GET"})
      * @param Categories|null $categories
